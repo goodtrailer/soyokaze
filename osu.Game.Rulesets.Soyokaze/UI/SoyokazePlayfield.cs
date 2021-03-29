@@ -3,17 +3,19 @@
 
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
+using osu.Framework.Input.Bindings;
 using osu.Game.Rulesets.UI;
+using osu.Game.Rulesets.Objects;
+using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Objects.Drawables;
-using osu.Game.Rulesets.Objects;
-using osu.Framework.Graphics.Containers;
-using osu.Game.Rulesets.Objects.Drawables;
+using System.Collections.Generic;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
     [Cached]
-    public class SoyokazePlayfield : Playfield
+    public class SoyokazePlayfield : Playfield, IKeyBindingHandler<SoyokazeAction>
     {
         private readonly ProxyContainer approachCircleContainer;
         protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
@@ -54,6 +56,57 @@ namespace osu.Game.Rulesets.Soyokaze.UI
                     approachCircleContainer.Add(hitCircle.ApproachCircleProxy.CreateProxy());
                     break;
             }
+        }
+
+        public bool OnPressed(SoyokazeAction action)
+        {
+            foreach (var hitObject in HitObjectContainer.AliveObjects)
+                switch (hitObject)
+                {
+                    case DrawableHitCircle hitCircle:
+                        if (hitCircle.Hit(action))
+                            return true;
+                        break;
+                }
+            return false;
+
+            #region Unused chronological sort
+            /* This is what I had written at one point to make sure that the list
+             * of objects was checked chronologically, because I wasn't sure if
+             * HitObjectContainer.AliveObjects was chronological or not. I'm still
+             * not sure if it is, but it seems to be from my small amount of
+             * playtesting, so I'm commenting it out for now. I'll leave it here
+             * in case it turns out to be necessary. But even if it is, I'll
+             * probably go for some alternative method, since this is really slow.
+
+                    List<DrawableSoyokazeHitObject> hitObjects = new List<DrawableSoyokazeHitObject>();
+                    foreach (var hitObject in HitObjectContainer.AliveObjects)
+                    {                
+                        switch (hitObject)
+                        {
+                            case DrawableHitCircle hitCircle:
+                                hitObjects.Add(hitCircle);
+                                break;
+                        }
+                    }
+
+                    hitObjects.Sort((x, y) =>
+                    {
+                        if (x.HitObject.StartTime > y.HitObject.StartTime)
+                            return 1;
+                        else
+                            return -1;
+                    });
+
+                    foreach (var hitObject in hitObjects)
+                        if (hitObject.Hit(action))
+                            return true;
+             */
+            #endregion
+        }
+
+        public void OnReleased(SoyokazeAction action)
+        {
         }
     }
 }

@@ -22,7 +22,7 @@ namespace osu.Game.Rulesets.Soyokaze
     {
         public override string Description => "soyokaze!";
         public override string ShortName => "soyokaze";
-        public override string PlayingVerb => "Feeling the wind";
+        public override string PlayingVerb => "Feeling the wind.";
 
         public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods = null) =>
             new DrawableSoyokazeRuleset(this, beatmap, mods);

@@ -9,28 +9,28 @@ using osu.Game.Rulesets.Objects.Drawables;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
-    public class DrawableSoyokazeHitObject : DrawableHitObject<SoyokazeHitObject>
+    public abstract class DrawableSoyokazeHitObject : DrawableHitObject<SoyokazeHitObject>
     {
-        public readonly IBindable<Vector2> PositionBindable = new Bindable<Vector2>();
-        public readonly IBindable<Vector2> SizeBindable = new Bindable<Vector2>();
-        public readonly IBindable<SoyokazeAction> ButtonBindable = new Bindable<SoyokazeAction>();
+        public readonly IBindable<Vector2> PositionBindable;
+        public readonly IBindable<Vector2> SizeBindable;
+        public readonly IBindable<SoyokazeAction> ButtonBindable;
 
         protected override double InitialLifetimeOffset => HitObject.Preempt;
+
 
 
         public DrawableSoyokazeHitObject(SoyokazeHitObject hitObject)
             : base(hitObject)
         {
-        }
-
-        protected override void UpdateInitialTransforms() => this.FadeIn(HitObject.FadeIn);
-
-        [BackgroundDependencyLoader]
-        private void load()
-        {
             Alpha = 1;
             Origin = Anchor.Centre;
+
+            PositionBindable = new Bindable<Vector2>();
+            SizeBindable = new Bindable<Vector2>();
+            ButtonBindable = new Bindable<SoyokazeAction>();
         }
+
+        public abstract bool Hit(SoyokazeAction action);
 
         protected override void OnApply()
         {
@@ -49,7 +49,5 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             SizeBindable.UnbindFrom(HitObject.SizeBindable);
             ButtonBindable.UnbindFrom(HitObject.ButtonBindable);
         }
-
-
     }
 }

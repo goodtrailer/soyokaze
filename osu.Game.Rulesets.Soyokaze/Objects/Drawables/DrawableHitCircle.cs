@@ -14,7 +14,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
-    class DrawableHitCircle : DrawableSoyokazeHitObject, IKeyBindingHandler<SoyokazeAction>
+    class DrawableHitCircle : DrawableSoyokazeHitObject
     {
         public ApproachCirclePiece ApproachCircleComponent { get; private set; }
         public HitCirclePiece HitCircleComponent { get; private set; }
@@ -125,23 +125,17 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             ApplyResult(r => r.Type = result);
         }
 
-        public bool OnPressed(SoyokazeAction action)
+        public override bool Hit(SoyokazeAction action)
         {
             if (Judged)
                 return false;
 
             SoyokazeAction validAction = ButtonBindable.Value;
-            if (action == validAction)
-            {
-                UpdateResult(true);
-                return true;
-            }
-            else
+            if (action != validAction)
                 return false;
-        }
-
-        public void OnReleased(SoyokazeAction action)
-        {
+            
+            UpdateResult(true);
+            return true;
         }
     }
 }
