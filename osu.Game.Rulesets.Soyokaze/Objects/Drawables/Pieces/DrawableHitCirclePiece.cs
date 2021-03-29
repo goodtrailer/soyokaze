@@ -10,12 +10,10 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces
 {
-    class HitCirclePiece : CompositeDrawable
+    class DrawableHitCirclePiece : CompositeDrawable
     {
-        public HitCirclePiece()
+        public DrawableHitCirclePiece()
         {
-            Scale = new Vector2(1);
-            RelativeSizeAxes = Axes.Both;
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
         }

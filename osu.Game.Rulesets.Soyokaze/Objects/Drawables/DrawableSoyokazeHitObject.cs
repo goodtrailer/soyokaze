@@ -6,6 +6,7 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Bindables;
 using osu.Game.Rulesets.Objects.Drawables;
+using osu.Game.Graphics.Containers;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
@@ -17,7 +18,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
         protected override double InitialLifetimeOffset => HitObject.Preempt;
 
-
+        private ShakeContainer shakeContainer;
 
         public DrawableSoyokazeHitObject(SoyokazeHitObject hitObject)
             : base(hitObject)
@@ -30,7 +31,22 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             ButtonBindable = new Bindable<SoyokazeAction>();
         }
 
+        [BackgroundDependencyLoader]
+        private void load()
+        {
+            shakeContainer = new ShakeContainer()
+            {
+                ShakeDuration = 30,
+                RelativeSizeAxes = Axes.Both,
+                Origin = Anchor.Centre,
+                Anchor = Anchor.Centre,
+            };
+            base.AddInternal(shakeContainer);
+        }
+
         public abstract bool Hit(SoyokazeAction action);
+
+        public virtual void Shake(double maximumLength) => shakeContainer.Shake(maximumLength);
 
         protected override void OnApply()
         {
@@ -49,5 +65,9 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             SizeBindable.UnbindFrom(HitObject.SizeBindable);
             ButtonBindable.UnbindFrom(HitObject.ButtonBindable);
         }
+
+        protected override void AddInternal(Drawable drawable) => shakeContainer.Add(drawable);
+        protected override void ClearInternal(bool disposeChildren = true) => shakeContainer.Clear(disposeChildren);
+        protected override bool RemoveInternal(Drawable drawable) => shakeContainer.Remove(drawable);
     }
 }

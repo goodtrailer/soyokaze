@@ -1,25 +1,25 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
+using osuTK;
+using osuTK.Graphics;
 using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Textures;
-using osu.Framework.Input.Bindings;
+using osu.Game.Graphics.Containers;
 using osu.Game.Rulesets.Objects.Drawables;
-using osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces;
 using osu.Game.Rulesets.Scoring;
-using osuTK;
-using osuTK.Graphics;
+using osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
     class DrawableHitCircle : DrawableSoyokazeHitObject
     {
-        public ApproachCirclePiece ApproachCircleComponent { get; private set; }
-        public HitCirclePiece HitCircleComponent { get; private set; }
+        public DrawableApproachCirclePiece ApproachCirclePiece { get; private set; }
+        public DrawableHitCirclePiece HitCirclePiece { get; private set; }
+        public Drawable ApproachCircleProxy => ApproachCirclePiece;
 
-        public Drawable ApproachCircleProxy => ApproachCircleComponent;
         public override bool HandlePositionalInput => true;
 
         public DrawableHitCircle()
@@ -34,16 +34,20 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
-            ApproachCircleComponent = new ApproachCirclePiece()
+            ApproachCirclePiece = new DrawableApproachCirclePiece()
             {
                 Alpha = 0,
+                RelativeSizeAxes = Axes.Both,
+                Scale = new Vector2(4),
             };
-            HitCircleComponent = new HitCirclePiece()
+            HitCirclePiece = new DrawableHitCirclePiece()
             {
                 Alpha = 0,
+                RelativeSizeAxes = Axes.Both,
             };
-            AddInternal(ApproachCircleComponent);
-            AddInternal(HitCircleComponent);
+
+            AddInternal(ApproachCirclePiece);
+            AddInternal(HitCirclePiece);
 
             PositionBindable.BindValueChanged(_ => Position = HitObject.Position);
             SizeBindable.BindValueChanged(_ => Size = HitObject.Size);
@@ -53,23 +57,23 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.UpdateInitialTransforms();
 
-            HitCircleComponent.FadeIn(HitObject.FadeIn);
+            HitCirclePiece.FadeIn(HitObject.FadeIn);
 
-            ApproachCircleComponent.FadeInFromZero(System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
-            ApproachCircleComponent.ScaleTo(1f, HitObject.Preempt);
-            ApproachCircleComponent.Expire(true);
+            ApproachCirclePiece.FadeInFromZero(System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
+            ApproachCirclePiece.ScaleTo(1f, HitObject.Preempt);
+            ApproachCirclePiece.Expire(true);
         }
 
         protected override void UpdateStartTimeStateTransforms()
         {
             base.UpdateStartTimeStateTransforms();
 
-            ApproachCircleComponent.FadeOut(50);
+            ApproachCirclePiece.FadeOut(50);
         }
 
         protected override void UpdateHitStateTransforms(ArmedState state)
         {
-            double duration = 0;
+            double duration;
             switch (state)
             {
                 case ArmedState.Hit:
@@ -92,7 +96,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             set
             {
                 base.LifetimeStart = value;
-                ApproachCircleComponent.LifetimeStart = value;
+                ApproachCirclePiece.LifetimeStart = value;
             }
         }
 
@@ -102,7 +106,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             set
             {
                 base.LifetimeEnd = value;
-                ApproachCircleComponent.LifetimeEnd = value;
+                ApproachCirclePiece.LifetimeEnd = value;
             }
         }
 
@@ -120,7 +124,11 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             HitResult result = HitObject.HitWindows.ResultFor(timeOffset);
 
             if (result == HitResult.None)
+            {
+                // shake, but make sure not to exceed into the window where you can actually miss
+                Shake(- timeOffset - HitObject.HitWindows.WindowFor(HitResult.Miss));
                 return;
+            }
             
             ApplyResult(r => r.Type = result);
         }

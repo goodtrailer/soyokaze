@@ -10,14 +10,12 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces
 {
-    class ApproachCirclePiece : CompositeDrawable
+    class DrawableApproachCirclePiece : CompositeDrawable
     {
         public override bool RemoveWhenNotAlive => false;
 
-        public ApproachCirclePiece()
+        public DrawableApproachCirclePiece()
         {
-            Scale = new Vector2(4);
-            RelativeSizeAxes = Axes.Both;
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
         }
