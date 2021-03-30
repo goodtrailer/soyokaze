@@ -112,14 +112,12 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
         protected override void CheckForResult(bool userTriggered, double timeOffset)
         {
-
             if (!userTriggered)
             {                
                 if (!HitObject.HitWindows.CanBeHit(timeOffset))
                     ApplyResult(r => r.Type = r.Judgement.MinResult);
                 return;
             }
-
 
             HitResult result = HitObject.HitWindows.ResultFor(timeOffset);
 

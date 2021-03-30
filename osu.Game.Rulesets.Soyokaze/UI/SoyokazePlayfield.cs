@@ -11,6 +11,8 @@ using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Objects.Drawables;
 using System.Collections.Generic;
+using osu.Game.Rulesets.Judgements;
+using osu.Framework.Logging;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
@@ -18,6 +20,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
     public class SoyokazePlayfield : Playfield, IKeyBindingHandler<SoyokazeAction>
     {
         private readonly ProxyContainer approachCircleContainer;
+        private readonly JudgementContainer<DrawableSoyokazeJudgement> judgementContainer;
         protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
         protected override HitObjectLifetimeEntry CreateLifetimeEntry(HitObject hitObject) => new SoyokazeHitObjectLifetimeEntry(hitObject);
 
@@ -29,17 +32,28 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
         public SoyokazePlayfield()
         {
-            approachCircleContainer = new ProxyContainer { RelativeSizeAxes = Axes.Both };
-            AddRangeInternal(new Drawable[]
+            approachCircleContainer = new ProxyContainer
             {
-                HitObjectContainer,
-                approachCircleContainer,
-            });
+                RelativeSizeAxes = Axes.Both,
+            };
+            judgementContainer = new JudgementContainer<DrawableSoyokazeJudgement>
+            {
+                RelativeSizeAxes = Axes.Both,
+            };
+
+            NewResult += onNewResult;
         }
 
         [BackgroundDependencyLoader]
         private void load()
         {
+            AddRangeInternal(new Drawable[]
+            {
+                HitObjectContainer,
+                approachCircleContainer,
+                judgementContainer
+            });
+
             RegisterPool<HitCircle, DrawableHitCircle>(15);
         }
 
@@ -54,6 +68,20 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             {
                 case DrawableHitCircle hitCircle:
                     approachCircleContainer.Add(hitCircle.ApproachCircleProxy.CreateProxy());
+                    break;
+            }
+        }
+
+        private void onNewResult(DrawableHitObject hitObject, JudgementResult result)
+        {
+            Logger.Log("onNewResult()");
+            if (!hitObject.DisplayResult || !DisplayJudgements.Value)
+                return;
+
+            switch (hitObject)
+            {
+                case DrawableHitCircle _:
+                    judgementContainer.Add(new DrawableSoyokazeJudgement(result, hitObject));
                     break;
             }
         }

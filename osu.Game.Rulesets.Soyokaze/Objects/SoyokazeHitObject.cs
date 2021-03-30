@@ -18,18 +18,18 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
         /// <summary>
         /// The base size of circles (not like CS really applies to ballad of breeze though)
         /// </summary>
-        public static float BASE_SIZE = 128;
+        public const float BASE_SIZE = 128;
 
         /// <summary>
         /// The base preempt time (AR10).
         /// </summary>
-        public static double BASE_PREEMPT = 450;
+        public const double BASE_PREEMPT = 450;
 
         /// <summary>
         /// The max (normal) fade in rate (can go lower for AR>10)
         /// </summary>
-        public static double BASE_FADEIN = 400;
-
+        public const double BASE_FADEIN = 400;
+        
         public readonly Bindable<SoyokazeAction> ButtonBindable = new Bindable<SoyokazeAction>();
 
         public SoyokazeAction Button

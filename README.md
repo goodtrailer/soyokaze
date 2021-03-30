@@ -1,4 +1,4 @@
-![logo](assets/logo.png)
+<img src="assets/logo.png" alt="soyokaze!" width="300" height="300">
 
 # soyokaze!
 
