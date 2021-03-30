@@ -12,7 +12,7 @@ An osu! ruleset mimicking Genshin Impact's Ballad of Breeze mini-game.
 1. ✓ Rudimentary hit circles spawning and approach circles.
 2. ✓ Top-only hits (no piercing)
 3. ✓ Shaking (only for early-hits)
-4. Judgements
+4. ✓ Judgements
 5. Combos/accents
 6. Texturing/skinning/configs
 7. Key indicators
