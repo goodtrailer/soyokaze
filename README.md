@@ -13,12 +13,13 @@ An osu! ruleset mimicking Genshin Impact's Ballad of Breeze mini-game.
 2. ✓ Top-only hits (no piercing)
 3. ✓ Shaking (only for early-hits)
 4. ✓ Judgements
-5. Combos/accents
+5. ✓ Combos/accents
 6. Texturing/skinning/configs
 7. Key indicators
 8. Difficulty calculation
 9. Check stats are scaling properly (HP, CS, OD)
 10. Mods (+DT, +HR, +EZ, +HT)
-11. Spinner mod (+SP)
-12. Sliders mod (+SL)
+11. End-game statistics
+12. Spinner mod (+SP)
+13. Sliders mod (+SL)
 

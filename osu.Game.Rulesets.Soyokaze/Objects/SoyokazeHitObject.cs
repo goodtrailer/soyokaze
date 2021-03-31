@@ -10,10 +10,11 @@ using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Soyokaze.Judgements;
 using osu.Game.Rulesets.Scoring;
+using osu.Framework.Logging;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects
 {
-    public class SoyokazeHitObject : HitObject, IHasPosition
+    public class SoyokazeHitObject : HitObject, IHasPosition, IHasComboInformation
     {
         /// <summary>
         /// The base size of circles (not like CS really applies to ballad of breeze though)
@@ -80,6 +81,42 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
 
         public float X => Position.X;
         public float Y => Position.Y;
+
+        // IHasComboInformation Impl -----------------------------------
+
+        public readonly Bindable<int> ComboOffsetBindable = new Bindable<int>();
+
+        public int ComboOffset
+        {
+            get => ComboOffsetBindable.Value;
+            set => ComboOffsetBindable.Value = value;
+        }
+
+        public Bindable<int> IndexInCurrentComboBindable { get; } = new Bindable<int>();
+
+        public int IndexInCurrentCombo
+        {
+            get => IndexInCurrentComboBindable.Value;
+            set => IndexInCurrentComboBindable.Value = value;
+        }
+
+        public Bindable<int> ComboIndexBindable { get; } = new Bindable<int>();
+
+        public int ComboIndex
+        {
+            get => ComboIndexBindable.Value;
+            set => ComboIndexBindable.Value = value;
+        }
+
+        public Bindable<bool> LastInComboBindable { get; } = new Bindable<bool>();
+
+        public bool LastInCombo
+        {
+            get => LastInComboBindable.Value;
+            set => LastInComboBindable.Value = value;
+        }
+        
+        public bool NewCombo { get; set; }
 
     }
 }

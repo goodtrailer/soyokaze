@@ -2,16 +2,24 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
+using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
-using osuTK;
+using osu.Framework.Logging;
+using osu.Game.Rulesets.Objects.Drawables;
+using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces
 {
-    class DrawableApproachCirclePiece : CompositeDrawable
+    public class DrawableApproachCirclePiece : CompositeDrawable
     {
+        [Resolved]
+        private DrawableHitObject drawableObject { get; set; }
+
+        private readonly Bindable<Color4> accentColour = new Bindable<Color4>();
+
         public override bool RemoveWhenNotAlive => false;
 
         public DrawableApproachCirclePiece()
@@ -28,6 +36,9 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces
                 RelativeSizeAxes = Axes.Both,
                 Icon = FontAwesome.Regular.Circle,
             });
+
+            accentColour.BindTo(drawableObject.AccentColour);
+            accentColour.BindValueChanged(colourChanged => Colour = colourChanged.NewValue, true);
         }
     }
 }

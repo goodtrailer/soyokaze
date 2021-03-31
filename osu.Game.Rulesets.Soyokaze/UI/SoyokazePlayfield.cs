@@ -10,9 +10,7 @@ using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Objects.Drawables;
-using System.Collections.Generic;
 using osu.Game.Rulesets.Judgements;
-using osu.Framework.Logging;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
@@ -24,7 +22,6 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
         protected override HitObjectLifetimeEntry CreateLifetimeEntry(HitObject hitObject) => new SoyokazeHitObjectLifetimeEntry(hitObject);
 
-        // exists to make AddInternal publicly accessible
         private class ProxyContainer : LifetimeManagementContainer
         {
             public void Add(Drawable proxy) => AddInternal(proxy);
@@ -57,9 +54,9 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             RegisterPool<HitCircle, DrawableHitCircle>(15);
         }
 
-        protected override void OnNewDrawableHitObject(DrawableHitObject drawable)
+        protected override void OnNewDrawableHitObject(DrawableHitObject drawableObject)
         {
-            drawable.OnLoadComplete += onDrawableHitObjectLoaded;
+            drawableObject.OnLoadComplete += onDrawableHitObjectLoaded;
         }
 
         private void onDrawableHitObjectLoaded(Drawable drawable)
@@ -72,16 +69,15 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             }
         }
 
-        private void onNewResult(DrawableHitObject hitObject, JudgementResult result)
+        private void onNewResult(DrawableHitObject drawableObject, JudgementResult result)
         {
-            Logger.Log("onNewResult()");
-            if (!hitObject.DisplayResult || !DisplayJudgements.Value)
+            if (!drawableObject.DisplayResult || !DisplayJudgements.Value)
                 return;
 
-            switch (hitObject)
+            switch (drawableObject)
             {
                 case DrawableHitCircle _:
-                    judgementContainer.Add(new DrawableSoyokazeJudgement(result, hitObject));
+                    judgementContainer.Add(new DrawableSoyokazeJudgement(result, drawableObject));
                     break;
             }
         }

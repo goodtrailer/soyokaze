@@ -15,6 +15,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         public readonly IBindable<Vector2> PositionBindable;
         public readonly IBindable<Vector2> SizeBindable;
         public readonly IBindable<SoyokazeAction> ButtonBindable;
+        public readonly IBindable<int> IndexInCurrentComboBindable;
 
         protected override double InitialLifetimeOffset => HitObject.Preempt;
 
@@ -29,6 +30,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             PositionBindable = new Bindable<Vector2>();
             SizeBindable = new Bindable<Vector2>();
             ButtonBindable = new Bindable<SoyokazeAction>();
+            IndexInCurrentComboBindable = new Bindable<int>();
         }
 
         [BackgroundDependencyLoader]
@@ -55,6 +57,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             PositionBindable.BindTo(HitObject.PositionBindable);
             SizeBindable.BindTo(HitObject.SizeBindable);
             ButtonBindable.BindTo(HitObject.ButtonBindable);
+            IndexInCurrentComboBindable.BindTo(HitObject.IndexInCurrentComboBindable);
         }
 
         protected override void OnFree()
@@ -64,6 +67,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             PositionBindable.UnbindFrom(HitObject.PositionBindable);
             SizeBindable.UnbindFrom(HitObject.SizeBindable);
             ButtonBindable.UnbindFrom(HitObject.ButtonBindable);
+            IndexInCurrentComboBindable.UnbindFrom(HitObject.IndexInCurrentComboBindable);
         }
 
         protected override void AddInternal(Drawable drawable) => shakeContainer.Add(drawable);

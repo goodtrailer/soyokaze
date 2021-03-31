@@ -11,10 +11,11 @@ using osu.Game.Graphics.Containers;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces;
+using osu.Framework.Logging;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
-    class DrawableHitCircle : DrawableSoyokazeHitObject
+    public class DrawableHitCircle : DrawableSoyokazeHitObject
     {
         public DrawableApproachCirclePiece ApproachCirclePiece { get; private set; }
         public DrawableHitCirclePiece HitCirclePiece { get; private set; }
