@@ -1,16 +1,15 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
-using osuTK;
 using osu.Framework.Bindables;
+using osu.Game.Beatmaps;
+using osu.Game.Beatmaps.ControlPoints;
+using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Types;
-using osu.Game.Beatmaps.ControlPoints;
-using osu.Game.Beatmaps;
-using osu.Game.Rulesets.Judgements;
-using osu.Game.Rulesets.Soyokaze.Judgements;
 using osu.Game.Rulesets.Scoring;
-using osu.Framework.Logging;
+using osu.Game.Rulesets.Soyokaze.Judgements;
+using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects
 {
@@ -30,7 +29,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
         /// The max (normal) fade in rate (can go lower for AR>10)
         /// </summary>
         public const double BASE_FADEIN = 400;
-        
+
         public readonly Bindable<SoyokazeAction> ButtonBindable = new Bindable<SoyokazeAction>();
 
         public SoyokazeAction Button
@@ -115,7 +114,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
             get => LastInComboBindable.Value;
             set => LastInComboBindable.Value = value;
         }
-        
+
         public bool NewCombo { get; set; }
 
     }

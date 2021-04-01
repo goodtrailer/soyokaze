@@ -22,8 +22,8 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
         {
             AddInternal(new Sprite
             {
-				Anchor = Anchor.Centre,
-				Origin = Anchor.Centre,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
                 Texture = textures.Get(new SoyokazeSkinComponent(SoyokazeSkinComponents.HitCircleOverlay).LookupName),
             });
         }

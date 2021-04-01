@@ -3,17 +3,17 @@
 
 using System.Collections.Generic;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Bindings;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Difficulty;
+using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Beatmaps;
 using osu.Game.Rulesets.Soyokaze.Mods;
 using osu.Game.Rulesets.Soyokaze.UI;
-using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.UI;
-using osu.Framework.Graphics.Textures;
-using osu.Framework.Graphics.Containers;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze
@@ -51,7 +51,7 @@ namespace osu.Game.Rulesets.Soyokaze
                     return new Mod[] { null };
             }
 
-            
+
         }
 
         public override IEnumerable<KeyBinding> GetDefaultKeyBindings(int variant = 0) => new[]

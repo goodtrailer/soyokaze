@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
-using System.Diagnostics;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Extensions
@@ -27,7 +26,7 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
                 new Vector2(SCREEN_WIDTH/2 - screenCenterDistance,              SCREEN_HEIGHT/2 + gap),
                 new Vector2(SCREEN_WIDTH/2 - screenCenterDistance + gap,        SCREEN_HEIGHT/2      ),
                 new Vector2(SCREEN_WIDTH/2 + screenCenterDistance,              SCREEN_HEIGHT/2 + gap),
-                new Vector2(SCREEN_WIDTH/2 + screenCenterDistance + gap,        SCREEN_HEIGHT/2      ) 
+                new Vector2(SCREEN_WIDTH/2 + screenCenterDistance + gap,        SCREEN_HEIGHT/2      )
             };
 
             if (!inButtonOrder)
@@ -39,7 +38,7 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
                     positions[0],
                     positions[4],
                     positions[5],
-                    
+
                     positions[3],
                     positions[2],
                     positions[6],

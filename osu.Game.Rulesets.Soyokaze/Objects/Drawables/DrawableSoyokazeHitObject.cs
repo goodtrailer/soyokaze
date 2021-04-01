@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
-using osuTK;
 using osu.Framework.Allocation;
-using osu.Framework.Graphics;
 using osu.Framework.Bindables;
-using osu.Game.Rulesets.Objects.Drawables;
+using osu.Framework.Graphics;
 using osu.Game.Graphics.Containers;
+using osu.Game.Rulesets.Objects.Drawables;
+using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {

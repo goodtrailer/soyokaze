@@ -7,10 +7,10 @@ using osu.Framework.Input;
 using osu.Game.Beatmaps;
 using osu.Game.Input.Handlers;
 using osu.Game.Replays;
-using osu.Game.Rulesets.Soyokaze.Objects;
-using osu.Game.Rulesets.Soyokaze.Replays;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects.Drawables;
+using osu.Game.Rulesets.Soyokaze.Objects;
+using osu.Game.Rulesets.Soyokaze.Replays;
 using osu.Game.Rulesets.UI;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
@@ -31,6 +31,6 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
         protected override PassThroughInputManager CreateInputManager() => new SoyokazeInputManager(Ruleset?.RulesetInfo);
 
-        
+
     }
 }

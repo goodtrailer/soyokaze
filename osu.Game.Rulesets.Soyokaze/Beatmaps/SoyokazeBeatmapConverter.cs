@@ -4,18 +4,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using osuTK;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Types;
-using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Extensions;
-using osu.Framework.Logging;
+using osu.Game.Rulesets.Soyokaze.Objects;
+using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Beatmaps
 {
     public class SoyokazeBeatmapConverter : BeatmapConverter<SoyokazeHitObject>
-    {        
+    {
         public const int HIT_OBJECT_CENTER_DISTANCE = 280;
         public const int HIT_OBJECT_GAP = 120;
 
@@ -33,7 +32,7 @@ namespace osu.Game.Rulesets.Soyokaze.Beatmaps
             IHasCombo comboData = original as IHasCombo;
 
             Vector2 originalPosition = positionData?.Position ?? Vector2.Zero;
-            
+
             int column = 0, row = 0;
             for (int i = 1; i < PositionExtensions.NUM_COLUMNS; i++)
                 if (originalPosition.X > i * PositionExtensions.BEATMAP_WIDTH / PositionExtensions.NUM_COLUMNS)

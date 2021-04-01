@@ -2,8 +2,8 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using osu.Game.Rulesets.Objects;
-using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Scoring;
+using osu.Game.Rulesets.Soyokaze.Objects;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
 {

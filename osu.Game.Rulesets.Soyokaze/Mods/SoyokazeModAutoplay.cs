@@ -2,9 +2,9 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using osu.Game.Beatmaps;
+using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Replays;
-using osu.Game.Rulesets.Mods;
 using osu.Game.Scoring;
 using osu.Game.Users;
 

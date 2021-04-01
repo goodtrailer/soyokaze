@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
-using osuTK;
-using osuTK.Graphics;
 using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
@@ -10,6 +8,8 @@ using osu.Framework.Graphics.Textures;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Skinning;
+using osuTK;
+using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
@@ -111,7 +111,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         protected override void CheckForResult(bool userTriggered, double timeOffset)
         {
             if (!userTriggered)
-            {                
+            {
                 if (!HitObject.HitWindows.CanBeHit(timeOffset))
                     ApplyResult(r => r.Type = r.Judgement.MinResult);
                 return;
@@ -122,10 +122,10 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             if (result == HitResult.None)
             {
                 // shake, but make sure not to exceed into the window where you can actually miss
-                Shake(- timeOffset - HitObject.HitWindows.WindowFor(HitResult.Miss));
+                Shake(-timeOffset - HitObject.HitWindows.WindowFor(HitResult.Miss));
                 return;
             }
-            
+
             ApplyResult(r => r.Type = result);
         }
 
@@ -137,7 +137,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             SoyokazeAction validAction = ButtonBindable.Value;
             if (action != validAction)
                 return false;
-            
+
             UpdateResult(true);
             return true;
         }

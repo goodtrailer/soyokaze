@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using osu.Game.Beatmaps;
 using osu.Game.Replays;
-using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Replays;
+using osu.Game.Rulesets.Soyokaze.Objects;
 
 namespace osu.Game.Rulesets.Soyokaze.Replays
 {
