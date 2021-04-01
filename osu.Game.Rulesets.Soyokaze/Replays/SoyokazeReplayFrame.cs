@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using osu.Game.Rulesets.Replays;
+using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Replays

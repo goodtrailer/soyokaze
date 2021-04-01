@@ -9,7 +9,7 @@ using osu.Game.Rulesets.Difficulty.Preprocessing;
 using osu.Game.Rulesets.Difficulty.Skills;
 using osu.Game.Rulesets.Mods;
 
-namespace osu.Game.Rulesets.Soyokaze
+namespace osu.Game.Rulesets.Soyokaze.Difficulty
 {
     public class SoyokazeDifficultyCalculator : DifficultyCalculator
     {

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using osu.Framework.Input.Bindings;
 using osu.Game.Rulesets.UI;
 
-namespace osu.Game.Rulesets.Soyokaze
+namespace osu.Game.Rulesets.Soyokaze.UI
 {
     public class SoyokazeInputManager : RulesetInputManager<SoyokazeAction>
     {

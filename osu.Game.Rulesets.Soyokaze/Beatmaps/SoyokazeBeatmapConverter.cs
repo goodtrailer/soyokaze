@@ -9,6 +9,7 @@ using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Types;
 using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.Objects;
+using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Beatmaps

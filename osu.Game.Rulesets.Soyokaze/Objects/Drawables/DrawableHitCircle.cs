@@ -8,6 +8,7 @@ using osu.Framework.Graphics.Textures;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Skinning;
+using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
 using osuTK.Graphics;
 

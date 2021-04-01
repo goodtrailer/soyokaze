@@ -11,6 +11,7 @@ using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Beatmaps;
+using osu.Game.Rulesets.Soyokaze.Difficulty;
 using osu.Game.Rulesets.Soyokaze.Mods;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osu.Game.Rulesets.UI;

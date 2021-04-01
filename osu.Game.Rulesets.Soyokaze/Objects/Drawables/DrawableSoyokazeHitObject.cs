@@ -6,6 +6,7 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Rulesets.Objects.Drawables;
+using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables

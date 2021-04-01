@@ -6,6 +6,7 @@ using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Extensions;
+using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
