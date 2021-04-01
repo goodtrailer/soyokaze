@@ -7,19 +7,17 @@ using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Textures;
-using osu.Game.Graphics.Containers;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
-using osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces;
-using osu.Framework.Logging;
+using osu.Game.Rulesets.Soyokaze.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
     public class DrawableHitCircle : DrawableSoyokazeHitObject
     {
-        public DrawableApproachCirclePiece ApproachCirclePiece { get; private set; }
-        public DrawableHitCirclePiece HitCirclePiece { get; private set; }
-        public Drawable ApproachCircleProxy => ApproachCirclePiece;
+        public Drawable ApproachCircle { get; private set; }
+        public Drawable HitCircle { get; private set; }
+        public Drawable ApproachCircleProxy => ApproachCircle;
 
         public override bool HandlePositionalInput => true;
 
@@ -30,25 +28,24 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         public DrawableHitCircle(SoyokazeHitObject hitObject = null)
             : base(hitObject)
         {
-        }
-
-        [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
-        {
-            ApproachCirclePiece = new DrawableApproachCirclePiece()
+            ApproachCircle = new SkinnableApproachCircle()
             {
                 Alpha = 0,
                 RelativeSizeAxes = Axes.Both,
                 Scale = new Vector2(4),
             };
-            HitCirclePiece = new DrawableHitCirclePiece()
+            HitCircle = new SkinnableHitCircle()
             {
                 Alpha = 0,
                 RelativeSizeAxes = Axes.Both,
             };
+        }
 
-            AddInternal(ApproachCirclePiece);
-            AddInternal(HitCirclePiece);
+        [BackgroundDependencyLoader]
+        private void load(TextureStore textures)
+        {
+            AddInternal(ApproachCircle);
+            AddInternal(HitCircle);
 
             PositionBindable.BindValueChanged(_ => Position = HitObject.Position);
             SizeBindable.BindValueChanged(_ => Size = HitObject.Size);
@@ -58,18 +55,18 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.UpdateInitialTransforms();
 
-            HitCirclePiece.FadeIn(HitObject.FadeIn);
+            HitCircle.FadeIn(HitObject.FadeIn);
 
-            ApproachCirclePiece.FadeInFromZero(System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
-            ApproachCirclePiece.ScaleTo(1f, HitObject.Preempt);
-            ApproachCirclePiece.Expire(true);
+            ApproachCircle.FadeInFromZero(System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
+            ApproachCircle.ScaleTo(1f, HitObject.Preempt);
+            ApproachCircle.Expire(true);
         }
 
         protected override void UpdateStartTimeStateTransforms()
         {
             base.UpdateStartTimeStateTransforms();
 
-            ApproachCirclePiece.FadeOut(50);
+            ApproachCircle.FadeOut(50);
         }
 
         protected override void UpdateHitStateTransforms(ArmedState state)
@@ -97,7 +94,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             set
             {
                 base.LifetimeStart = value;
-                ApproachCirclePiece.LifetimeStart = value;
+                ApproachCircle.LifetimeStart = value;
             }
         }
 
@@ -107,7 +104,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             set
             {
                 base.LifetimeEnd = value;
-                ApproachCirclePiece.LifetimeEnd = value;
+                ApproachCircle.LifetimeEnd = value;
             }
         }
 

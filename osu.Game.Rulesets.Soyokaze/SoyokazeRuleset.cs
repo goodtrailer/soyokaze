@@ -20,8 +20,10 @@ namespace osu.Game.Rulesets.Soyokaze
 {
     public class SoyokazeRuleset : Ruleset
     {
+        public const string SHORT_NAME = "soyokaze";
+
         public override string Description => "soyokaze!";
-        public override string ShortName => "soyokaze";
+        public override string ShortName => SHORT_NAME;
         public override string PlayingVerb => "Feeling the wind";
 
         public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods = null) =>

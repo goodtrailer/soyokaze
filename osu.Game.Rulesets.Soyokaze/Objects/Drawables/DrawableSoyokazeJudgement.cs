@@ -7,7 +7,6 @@ using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Extensions;
-using osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
@@ -24,6 +23,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             Position = positions[(int)button];
         }
 
-        protected override Drawable CreateDefaultJudgement(HitResult result) => new DrawableSoyokazeJudgementPiece(result);
+        protected override Drawable CreateDefaultJudgement(HitResult result) => new DefaultJudgementPiece(result);
     }
 }

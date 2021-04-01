@@ -5,37 +5,36 @@ using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Sprites;
-using osu.Framework.Graphics.Textures;
 using osu.Game.Rulesets.Objects.Drawables;
+using osu.Game.Rulesets.Soyokaze.Skinning.Defaults;
+using osu.Game.Skinning;
 using osuTK.Graphics;
 
-namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables.Pieces
+namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
-    public class DrawableHitCirclePiece : CompositeDrawable
+    public class SkinnableApproachCircle : Container
     {
         [Resolved]
         private DrawableHitObject drawableObject { get; set; }
 
         private readonly Bindable<Color4> accentColour = new Bindable<Color4>();
 
-        public DrawableHitCirclePiece()
+        private Drawable approachCircle;
+        public override bool RemoveWhenNotAlive => false;
+
+        public SkinnableApproachCircle()
         {
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
         }
 
         [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
+        private void load()
         {
-            AddInternal(new SpriteIcon
-            {
-                RelativeSizeAxes = Axes.Both,
-                Icon = FontAwesome.Regular.Circle,
-            });
+            AddInternal(approachCircle = new SkinnableDrawable(new SoyokazeSkinComponent(SoyokazeSkinComponents.ApproachCircle), _ => new DefaultApproachCircle()));
 
             accentColour.BindTo(drawableObject.AccentColour);
-            accentColour.BindValueChanged(colourChanged => Colour = colourChanged.NewValue, true);
+            accentColour.BindValueChanged(colourChanged => approachCircle.Colour = colourChanged.NewValue, true);
         }
     }
 }
