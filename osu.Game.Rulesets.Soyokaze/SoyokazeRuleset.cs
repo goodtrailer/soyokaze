@@ -50,8 +50,6 @@ namespace osu.Game.Rulesets.Soyokaze
                 default:
                     return new Mod[] { null };
             }
-
-
         }
 
         public override IEnumerable<KeyBinding> GetDefaultKeyBindings(int variant = 0) => new[]

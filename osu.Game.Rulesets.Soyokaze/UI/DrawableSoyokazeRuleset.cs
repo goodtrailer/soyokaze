@@ -30,7 +30,5 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         public override DrawableHitObject<SoyokazeHitObject> CreateDrawableRepresentation(SoyokazeHitObject h) => null;
 
         protected override PassThroughInputManager CreateInputManager() => new SoyokazeInputManager(Ruleset?.RulesetInfo);
-
-
     }
 }

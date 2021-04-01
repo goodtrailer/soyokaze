@@ -49,8 +49,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
         public double Preempt = BASE_PREEMPT;
         public double FadeIn = BASE_FADEIN;
 
-
-
         // HitObject Impl ----------------------------------------------
         protected override void ApplyDefaultsToSelf(ControlPointInfo controlPointInfo, BeatmapDifficulty difficulty)
         {
@@ -116,6 +114,5 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
         }
 
         public bool NewCombo { get; set; }
-
     }
 }

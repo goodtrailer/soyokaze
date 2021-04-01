@@ -16,6 +16,5 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         }
 
         protected override double InitialLifetimeOffset => (HitObject as SoyokazeHitObject)?.Preempt ?? SoyokazeHitObject.BASE_PREEMPT;
-
     }
 }
