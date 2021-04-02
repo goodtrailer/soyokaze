@@ -9,5 +9,6 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         HitCircle,
         HitCircleOverlay,
         HitCircleText,
+        Cursor,
     }
 }

@@ -70,7 +70,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
             drawableObject.ApplyCustomUpdateState += updateState;
         }
-        
+
         private void updateState(DrawableHitObject drawableObject, ArmedState state)
         {
             switch (state)
