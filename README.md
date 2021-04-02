@@ -14,7 +14,7 @@ An osu! ruleset mimicking Genshin Impact's Ballad of Breeze mini-game.
 3. ✓ Shaking (only for early-hits)
 4. ✓ Judgements
 5. ✓ Combos/accents
-6. Texturing/skinning
+6. ✓ Texturing/skinning
 7. Configuration/settings
 8. Key indicators
 9. Difficulty calculation

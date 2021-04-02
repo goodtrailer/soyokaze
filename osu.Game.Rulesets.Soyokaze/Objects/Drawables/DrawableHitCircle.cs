@@ -76,8 +76,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             switch (state)
             {
                 case ArmedState.Hit:
-                    duration = 500;
-                    this.ScaleTo(2, duration, Easing.OutQuint).FadeOut(duration, Easing.OutQuint).Expire();
+                    duration = 400;
+                    this.ScaleTo(1.5f, duration, Easing.OutQuint).FadeOut(duration, Easing.OutQuint).Expire();
                     break;
 
                 case ArmedState.Miss:

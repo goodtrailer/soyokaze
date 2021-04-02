@@ -13,8 +13,10 @@ using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Beatmaps;
 using osu.Game.Rulesets.Soyokaze.Difficulty;
 using osu.Game.Rulesets.Soyokaze.Mods;
+using osu.Game.Rulesets.Soyokaze.Skinning.Legacy;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osu.Game.Rulesets.UI;
+using osu.Game.Skinning;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze
@@ -37,6 +39,8 @@ namespace osu.Game.Rulesets.Soyokaze
 
         public override DifficultyCalculator CreateDifficultyCalculator(WorkingBeatmap beatmap) =>
             new SoyokazeDifficultyCalculator(this, beatmap);
+
+        public override ISkin CreateLegacySkinProvider(ISkinSource source, IBeatmap beatmap) => new SoyokazeLegacySkinTransformer(source);
 
         public override IEnumerable<Mod> GetModsFor(ModType type)
         {

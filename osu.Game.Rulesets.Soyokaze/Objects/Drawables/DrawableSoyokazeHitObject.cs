@@ -13,10 +13,10 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
     public abstract class DrawableSoyokazeHitObject : DrawableHitObject<SoyokazeHitObject>
     {
-        public readonly IBindable<Vector2> PositionBindable;
-        public readonly IBindable<Vector2> SizeBindable;
-        public readonly IBindable<SoyokazeAction> ButtonBindable;
-        public readonly IBindable<int> IndexInCurrentComboBindable;
+        public readonly Bindable<Vector2> PositionBindable;
+        public readonly Bindable<Vector2> SizeBindable;
+        public readonly Bindable<SoyokazeAction> ButtonBindable;
+        public readonly Bindable<int> IndexInCurrentComboBindable;
 
         protected override double InitialLifetimeOffset => HitObject.Preempt;
 
