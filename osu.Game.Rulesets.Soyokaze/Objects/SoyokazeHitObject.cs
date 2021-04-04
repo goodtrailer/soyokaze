@@ -14,7 +14,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects
 {
-    public class SoyokazeHitObject : HitObject, IHasPosition, IHasComboInformation
+    public class SoyokazeHitObject : HitObject, IHasComboInformation
     {
         /// <summary>
         /// The base size of circles (not like CS really applies to ballad of breeze though)
@@ -66,19 +66,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
         public override Judgement CreateJudgement() => new SoyokazeJudgement();
 
         protected override HitWindows CreateHitWindows() => new HitWindows();
-
-        // IHasPosition Impl -------------------------------------------
-
-        public readonly Bindable<Vector2> PositionBindable = new Bindable<Vector2>();
-
-        public Vector2 Position
-        {
-            get => PositionBindable.Value;
-            set => PositionBindable.Value = value;
-        }
-
-        public float X => Position.X;
-        public float Y => Position.Y;
 
         // IHasComboInformation Impl -----------------------------------
 

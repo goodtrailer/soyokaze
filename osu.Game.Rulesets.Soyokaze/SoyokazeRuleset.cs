@@ -8,9 +8,13 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Bindings;
 using osu.Game.Beatmaps;
+using osu.Game.Configuration;
+using osu.Game.Overlays.Settings;
+using osu.Game.Rulesets.Configuration;
 using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Beatmaps;
+using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Difficulty;
 using osu.Game.Rulesets.Soyokaze.Mods;
 using osu.Game.Rulesets.Soyokaze.Skinning.Legacy;
@@ -29,16 +33,21 @@ namespace osu.Game.Rulesets.Soyokaze
         public override string ShortName => SHORT_NAME;
         public override string PlayingVerb => "Feeling the wind";
 
-        public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods = null) =>
-            new DrawableSoyokazeRuleset(this, beatmap, mods);
 
         public override IBeatmapConverter CreateBeatmapConverter(IBeatmap beatmap) =>
             new SoyokazeBeatmapConverter(beatmap, this);
 
         public override IBeatmapProcessor CreateBeatmapProcessor(IBeatmap beatmap) => new BeatmapProcessor(beatmap);
 
+        public override IRulesetConfigManager CreateConfig(SettingsStore settings) => new SoyokazeConfigManager(settings, RulesetInfo);
+
+        public override RulesetSettingsSubsection CreateSettings() => new SoyokazeSettingsSubsection(this);
+
         public override DifficultyCalculator CreateDifficultyCalculator(WorkingBeatmap beatmap) =>
             new SoyokazeDifficultyCalculator(this, beatmap);
+
+        public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods = null) =>
+            new DrawableSoyokazeRuleset(this, beatmap, mods);
 
         public override ISkin CreateLegacySkinProvider(ISkinSource source, IBeatmap beatmap) => new SoyokazeLegacySkinTransformer(source);
 

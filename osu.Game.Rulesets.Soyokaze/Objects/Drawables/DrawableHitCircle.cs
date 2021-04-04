@@ -2,11 +2,14 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
+using osu.Framework.Bindables;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Textures;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
+using osu.Game.Rulesets.Soyokaze.Configuration;
+using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.Skinning;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
@@ -48,8 +51,16 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             AddInternal(ApproachCircle);
             AddInternal(HitCircle);
 
-            PositionBindable.BindValueChanged(_ => Position = HitObject.Position);
             SizeBindable.BindValueChanged(_ => Size = HitObject.Size);
+            ScreenCenterDistanceBindable.BindValueChanged(_ => updatePosition());
+            GapBindable.BindValueChanged(_ => updatePosition());
+            ButtonBindable.BindValueChanged(_ => updatePosition());
+        }
+
+        private void updatePosition()
+        {
+            Vector2[] positions = PositionExtensions.GetPositions(ScreenCenterDistanceBindable.Value, GapBindable.Value, true);
+            Position = positions[(int)ButtonBindable.Value];
         }
 
         protected override void UpdateInitialTransforms()

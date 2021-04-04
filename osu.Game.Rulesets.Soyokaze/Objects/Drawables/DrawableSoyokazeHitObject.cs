@@ -6,6 +6,7 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Rulesets.Objects.Drawables;
+using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
 
@@ -13,29 +14,26 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
     public abstract class DrawableSoyokazeHitObject : DrawableHitObject<SoyokazeHitObject>
     {
-        public readonly Bindable<Vector2> PositionBindable;
-        public readonly Bindable<Vector2> SizeBindable;
-        public readonly Bindable<SoyokazeAction> ButtonBindable;
-        public readonly Bindable<int> IndexInCurrentComboBindable;
+        public readonly Bindable<Vector2> SizeBindable = new Bindable<Vector2>();
+        public readonly Bindable<SoyokazeAction> ButtonBindable = new Bindable<SoyokazeAction>();
+        public readonly Bindable<int> IndexInCurrentComboBindable = new Bindable<int>();
+        public readonly Bindable<int> ScreenCenterDistanceBindable = new Bindable<int>();
+        public readonly Bindable<int> GapBindable = new Bindable<int>();
 
         protected override double InitialLifetimeOffset => HitObject.Preempt;
 
         private ShakeContainer shakeContainer;
+        private SoyokazeConfigManager configManager;
 
         public DrawableSoyokazeHitObject(SoyokazeHitObject hitObject)
             : base(hitObject)
         {
             Alpha = 1;
             Origin = Anchor.Centre;
-
-            PositionBindable = new Bindable<Vector2>();
-            SizeBindable = new Bindable<Vector2>();
-            ButtonBindable = new Bindable<SoyokazeAction>();
-            IndexInCurrentComboBindable = new Bindable<int>();
         }
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(SoyokazeConfigManager cm)
         {
             shakeContainer = new ShakeContainer()
             {
@@ -45,6 +43,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 Anchor = Anchor.Centre,
             };
             base.AddInternal(shakeContainer);
+
+            configManager = cm;
         }
 
         public abstract bool Hit(SoyokazeAction action);
@@ -55,7 +55,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.OnApply();
 
-            PositionBindable.BindTo(HitObject.PositionBindable);
+            ScreenCenterDistanceBindable.BindTo(configManager.GetBindable<int>(SoyokazeConfig.HitCircleScreenCenterDistance));
+            GapBindable.BindTo(configManager.GetBindable<int>(SoyokazeConfig.HitCircleGap));
             SizeBindable.BindTo(HitObject.SizeBindable);
             ButtonBindable.BindTo(HitObject.ButtonBindable);
             IndexInCurrentComboBindable.BindTo(HitObject.IndexInCurrentComboBindable);
@@ -65,7 +66,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.OnFree();
 
-            PositionBindable.UnbindFrom(HitObject.PositionBindable);
+            ScreenCenterDistanceBindable.UnbindFrom(configManager.GetBindable<int>(SoyokazeConfig.HitCircleScreenCenterDistance));
+            GapBindable.UnbindFrom(configManager.GetBindable<int>(SoyokazeConfig.HitCircleGap));
             SizeBindable.UnbindFrom(HitObject.SizeBindable);
             ButtonBindable.UnbindFrom(HitObject.ButtonBindable);
             IndexInCurrentComboBindable.UnbindFrom(HitObject.IndexInCurrentComboBindable);

@@ -8,6 +8,7 @@ using osu.Framework.Input.Bindings;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
+using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Objects.Drawables;
 using osu.Game.Rulesets.UI;
@@ -19,6 +20,8 @@ namespace osu.Game.Rulesets.Soyokaze.UI
     {
         private readonly ProxyContainer approachCircleContainer;
         private readonly JudgementContainer<DrawableSoyokazeJudgement> judgementContainer;
+        private SoyokazeConfigManager configManager;
+
         protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
         protected override HitObjectLifetimeEntry CreateLifetimeEntry(HitObject hitObject) => new SoyokazeHitObjectLifetimeEntry(hitObject);
 
@@ -42,8 +45,10 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         }
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(SoyokazeConfigManager cm)
         {
+            configManager = cm;
+
             AddRangeInternal(new Drawable[]
             {
                 HitObjectContainer,
@@ -77,7 +82,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             switch (drawableObject)
             {
                 case DrawableHitCircle _:
-                    judgementContainer.Add(new DrawableSoyokazeJudgement(result, drawableObject));
+                    judgementContainer.Add(new DrawableSoyokazeJudgement(result, drawableObject, configManager));
                     break;
             }
         }

@@ -4,9 +4,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using osu.Framework.Allocation;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Types;
+using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.UI;
@@ -16,9 +18,6 @@ namespace osu.Game.Rulesets.Soyokaze.Beatmaps
 {
     public class SoyokazeBeatmapConverter : BeatmapConverter<SoyokazeHitObject>
     {
-        public const int HIT_OBJECT_CENTER_DISTANCE = 280;
-        public const int HIT_OBJECT_GAP = 120;
-
         public SoyokazeBeatmapConverter(IBeatmap beatmap, Ruleset ruleset)
             : base(beatmap, ruleset)
         {
@@ -28,6 +27,7 @@ namespace osu.Game.Rulesets.Soyokaze.Beatmaps
 
         protected override IEnumerable<SoyokazeHitObject> ConvertHitObject(HitObject original, IBeatmap beatmap, CancellationToken cancellationToken)
         {
+            
             HitCircle hitCircle = new HitCircle();
             IHasPosition positionData = original as IHasPosition;
             IHasCombo comboData = original as IHasCombo;
@@ -42,10 +42,7 @@ namespace osu.Game.Rulesets.Soyokaze.Beatmaps
                 if (originalPosition.Y > i * PositionExtensions.BEATMAP_HEIGHT / PositionExtensions.NUM_ROWS)
                     row = i;
 
-            Vector2[] hitObjectPositions = PositionExtensions.GetPositions(HIT_OBJECT_CENTER_DISTANCE, HIT_OBJECT_GAP);
-
-            hitCircle.Position = hitObjectPositions[column + PositionExtensions.NUM_COLUMNS * row];
-            hitCircle.Button = (SoyokazeAction)PositionExtensions.PositionToButton(column, row);
+            hitCircle.Button = (SoyokazeAction)PositionExtensions.PositionToButton(column + PositionExtensions.NUM_COLUMNS * row);
             hitCircle.Samples = original.Samples;
             hitCircle.StartTime = original.StartTime;
             hitCircle.NewCombo = comboData?.NewCombo ?? false;

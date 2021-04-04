@@ -31,7 +31,6 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
                 Frames.Add(new SoyokazeReplayFrame
                 {
                     Time = hitObject.StartTime,
-                    Position = hitObject.Position,
                     // todo: add required inputs and extra frames.
                 });
             }

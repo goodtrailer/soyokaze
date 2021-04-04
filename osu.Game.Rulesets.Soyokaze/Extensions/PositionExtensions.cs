@@ -46,33 +46,29 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
                 };
         }
 
-        public static int PositionToButton(int column, int row)
+        public static int PositionToButton(int positionIndex)
         {
-            if (row == 0)
-                switch (column)
-                {
-                    case 0:
-                        return 1;
-                    case 1:
-                        return 0;
-                    case 2:
-                        return 5;
-                    case 3:
-                        return 4;
-                }
-            else if (row == 1)
-                switch (column)
-                {
-                    case 0:
-                        return 2;
-                    case 1:
-                        return 3;
-                    case 2:
-                        return 6;
-                    case 3:
-                        return 7;
-                }
-            return -1; // shouldn't be reachable because of assert, but VS is yelling at me
+            switch (positionIndex)
+            {
+                case 0:
+                    return 1;
+                case 1:
+                    return 0;
+                case 2:
+                    return 5;
+                case 3:
+                    return 4;
+                case 4:
+                    return 2;
+                case 5:
+                    return 3;
+                case 6:
+                    return 6;
+                case 7:
+                    return 7;
+                default:
+                    return -1;
+            }
         }
     }
 }

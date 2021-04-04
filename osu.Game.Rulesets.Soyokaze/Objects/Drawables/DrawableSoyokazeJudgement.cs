@@ -1,10 +1,14 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
+using osu.Framework.Allocation;
+using osu.Framework.Bindables;
 using osu.Framework.Graphics;
+using osu.Framework.Logging;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
+using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
@@ -13,14 +17,16 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
     public class DrawableSoyokazeJudgement : DrawableJudgement
     {
-        public const int JUDGEMENT_CENTER_DISTANCE = 280;
-        public const int JUDGEMENT_GAP = 120;
-        public DrawableSoyokazeJudgement(JudgementResult result, DrawableHitObject hitObject)
-            : base(result, hitObject)
+        public DrawableSoyokazeJudgement(JudgementResult result, DrawableHitObject drawableObject, SoyokazeConfigManager configManager)
+            : base(result, drawableObject)
         {
             Origin = Anchor.Centre;
-            Vector2[] positions = PositionExtensions.GetPositions(JUDGEMENT_CENTER_DISTANCE, JUDGEMENT_GAP, true);
-            SoyokazeAction button = (hitObject as DrawableSoyokazeHitObject)?.ButtonBindable.Value ?? SoyokazeAction.Button0;
+
+            SoyokazeAction button = (drawableObject as DrawableSoyokazeHitObject)?.ButtonBindable.Value ?? default;
+            int screenCenterDistance = configManager.Get<int>(SoyokazeConfig.JudgementScreenCenterDistance);
+            int gap = configManager.Get<int>(SoyokazeConfig.JudgementGap);
+
+            Vector2[] positions = PositionExtensions.GetPositions(screenCenterDistance, gap, true);
             Position = positions[(int)button];
         }
 
