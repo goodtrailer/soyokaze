@@ -6,9 +6,11 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
     public enum SoyokazeSkinComponents
     {
         ApproachCircle,
+        Cursor,
         HitCircle,
         HitCircleOverlay,
         HitCircleText,
-        Cursor,
+        InputOverlayKey,
+        InputOverlayBackground,
     }
 }

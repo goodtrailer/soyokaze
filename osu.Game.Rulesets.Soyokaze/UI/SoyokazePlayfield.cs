@@ -11,6 +11,7 @@ using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Objects.Drawables;
+using osu.Game.Rulesets.Soyokaze.Skinning;
 using osu.Game.Rulesets.UI;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
@@ -20,6 +21,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
     {
         private readonly ProxyContainer approachCircleContainer;
         private readonly JudgementContainer<DrawableSoyokazeJudgement> judgementContainer;
+        private readonly SkinnableInputOverlay inputOverlay;
         private SoyokazeConfigManager configManager;
 
         protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
@@ -40,6 +42,10 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             {
                 RelativeSizeAxes = Axes.Both,
             };
+            inputOverlay = new SkinnableInputOverlay
+            {
+                RelativeSizeAxes = Axes.Both,
+            };
 
             NewResult += onNewResult;
         }
@@ -53,7 +59,8 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             {
                 HitObjectContainer,
                 approachCircleContainer,
-                judgementContainer
+                judgementContainer,
+                inputOverlay
             });
 
             RegisterPool<HitCircle, DrawableHitCircle>(15);
@@ -89,6 +96,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
         public bool OnPressed(SoyokazeAction action)
         {
+            inputOverlay.PressKey(action);
             foreach (var hitObject in HitObjectContainer.AliveObjects)
                 switch (hitObject)
                 {
@@ -97,7 +105,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
                             return true;
                         break;
                 }
-            return false;
+            return true;
 
             #region Unused chronological sort
             /* This is what I had written at one point to make sure that the list
@@ -136,6 +144,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
         public void OnReleased(SoyokazeAction action)
         {
+            inputOverlay.UnpressKey(action);
         }
     }
 }

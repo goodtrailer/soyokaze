@@ -9,10 +9,14 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
     {
         public const int SCREEN_WIDTH = 1366;
         public const int SCREEN_HEIGHT = 768;
-        public const int NUM_COLUMNS = 4;
-        public const int NUM_ROWS = 2;
+        public static readonly Vector2 SCREEN_DIMS = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT);
+        public static readonly Vector2 SCREEN_CENTER = new Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         public const int BEATMAP_WIDTH = 512;
         public const int BEATMAP_HEIGHT = 384;
+        public static readonly Vector2 BEATMAP_DIMS = new Vector2(BEATMAP_WIDTH, BEATMAP_HEIGHT);
+        public static readonly Vector2 BEATMAP_CENTER = new Vector2(BEATMAP_WIDTH / 2, BEATMAP_HEIGHT / 2);
+        public const int NUM_COLUMNS = 4;
+        public const int NUM_ROWS = 2;
 
         public static Vector2[] GetPositions(int screenCenterDistance, int gap, bool inButtonOrder = false)
         {

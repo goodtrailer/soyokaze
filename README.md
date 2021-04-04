@@ -16,7 +16,7 @@ An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game.
 1. ✓ Combos/accents
 1. ✓ Texturing/skinning
 1. ✓ Configuration/settings
-1. Key indicators
+1. ✓ Key indicators
 1. Difficulty calculation
 1. Check stats are scaling properly (HP, CS, OD)
 1. Mods (+DT, +HR, +EZ, +HT, +AT)

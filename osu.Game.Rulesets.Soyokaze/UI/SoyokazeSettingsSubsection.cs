@@ -13,9 +13,6 @@ namespace osu.Game.Rulesets.Soyokaze.UI
     {
         protected override string Header => "soyokaze!";
 
-        private Bindable<bool> screenCenterDistanceLockedBindable = new Bindable<bool>();
-        private Bindable<int> localJudgementScreenCenterDistanceBindable = new Bindable<int>();
-
         public SoyokazeSettingsSubsection(Ruleset ruleset)
             : base(ruleset)
         {
@@ -51,6 +48,18 @@ namespace osu.Game.Rulesets.Soyokaze.UI
                 {
                     LabelText = "Judgement gap",
                     Current = configManager.GetBindable<int>(SoyokazeConfig.JudgementGap),
+                    ShowsDefaultIndicator = true,
+                },
+                new SettingsSlider<int>
+                {
+                    LabelText = "Input Overlay distance from screen center",
+                    Current = configManager.GetBindable<int>(SoyokazeConfig.InputOverlayScreenCenterDistance),
+                    ShowsDefaultIndicator = true,
+                },
+                new SettingsSlider<int>
+                {
+                    LabelText = "Input Overlay gap",
+                    Current = configManager.GetBindable<int>(SoyokazeConfig.InputOverlayGap),
                     ShowsDefaultIndicator = true,
                 },
             };

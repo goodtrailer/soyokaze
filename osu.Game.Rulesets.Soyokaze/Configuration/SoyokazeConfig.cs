@@ -9,5 +9,7 @@ namespace osu.Game.Rulesets.Soyokaze.Configuration
         HitCircleGap,
         JudgementScreenCenterDistance,
         JudgementGap,
+        InputOverlayScreenCenterDistance,
+        InputOverlayGap,
     }
 }
