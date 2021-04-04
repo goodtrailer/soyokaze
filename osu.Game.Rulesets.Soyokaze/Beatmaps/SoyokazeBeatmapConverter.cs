@@ -4,11 +4,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using osu.Framework.Allocation;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Types;
-using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.UI;
@@ -27,7 +25,6 @@ namespace osu.Game.Rulesets.Soyokaze.Beatmaps
 
         protected override IEnumerable<SoyokazeHitObject> ConvertHitObject(HitObject original, IBeatmap beatmap, CancellationToken cancellationToken)
         {
-            
             HitCircle hitCircle = new HitCircle();
             IHasPosition positionData = original as IHasPosition;
             IHasCombo comboData = original as IHasCombo;

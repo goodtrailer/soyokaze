@@ -8,7 +8,7 @@
 
 An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game.
 
-### To-Do:
+### To-Do
 1. ✓ Rudimentary hit circles spawning and approach circles.
 1. ✓ Top-only hits (no piercing)
 1. ✓ Shaking (only for early-hits)

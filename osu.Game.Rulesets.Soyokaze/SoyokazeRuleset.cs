@@ -33,7 +33,6 @@ namespace osu.Game.Rulesets.Soyokaze
         public override string ShortName => SHORT_NAME;
         public override string PlayingVerb => "Feeling the wind";
 
-
         public override IBeatmapConverter CreateBeatmapConverter(IBeatmap beatmap) =>
             new SoyokazeBeatmapConverter(beatmap, this);
 

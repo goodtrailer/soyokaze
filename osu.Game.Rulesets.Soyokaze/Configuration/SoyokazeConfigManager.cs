@@ -3,7 +3,6 @@
 
 using osu.Game.Configuration;
 using osu.Game.Rulesets.Configuration;
-using osu.Game.Rulesets.UI;
 using osu.Game.Rulesets.Soyokaze.Extensions;
 
 namespace osu.Game.Rulesets.Soyokaze.Configuration
