@@ -6,21 +6,24 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/goodtrailer/soyokaze/badge/main?style=flat-square)](https://www.codefactor.io/repository/github/goodtrailer/soyokaze/overview/main)
 [![License](https://img.shields.io/github/license/goodtrailer/soyokaze.svg?color=blue&style=flat-square)](https://github.com/goodtrailer/soyokaze/blob/master/LICENSE)
 
-An osu! ruleset mimicking Genshin Impact's Ballad of Breeze mini-game.
+An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game.
 
 ### To-Do:
 1. ✓ Rudimentary hit circles spawning and approach circles.
-2. ✓ Top-only hits (no piercing)
-3. ✓ Shaking (only for early-hits)
-4. ✓ Judgements
-5. ✓ Combos/accents
-6. ✓ Texturing/skinning
-7. ✓ Configuration/settings
-8. Key indicators
-9. Difficulty calculation
-10. Check stats are scaling properly (HP, CS, OD)
-11. Mods (+DT, +HR, +EZ, +HT)
-12. End-game statistics
-13. Spinner mod (+SP)
-14. Sliders mod (+SL)
+1. ✓ Top-only hits (no piercing)
+1. ✓ Shaking (only for early-hits)
+1. ✓ Judgements
+1. ✓ Combos/accents
+1. ✓ Texturing/skinning
+1. ✓ Configuration/settings
+1. Key indicators
+1. Difficulty calculation
+1. Check stats are scaling properly (HP, CS, OD)
+1. Mods (+DT, +HR, +EZ, +HT, +AT)
+1. End-game statistics
+1. Replays
+1. Kiai visuals
+1. Spinner mod (+SP)
+1. Sliders mod (+SL)
+1. Sliderends mod (+SE)
 
