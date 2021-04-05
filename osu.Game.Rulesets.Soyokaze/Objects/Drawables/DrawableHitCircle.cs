@@ -4,7 +4,9 @@
 using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Textures;
+using osu.Framework.Logging;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Extensions;
@@ -17,8 +19,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
     public class DrawableHitCircle : DrawableSoyokazeHitObject
     {
-        public Drawable ApproachCircle { get; private set; }
-        public Drawable HitCircle { get; private set; }
+        public SkinnableApproachCircle ApproachCircle { get; private set; }
+        public SkinnableHitCircle HitCircle { get; private set; }
         public Drawable ApproachCircleProxy => ApproachCircle;
 
         public override bool HandlePositionalInput => true;
@@ -30,17 +32,17 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         public DrawableHitCircle(SoyokazeHitObject hitObject = null)
             : base(hitObject)
         {
-            ApproachCircle = new SkinnableApproachCircle()
+            ApproachCircle = new SkinnableApproachCircle
             {
                 Alpha = 0,
-                RelativeSizeAxes = Axes.Both,
                 Scale = new Vector2(4),
             };
-            HitCircle = new SkinnableHitCircle()
+            HitCircle = new SkinnableHitCircle
             {
                 Alpha = 0,
-                RelativeSizeAxes = Axes.Both,
+                Scale = new Vector2(1),
             };
+            Size = new Vector2(SoyokazeHitObject.OBJECT_RADIUS * 2);
         }
 
         [BackgroundDependencyLoader]
@@ -49,10 +51,10 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             AddInternal(ApproachCircle);
             AddInternal(HitCircle);
 
-            SizeBindable.BindValueChanged(_ => Size = HitObject.Size);
-            ScreenCenterDistanceBindable.BindValueChanged(_ => updatePosition());
-            GapBindable.BindValueChanged(_ => updatePosition());
-            ButtonBindable.BindValueChanged(_ => updatePosition());
+            ScaleBindable.BindValueChanged(valueChanged => Scale = new Vector2(valueChanged.NewValue), true);
+            ScreenCenterDistanceBindable.BindValueChanged(_ => updatePosition(), true);
+            GapBindable.BindValueChanged(_ => updatePosition(), true);
+            ButtonBindable.BindValueChanged(_ => updatePosition(), true);
         }
 
         private void updatePosition()
@@ -81,19 +83,27 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
         protected override void UpdateHitStateTransforms(ArmedState state)
         {
-            double duration;
+            const double hit_duration = 400;
+            const float hit_dilate = 1.5f;
+
+            const double miss_duration = 200;
+            const float miss_contract = 0.8f;
+            const float miss_offset = 10f;
+
+
             switch (state)
             {
                 case ArmedState.Hit:
-                    duration = 400;
-                    this.ScaleTo(1.5f, duration, Easing.OutQuint).FadeOut(duration, Easing.OutQuint).Expire();
+                    this.ScaleTo(Scale * hit_dilate, hit_duration, Easing.OutQuint);
+                    this.FadeOut(hit_duration, Easing.OutQuint);
+                    Expire();
                     break;
 
                 case ArmedState.Miss:
-                    duration = 200;
-                    this.ScaleTo(0.8f, duration, Easing.OutQuint);
-                    this.MoveToOffset(new Vector2(0, 10), duration, Easing.In);
-                    this.FadeColour(Color4.Red.Opacity(0.5f), duration / 2, Easing.OutQuint).Then().FadeOut(duration / 2, Easing.InQuint).Expire();
+                    this.ScaleTo(Scale * miss_contract, miss_duration, Easing.OutQuint);
+                    this.MoveToOffset(new Vector2(0, miss_offset), miss_duration, Easing.In);
+                    this.FadeOut(miss_duration, Easing.InQuint);
+                    Expire();
                     break;
             }
         }

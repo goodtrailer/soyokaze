@@ -6,9 +6,11 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Rulesets.Objects.Drawables;
+using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Skinning.Defaults;
 using osu.Game.Skinning;
+using osuTK;
 using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning
@@ -31,6 +33,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         {
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
+            RelativeSizeAxes = Axes.Both;
             Masking = true;
 
             hitCircle = new SkinnableDrawable(

@@ -14,7 +14,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
     public abstract class DrawableSoyokazeHitObject : DrawableHitObject<SoyokazeHitObject>
     {
-        public readonly Bindable<Vector2> SizeBindable = new Bindable<Vector2>();
+        public readonly Bindable<float> ScaleBindable = new Bindable<float>();
         public readonly Bindable<SoyokazeAction> ButtonBindable = new Bindable<SoyokazeAction>();
         public readonly Bindable<int> IndexInCurrentComboBindable = new Bindable<int>();
         public readonly Bindable<int> ScreenCenterDistanceBindable = new Bindable<int>();
@@ -57,7 +57,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
             ScreenCenterDistanceBindable.BindTo(configManager.GetBindable<int>(SoyokazeConfig.HitCircleScreenCenterDistance));
             GapBindable.BindTo(configManager.GetBindable<int>(SoyokazeConfig.HitCircleGap));
-            SizeBindable.BindTo(HitObject.SizeBindable);
+            ScaleBindable.BindTo(HitObject.ScaleBindable);
             ButtonBindable.BindTo(HitObject.ButtonBindable);
             IndexInCurrentComboBindable.BindTo(HitObject.IndexInCurrentComboBindable);
         }
@@ -68,7 +68,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
             ScreenCenterDistanceBindable.UnbindFrom(configManager.GetBindable<int>(SoyokazeConfig.HitCircleScreenCenterDistance));
             GapBindable.UnbindFrom(configManager.GetBindable<int>(SoyokazeConfig.HitCircleGap));
-            SizeBindable.UnbindFrom(HitObject.SizeBindable);
+            ScaleBindable.UnbindFrom(HitObject.ScaleBindable);
             ButtonBindable.UnbindFrom(HitObject.ButtonBindable);
             IndexInCurrentComboBindable.UnbindFrom(HitObject.IndexInCurrentComboBindable);
         }

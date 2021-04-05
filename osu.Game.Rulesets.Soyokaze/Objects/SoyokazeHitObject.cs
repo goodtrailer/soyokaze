@@ -17,9 +17,9 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
     public class SoyokazeHitObject : HitObject, IHasComboInformation
     {
         /// <summary>
-        /// The base size of circles (not like CS really applies to ballad of breeze though)
+        /// The radius of circles (radius does not change between circles, but scale does)
         /// </summary>
-        public const float BASE_SIZE = 128;
+        public const float OBJECT_RADIUS = 64;
 
         /// <summary>
         /// The base preempt time (AR10).
@@ -39,12 +39,12 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
             set => ButtonBindable.Value = value;
         }
 
-        public readonly Bindable<Vector2> SizeBindable = new Bindable<Vector2>(new Vector2(BASE_SIZE));
+        public readonly Bindable<float> ScaleBindable = new Bindable<float>(1f);
 
-        public Vector2 Size
+        public float Scale
         {
-            get => SizeBindable.Value;
-            set => SizeBindable.Value = value;
+            get => ScaleBindable.Value;
+            set => ScaleBindable.Value = value;
         }
 
         public double Preempt = BASE_PREEMPT;
@@ -61,6 +61,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
             FadeIn = BASE_FADEIN;
             if (Preempt < BASE_PREEMPT)
                 FadeIn *= Preempt / BASE_PREEMPT;
+
+            Scale = (1.0f - 0.7f * (difficulty.CircleSize - 5) / 5) * 0.8f; // idk why, but the scaling is off by a factor of 1.6 from std.
         }
 
         public override Judgement CreateJudgement() => new SoyokazeJudgement();
