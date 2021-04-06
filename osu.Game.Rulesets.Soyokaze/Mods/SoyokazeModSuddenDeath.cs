@@ -5,7 +5,7 @@ using osu.Game.Rulesets.Mods;
 
 namespace osu.Game.Rulesets.Soyokaze.Mods
 {
-    public class SoyokazeModNoFail : ModNoFail
+    public class SoyokazeModSuddenDeath : ModSuddenDeath
     {
     }
 }

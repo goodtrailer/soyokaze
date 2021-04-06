@@ -55,13 +55,44 @@ namespace osu.Game.Rulesets.Soyokaze
             switch (type)
             {
                 case ModType.DifficultyReduction:
-                    return new Mod[] { new SoyokazeModNoFail() };
+                    return new Mod[]
+                    {
+                        new SoyokazeModEasy(),
+                        new SoyokazeModNoFail(),
+                        new MultiMod(new SoyokazeModHalfTime(), new SoyokazeModDaycore()),
+                    };
+
+                case ModType.DifficultyIncrease:
+                    return new Mod[]
+                    {
+                        new SoyokazeModHardRock(),
+                        new MultiMod(new SoyokazeModSuddenDeath(), new SoyokazeModPerfect()),
+                        new MultiMod(new SoyokazeModDoubleTime(), new SoyokazeModNightcore()),
+                    };
+
+                case ModType.Conversion:
+                    return new Mod[]
+                    {
+                        new SoyokazeModRandom(),
+                        new SoyokazeModDifficultyAdjust(),
+                    };
 
                 case ModType.Automation:
-                    return new[] { new SoyokazeModAutoplay() };
+                    return new Mod[]
+                    {
+                        new MultiMod(new SoyokazeModAutoplay(), new SoyokazeModCinema()),
+                    };
+
+                case ModType.Fun:
+                    return new Mod[]
+                    {
+                        new MultiMod(new ModWindUp(), new ModWindDown()),
+                    };
 
                 default:
-                    return new Mod[] { null };
+                    return new Mod[]
+                    {
+                    };
             }
         }
 

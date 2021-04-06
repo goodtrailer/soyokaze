@@ -4,17 +4,16 @@
 using System.Collections.Generic;
 using osu.Game.Rulesets.Replays;
 using osu.Game.Rulesets.Soyokaze.UI;
-using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Replays
 {
     public class SoyokazeReplayFrame : ReplayFrame
     {
         public List<SoyokazeAction> Actions = new List<SoyokazeAction>();
-        public Vector2 Position;
 
-        public SoyokazeReplayFrame(SoyokazeAction? button = null)
+        public SoyokazeReplayFrame(double time, SoyokazeAction? button = null)
         {
+            Time = time;
             if (button.HasValue)
                 Actions.Add(button.Value);
         }

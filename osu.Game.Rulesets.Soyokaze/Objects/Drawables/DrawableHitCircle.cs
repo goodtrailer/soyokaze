@@ -2,18 +2,14 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
-using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
-using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Textures;
-using osu.Framework.Logging;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.Skinning;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
-using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
@@ -102,7 +98,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 case ArmedState.Miss:
                     this.ScaleTo(Scale * miss_contract, miss_duration, Easing.OutQuint);
                     this.MoveToOffset(new Vector2(0, miss_offset), miss_duration, Easing.In);
-                    this.FadeOut(miss_duration, Easing.InQuint);
+                    this.FadeOut(miss_duration, Easing.OutQuint);
                     Expire();
                     break;
             }

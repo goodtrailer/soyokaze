@@ -5,7 +5,8 @@ using osu.Game.Rulesets.Mods;
 
 namespace osu.Game.Rulesets.Soyokaze.Mods
 {
-    public class SoyokazeModNoFail : ModNoFail
+    public class SoyokazeModDoubleTime : ModDoubleTime
     {
+        public override double ScoreMultiplier => 1.12;
     }
 }

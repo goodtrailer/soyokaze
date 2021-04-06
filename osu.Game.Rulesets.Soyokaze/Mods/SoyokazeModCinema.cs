@@ -11,13 +11,13 @@ using osu.Game.Users;
 
 namespace osu.Game.Rulesets.Soyokaze.Mods
 {
-    public class SoyokazeModAutoplay : ModAutoplay<SoyokazeHitObject>
+    public class SoyokazeModCinema : ModCinema<SoyokazeHitObject>
     {
         public override Score CreateReplayScore(IBeatmap beatmap, IReadOnlyList<Mod> mods) => new Score
         {
             ScoreInfo = new ScoreInfo
             {
-                User = new User { Username = "Autoplay" },
+                User = new User { Username = "Cinema" }
             },
             Replay = new SoyokazeAutoGenerator(beatmap, mods).Generate(),
         };
