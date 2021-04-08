@@ -8,6 +8,7 @@ using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Replays;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.UI;
+using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Replays
 {
@@ -29,13 +30,13 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
 
         public override Replay Generate()
         {
-            Frames.Add(new SoyokazeReplayFrame(-100000));
+            Frames.Add(new SoyokazeReplayFrame(-100000, Vector2.Zero));
 
             for (int i = 0; i < Beatmap.HitObjects.Count; i++)
             {
                 SoyokazeHitObject currentObject = Beatmap.HitObjects[i];
                 SoyokazeAction currentButton = currentObject.Button;
-                addOrderedFrame(new SoyokazeReplayFrame(currentObject.StartTime, currentButton));
+                addOrderedFrame(new SoyokazeReplayFrame(currentObject.StartTime, Vector2.Zero, currentButton));
 
                 double pressDuration = default_press_duration;
                 for (int j = i + 1; j < Beatmap.HitObjects.Count; j++)
@@ -53,7 +54,7 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
                     }
                 }
 
-                addOrderedFrame(new SoyokazeReplayFrame(currentObject.StartTime + pressDuration));
+                addOrderedFrame(new SoyokazeReplayFrame(currentObject.StartTime + pressDuration, Vector2.Zero));
             }
 
             return Replay;
@@ -97,7 +98,5 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
 
             Frames.Insert(index, frame);
         }
-
-
     }
 }

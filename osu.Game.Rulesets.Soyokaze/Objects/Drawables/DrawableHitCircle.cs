@@ -86,7 +86,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             const float miss_contract = 0.8f;
             const float miss_offset = 10f;
 
-
             switch (state)
             {
                 case ArmedState.Hit:

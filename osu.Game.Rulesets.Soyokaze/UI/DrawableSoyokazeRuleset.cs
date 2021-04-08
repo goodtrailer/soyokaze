@@ -12,6 +12,7 @@ using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Replays;
 using osu.Game.Rulesets.UI;
+using osu.Game.Scoring;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
@@ -25,10 +26,12 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
         protected override Playfield CreatePlayfield() => new SoyokazePlayfield();
 
-        protected override ReplayInputHandler CreateReplayInputHandler(Replay replay) => new SoyokazeFramedReplayInputHandler(replay);
-
         public override DrawableHitObject<SoyokazeHitObject> CreateDrawableRepresentation(SoyokazeHitObject h) => null;
 
         protected override PassThroughInputManager CreateInputManager() => new SoyokazeInputManager(Ruleset?.RulesetInfo);
+
+        protected override ReplayRecorder CreateReplayRecorder(Score score) => new SoyokazeReplayRecorder(score);
+
+        protected override ReplayInputHandler CreateReplayInputHandler(Replay replay) => new SoyokazeFramedReplayInputHandler(replay);
     }
 }

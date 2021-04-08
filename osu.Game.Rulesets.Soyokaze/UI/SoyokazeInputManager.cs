@@ -17,28 +17,28 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
     public enum SoyokazeAction
     {
-        [Description("Button 0 (DPAD-L ↑)")]
+        [Description("Button 1 (DPAD-L ↑)")]
         Button0,
 
-        [Description("Button 1 (DPAD-L ←)")]
+        [Description("Button 2 (DPAD-L ←)")]
         Button1,
 
-        [Description("Button 2 (DPAD-L ↓)")]
+        [Description("Button 3 (DPAD-L ↓)")]
         Button2,
 
-        [Description("Button 3 (DPAD-L →)")]
+        [Description("Button 4 (DPAD-L →)")]
         Button3,
 
-        [Description("Button 4 (DPAD-R ↑)")]
+        [Description("Button 5 (DPAD-R ↑)")]
         Button4,
 
-        [Description("Button 5 (DPAD-R ←)")]
+        [Description("Button 6 (DPAD-R ←)")]
         Button5,
 
-        [Description("Button 6 (DPAD-R ↓)")]
+        [Description("Button 7 (DPAD-R ↓)")]
         Button6,
 
-        [Description("Button 7 (DPAD-R →)")]
+        [Description("Button 8 (DPAD-R →)")]
         Button7,
     }
 }

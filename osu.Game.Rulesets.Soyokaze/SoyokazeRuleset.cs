@@ -13,10 +13,12 @@ using osu.Game.Overlays.Settings;
 using osu.Game.Rulesets.Configuration;
 using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Mods;
+using osu.Game.Rulesets.Replays.Types;
 using osu.Game.Rulesets.Soyokaze.Beatmaps;
 using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Difficulty;
 using osu.Game.Rulesets.Soyokaze.Mods;
+using osu.Game.Rulesets.Soyokaze.Replays;
 using osu.Game.Rulesets.Soyokaze.Skinning.Legacy;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osu.Game.Rulesets.UI;
@@ -50,6 +52,8 @@ namespace osu.Game.Rulesets.Soyokaze
 
         public override ISkin CreateLegacySkinProvider(ISkinSource source, IBeatmap beatmap) => new SoyokazeLegacySkinTransformer(source);
 
+        public override IConvertibleReplayFrame CreateConvertibleReplayFrame() => new SoyokazeReplayFrame();
+
         public override IEnumerable<Mod> GetModsFor(ModType type)
         {
             switch (type)
@@ -70,17 +74,17 @@ namespace osu.Game.Rulesets.Soyokaze
                         new MultiMod(new SoyokazeModDoubleTime(), new SoyokazeModNightcore()),
                     };
 
+                case ModType.Automation:
+                    return new Mod[]
+                    {
+                        new MultiMod(new SoyokazeModAutoplay(), new SoyokazeModCinema()),
+                    };
+
                 case ModType.Conversion:
                     return new Mod[]
                     {
                         new SoyokazeModRandom(),
                         new SoyokazeModDifficultyAdjust(),
-                    };
-
-                case ModType.Automation:
-                    return new Mod[]
-                    {
-                        new MultiMod(new SoyokazeModAutoplay(), new SoyokazeModCinema()),
                     };
 
                 case ModType.Fun:
