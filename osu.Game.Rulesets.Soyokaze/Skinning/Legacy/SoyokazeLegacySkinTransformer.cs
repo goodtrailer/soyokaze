@@ -39,7 +39,13 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
 
         public override IBindable<TValue> GetConfig<TLookup, TValue>(TLookup lookup)
         {
-            return Source.GetConfig<TLookup, TValue>(lookup);
+            switch (lookup)
+            {
+                case SoyokazeSkinColour colour:
+                    return Source.GetConfig<SkinCustomColourLookup, TValue>(new SkinCustomColourLookup(colour));
+                default:
+                    return Source.GetConfig<TLookup, TValue>(lookup);
+            }
         }
     }
 }

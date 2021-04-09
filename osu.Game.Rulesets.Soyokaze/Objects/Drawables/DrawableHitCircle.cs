@@ -55,7 +55,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
         private void updatePosition()
         {
-            Vector2[] positions = PositionExtensions.GetPositions(ScreenCenterDistanceBindable.Value, GapBindable.Value, true);
+            Vector2[] positions = PositionExtensions.GetPositions(ScreenCenterDistanceBindable.Value, GapBindable.Value, true, Anchor.TopLeft);
             Position = positions[(int)ButtonBindable.Value];
         }
 

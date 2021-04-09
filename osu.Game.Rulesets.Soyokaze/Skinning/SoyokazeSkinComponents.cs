@@ -12,5 +12,6 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         HitCircleText,
         InputOverlayKey,
         InputOverlayBackground,
+        KiaiVisualizerSquare
     }
 }

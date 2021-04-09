@@ -2,6 +2,8 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
+using osu.Framework.Audio.Track;
+using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Input.Bindings;
@@ -19,10 +21,14 @@ namespace osu.Game.Rulesets.Soyokaze.UI
     [Cached]
     public class SoyokazePlayfield : Playfield, IKeyBindingHandler<SoyokazeAction>
     {
-        private readonly ProxyContainer approachCircleContainer;
-        private readonly JudgementContainer<DrawableSoyokazeJudgement> judgementContainer;
-        private readonly SkinnableInputOverlay inputOverlay;
+        private readonly ProxyContainer approachCircleContainer = new ProxyContainer { RelativeSizeAxes = Axes.Both };
+        private readonly JudgementContainer<DrawableSoyokazeJudgement> judgementContainer = new JudgementContainer<DrawableSoyokazeJudgement> { RelativeSizeAxes = Axes.Both };
+        private readonly SkinnableInputOverlay inputOverlay = new SkinnableInputOverlay { RelativeSizeAxes = Axes.Both, Origin = Anchor.Centre, Anchor = Anchor.Centre };
+        private readonly SkinnableKiaiVisualizer kiaiVisualizer = new SkinnableKiaiVisualizer { RelativeSizeAxes = Axes.Both, Origin = Anchor.Centre, Anchor = Anchor.Centre };
         private SoyokazeConfigManager configManager;
+
+        private readonly Bindable<bool> showInputOverlayBindable = new Bindable<bool>(true);
+        private readonly Bindable<bool> showKiaiVisualizerBindable = new Bindable<bool>(true);
 
         protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
         protected override HitObjectLifetimeEntry CreateLifetimeEntry(HitObject hitObject) => new SoyokazeHitObjectLifetimeEntry(hitObject);
@@ -34,19 +40,6 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
         public SoyokazePlayfield()
         {
-            approachCircleContainer = new ProxyContainer
-            {
-                RelativeSizeAxes = Axes.Both,
-            };
-            judgementContainer = new JudgementContainer<DrawableSoyokazeJudgement>
-            {
-                RelativeSizeAxes = Axes.Both,
-            };
-            inputOverlay = new SkinnableInputOverlay
-            {
-                RelativeSizeAxes = Axes.Both,
-            };
-
             NewResult += onNewResult;
         }
 
@@ -57,13 +50,19 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
             AddRangeInternal(new Drawable[]
             {
+                kiaiVisualizer,
+                inputOverlay,
                 HitObjectContainer,
-                approachCircleContainer,
                 judgementContainer,
-                inputOverlay
+                approachCircleContainer,
             });
 
-            RegisterPool<HitCircle, DrawableHitCircle>(15);
+            RegisterPool<HitCircle, DrawableHitCircle>(30);
+
+            configManager.BindWith(SoyokazeConfig.ShowInputOverlay, showInputOverlayBindable);
+            showInputOverlayBindable.BindValueChanged(valueChanged => inputOverlay.FadeTo(valueChanged.NewValue ? 1f : 0f, 300.0));
+            configManager.BindWith(SoyokazeConfig.ShowKiaiVisualizer, showKiaiVisualizerBindable);
+            showKiaiVisualizerBindable.BindValueChanged(valueChanged => kiaiVisualizer.FadeTo(valueChanged.NewValue ? 1f : 0f, 300.0));
         }
 
         protected override void OnNewDrawableHitObject(DrawableHitObject drawableObject)

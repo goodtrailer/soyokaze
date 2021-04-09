@@ -25,6 +25,18 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
             Children = new Drawable[]
             {
+                new SettingsCheckbox
+                {
+                    LabelText = "Show Input Overlay",
+                    Current = configManager.GetBindable<bool>(SoyokazeConfig.ShowInputOverlay),
+                    ShowsDefaultIndicator = true,
+                },
+                new SettingsCheckbox
+                {
+                    LabelText = "Show Kiai Visualizer",
+                    Current = configManager.GetBindable<bool>(SoyokazeConfig.ShowKiaiVisualizer),
+                    ShowsDefaultIndicator = true,
+                },
                 new SettingsSlider<int>
                 {
                     LabelText = "Hit Circle distance from screen center",
@@ -59,6 +71,12 @@ namespace osu.Game.Rulesets.Soyokaze.UI
                 {
                     LabelText = "Input Overlay gap",
                     Current = configManager.GetBindable<int>(SoyokazeConfig.InputOverlayGap),
+                    ShowsDefaultIndicator = true,
+                },
+                new SettingsSlider<int>
+                {
+                    LabelText = "Kiai Visualizer distance from screen center",
+                    Current = configManager.GetBindable<int>(SoyokazeConfig.KiaiVisualizerScreenCenterDistance),
                     ShowsDefaultIndicator = true,
                 },
             };

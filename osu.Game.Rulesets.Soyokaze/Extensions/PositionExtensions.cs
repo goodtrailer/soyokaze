@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
+using osu.Framework.Extensions.EnumExtensions;
+using osu.Framework.Graphics;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Extensions
@@ -18,20 +20,33 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
         public const int NUM_COLUMNS = 4;
         public const int NUM_ROWS = 2;
 
-        public static Vector2[] GetPositions(int screenCenterDistance, int gap, bool inButtonOrder = false)
+        public static Vector2[] GetPositions(int screenCenterDistance, int gap, bool inButtonOrder, Anchor origin)
         {
+            Vector2 offset = new Vector2(0);
+
+            if (origin.HasFlagFast(Anchor.x0))
+                offset.X = SCREEN_WIDTH / 2;
+            else if (origin.HasFlagFast(Anchor.x2))
+                offset.X = -SCREEN_WIDTH / 2;
+
+            if (origin.HasFlagFast(Anchor.y0))
+                offset.Y = SCREEN_HEIGHT / 2;
+            else if (origin.HasFlagFast(Anchor.y2))
+                offset.Y = -SCREEN_HEIGHT / 2;
+
             Vector2[] positions = new Vector2[]
             {
-                new Vector2(SCREEN_WIDTH/2 - screenCenterDistance - gap,        SCREEN_HEIGHT/2      ),
-                new Vector2(SCREEN_WIDTH/2 - screenCenterDistance,              SCREEN_HEIGHT/2 - gap),
-                new Vector2(SCREEN_WIDTH/2 + screenCenterDistance - gap,        SCREEN_HEIGHT/2      ),
-                new Vector2(SCREEN_WIDTH/2 + screenCenterDistance,              SCREEN_HEIGHT/2 - gap),
+                new Vector2(offset.X - screenCenterDistance - gap,        offset.Y      ),
+                new Vector2(offset.X - screenCenterDistance,              offset.Y - gap),
+                new Vector2(offset.X + screenCenterDistance - gap,        offset.Y      ),
+                new Vector2(offset.X + screenCenterDistance,              offset.Y - gap),
 
-                new Vector2(SCREEN_WIDTH/2 - screenCenterDistance,              SCREEN_HEIGHT/2 + gap),
-                new Vector2(SCREEN_WIDTH/2 - screenCenterDistance + gap,        SCREEN_HEIGHT/2      ),
-                new Vector2(SCREEN_WIDTH/2 + screenCenterDistance,              SCREEN_HEIGHT/2 + gap),
-                new Vector2(SCREEN_WIDTH/2 + screenCenterDistance + gap,        SCREEN_HEIGHT/2      )
+                new Vector2(offset.X - screenCenterDistance,              offset.Y + gap),
+                new Vector2(offset.X - screenCenterDistance + gap,        offset.Y      ),
+                new Vector2(offset.X + screenCenterDistance,              offset.Y + gap),
+                new Vector2(offset.X + screenCenterDistance + gap,        offset.Y      )
             };
+
 
             if (!inButtonOrder)
                 return positions;

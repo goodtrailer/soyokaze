@@ -23,7 +23,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             int screenCenterDistance = configManager.Get<int>(SoyokazeConfig.JudgementScreenCenterDistance);
             int gap = configManager.Get<int>(SoyokazeConfig.JudgementGap);
 
-            Vector2[] positions = PositionExtensions.GetPositions(screenCenterDistance, gap, true);
+            Vector2[] positions = PositionExtensions.GetPositions(screenCenterDistance, gap, true, Anchor.TopLeft);
             Position = positions[(int)button];
         }
 

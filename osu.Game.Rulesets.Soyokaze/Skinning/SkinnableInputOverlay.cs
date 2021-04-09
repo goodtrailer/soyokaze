@@ -16,7 +16,6 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
     public class SkinnableInputOverlay : Container
     {
-        private Container[] inputOverlayKeyContainers = new Container[8];
         private SkinnableDrawable[] inputOverlayKeys = new SkinnableDrawable[8];
         private SkinnableDrawable[] inputOverlayBackgrounds = new SkinnableDrawable[2];
 
@@ -24,23 +23,23 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         private Bindable<int> gapBindable = new Bindable<int>();
 
         private int screenCenterDistance => screenCenterDistanceBindable.Value;
-
         private int gap => gapBindable.Value;
 
         private const double press_duration = 60d;
-        private const float press_size = 0.6f;
+        private const float press_scale = 0.6f;
 
         public SkinnableInputOverlay()
         {
-            Origin = Anchor.Centre;
-
             for (int i = 0; i < 8; i++)
             {
-                inputOverlayKeyContainers[i] = new Container() { Origin = Anchor.Centre, Anchor = Anchor.Centre };
                 inputOverlayKeys[i] = new SkinnableDrawable(
                     new SoyokazeSkinComponent(SoyokazeSkinComponents.InputOverlayKey),
                     _ => new DefaultInputOverlayKey()
-                );
+                )
+                {
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre,
+                };
             }
 
             for (int i = 0; i < 2; i++)
@@ -48,16 +47,18 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 inputOverlayBackgrounds[i] = new SkinnableDrawable(
                     new SoyokazeSkinComponent(SoyokazeSkinComponents.InputOverlayBackground),
                     _ => new DefaultInputOverlayBackground()
-                );
+                )
+                {
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre,
+                };
             }
         }
 
         [BackgroundDependencyLoader]
         private void load(SoyokazeConfigManager cm)
         {
-            for (int i = 0; i < 8; i++)
-                inputOverlayKeyContainers[i].Add(inputOverlayKeys[i]);
-            AddRangeInternal(inputOverlayKeyContainers);
+            AddRangeInternal(inputOverlayKeys);
             AddRangeInternal(inputOverlayBackgrounds);
 
             cm.BindWith(SoyokazeConfig.InputOverlayScreenCenterDistance, screenCenterDistanceBindable);
@@ -69,17 +70,17 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
         private void updatePositions()
         {
-            Vector2[] positions = PositionExtensions.GetPositions(screenCenterDistance, gap, true);
+            Vector2[] positions = PositionExtensions.GetPositions(screenCenterDistance, gap, true, Anchor.Centre);
             for (int i = 0; i < 8; i++)
-                inputOverlayKeyContainers[i].Position = positions[i];
-
-            inputOverlayBackgrounds[0].Position = PositionExtensions.SCREEN_CENTER + new Vector2(-screenCenterDistance, 0);
-            inputOverlayBackgrounds[1].Position = PositionExtensions.SCREEN_CENTER + new Vector2(screenCenterDistance, 0);
+                inputOverlayKeys[i].Position = positions[i];
+            
+            inputOverlayBackgrounds[0].Position = new Vector2(-screenCenterDistance, 0);
+            inputOverlayBackgrounds[1].Position = new Vector2(screenCenterDistance, 0);
         }
 
         public void PressKey(SoyokazeAction button)
         {
-            inputOverlayKeys[(int)button].ScaleTo(press_size, press_duration);
+            inputOverlayKeys[(int)button].ScaleTo(press_scale, press_duration);
         }
 
         public void UnpressKey(SoyokazeAction button)

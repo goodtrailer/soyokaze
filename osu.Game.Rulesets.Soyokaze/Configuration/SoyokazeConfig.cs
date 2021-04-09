@@ -11,5 +11,8 @@ namespace osu.Game.Rulesets.Soyokaze.Configuration
         JudgementGap,
         InputOverlayScreenCenterDistance,
         InputOverlayGap,
+        ShowInputOverlay,
+        KiaiVisualizerScreenCenterDistance,
+        ShowKiaiVisualizer,
     }
 }
