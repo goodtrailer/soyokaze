@@ -42,9 +42,9 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             AddInternal(composite);
 
             Color4 defaultColor = skin.GetConfig<SoyokazeSkinColour, Color4>(SoyokazeSkinColour.KiaiVisualizerDefault)?.Value ?? Color4.DarkSlateGray;
-            byte defaultOpacity= skin.GetConfig<SoyokazeSkinConfiguration, byte>(SoyokazeSkinConfiguration.KiaiVisualizerDefaultOpacity)?.Value ?? 128;
+            byte defaultOpacity = skin.GetConfig<SoyokazeSkinConfiguration, byte>(SoyokazeSkinConfiguration.KiaiVisualizerDefaultOpacity)?.Value ?? 128;
             composite.Colour = defaultColor.Opacity(defaultOpacity);
-            
+
             firstFlashColour = skin.GetConfig<SoyokazeSkinColour, Color4>(SoyokazeSkinColour.KiaiVisualizerFirstFlash)?.Value ?? Color4.White;
             firstFlashOpacity = skin.GetConfig<SoyokazeSkinConfiguration, byte>(SoyokazeSkinConfiguration.KiaiVisualizerFirstFlashOpacity)?.Value ?? 255;
 

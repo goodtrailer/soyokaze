@@ -47,7 +47,6 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
                 new Vector2(offset.X + screenCenterDistance + gap,        offset.Y      )
             };
 
-
             if (!inButtonOrder)
                 return positions;
             else

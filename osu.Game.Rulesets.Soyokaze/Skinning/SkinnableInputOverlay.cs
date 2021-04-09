@@ -73,7 +73,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             Vector2[] positions = PositionExtensions.GetPositions(screenCenterDistance, gap, true, Anchor.Centre);
             for (int i = 0; i < 8; i++)
                 inputOverlayKeys[i].Position = positions[i];
-            
+
             inputOverlayBackgrounds[0].Position = new Vector2(-screenCenterDistance, 0);
             inputOverlayBackgrounds[1].Position = new Vector2(screenCenterDistance, 0);
         }
