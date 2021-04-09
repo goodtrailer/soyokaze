@@ -10,5 +10,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         KiaiVisualizerDefaultOpacity,
         KiaiVisualizerFirstFlashOpacity,
         KiaiVisualizerFlashOpacity,
+        KiaiVisualizerDefaultSpin,
+        KiaiVisualizerKiaiSpin,
     }
 }

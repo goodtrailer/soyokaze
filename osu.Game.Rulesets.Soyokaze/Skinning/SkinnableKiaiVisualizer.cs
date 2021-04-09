@@ -25,6 +25,9 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         private byte firstFlashOpacity;
         private byte flashOpacity;
 
+        private float defaultSpin;
+        private float kiaiSpin;
+
         private KiaiSquaresComposite composite = new KiaiSquaresComposite()
         {
             RelativeSizeAxes = Axes.Both,
@@ -47,6 +50,9 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
             flashColour = skin.GetConfig<SoyokazeSkinColour, Color4>(SoyokazeSkinColour.KiaiVisualizerFlash)?.Value ?? Color4.White;
             flashOpacity = skin.GetConfig<SoyokazeSkinConfiguration, byte>(SoyokazeSkinConfiguration.KiaiVisualizerFlashOpacity)?.Value ?? 192;
+
+            defaultSpin = skin.GetConfig<SoyokazeSkinConfiguration, float>(SoyokazeSkinConfiguration.KiaiVisualizerDefaultSpin)?.Value ?? 1.5f;
+            kiaiSpin = skin.GetConfig<SoyokazeSkinConfiguration, float>(SoyokazeSkinConfiguration.KiaiVisualizerKiaiSpin)?.Value ?? -60f;
         }
 
         protected override void OnNewBeat(int beatIndex, TimingControlPoint timingPoint, EffectControlPoint effectPoint, ChannelAmplitudes amplitudes)
@@ -58,13 +64,13 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 else if (kiaiIndex % (int)timingPoint.TimeSignature == 0)
                     composite.FlashColour(flashColour.Opacity(flashOpacity), timingPoint.BeatLength * 2, Easing.In);
 
-                composite.Spin(timingPoint.BeatLength, -60f);
+                composite.Spin(timingPoint.BeatLength, kiaiSpin);
 
                 kiaiIndex++;
             }
             else
             {
-                composite.Spin(timingPoint.BeatLength, 1.5f);
+                composite.Spin(timingPoint.BeatLength, defaultSpin);
                 kiaiIndex = 0;
             }
         }
