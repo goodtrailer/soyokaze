@@ -14,14 +14,20 @@ using osu.Game.Rulesets.Configuration;
 using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Replays.Types;
+using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Beatmaps;
 using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Difficulty;
+using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.Mods;
+using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Replays;
 using osu.Game.Rulesets.Soyokaze.Skinning.Legacy;
+using osu.Game.Rulesets.Soyokaze.Statistics;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osu.Game.Rulesets.UI;
+using osu.Game.Scoring;
+using osu.Game.Screens.Ranking.Statistics;
 using osu.Game.Skinning;
 using osuTK;
 
@@ -53,6 +59,61 @@ namespace osu.Game.Rulesets.Soyokaze
         public override ISkin CreateLegacySkinProvider(ISkinSource source, IBeatmap beatmap) => new SoyokazeLegacySkinTransformer(source);
 
         public override IConvertibleReplayFrame CreateConvertibleReplayFrame() => new SoyokazeReplayFrame();
+
+        public override StatisticRow[] CreateStatisticsForScore(ScoreInfo score, IBeatmap playableBeatmap)
+        {
+            List<HitEvent>[] HitEventsLists = new List<HitEvent>[8];
+            for (int i = 0; i < HitEventsLists.Length; i++)
+                HitEventsLists[i] = new List<HitEvent>();
+
+            foreach (HitEvent hitEvent in score.HitEvents)
+            {
+                if (!(hitEvent.HitObject is SoyokazeHitObject soyokazeObject))
+                    continue;
+
+                HitEventsLists[(int)soyokazeObject.Button].Add(hitEvent);
+            }
+
+            Container accuracyGraphsContainer = new Container()
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                AutoSizeAxes = Axes.Both,
+            };
+
+            Vector2[] positions = PositionExtensions.GetPositions(250, 130, true, Anchor.Centre);
+            for (int i = 0; i < positions.Length; i++)
+                accuracyGraphsContainer.Add(new AccuracyGraph(HitEventsLists[i]) { Position = positions[i] });
+
+            return new StatisticRow[]
+            {
+                new StatisticRow
+                {
+                    Columns = new StatisticItem[]
+                    {
+                        new StatisticItem("Button Accuracies", accuracyGraphsContainer),
+                    },
+                },
+                new StatisticRow
+                {
+                    Columns = new StatisticItem[]
+                    {
+                        new StatisticItem("Overall Distribution", new HitEventTimingDistributionGraph(score.HitEvents)
+                        {
+                            RelativeSizeAxes = Axes.X,
+                            Size = new Vector2(1f, 100f)
+                        }),
+                    }
+                },
+                new StatisticRow
+                {
+                    Columns = new StatisticItem[]
+                    {
+                        new StatisticItem("", new UnstableRate(score.HitEvents){ AutoSizeAxes = Axes.None, RelativeSizeAxes = Axes.X, Size = new Vector2(0.2f, 10f) }),
+                    },
+                },
+            };
+        }
 
         public override IEnumerable<Mod> GetModsFor(ModType type)
         {
