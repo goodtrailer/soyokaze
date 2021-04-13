@@ -22,7 +22,7 @@ An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game.
 1. ✓ Replays
 1. ✓ Kiai visuals
 1. ✓ End-game statistics
-1. Difficulty calculation
+1. ✓ Difficulty calculation
 1. Editor support (at the very least, prevent crashing)
 1. Spinner mod (+SP)
 1. Sliders mod (+SL)

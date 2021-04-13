@@ -9,16 +9,15 @@ using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Difficulty.Preprocessing;
 using osu.Game.Rulesets.Difficulty.Skills;
 using osu.Game.Rulesets.Mods;
-using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Difficulty.Preprocessing;
 using osu.Game.Rulesets.Soyokaze.Difficulty.Skills;
-using osu.Game.Rulesets.Soyokaze.Objects;
+using osu.Game.Rulesets.Soyokaze.Mods;
 
 namespace osu.Game.Rulesets.Soyokaze.Difficulty
 {
     public class SoyokazeDifficultyCalculator : DifficultyCalculator
     {
-        private const double difficulty_multiplier = 0.0675;
+        private const double difficulty_multiplier = 0.445;
 
         public SoyokazeDifficultyCalculator(Ruleset ruleset, WorkingBeatmap beatmap)
             : base(ruleset, beatmap)
@@ -34,21 +33,11 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
             double readRating = Math.Sqrt(skills[1].DifficultyValue()) * difficulty_multiplier;
             double starRating = speedRating + readRating + (speedRating - readRating) / 3;
 
-            HitWindows hitWindows = new HitWindows();
-            hitWindows.SetDifficulty(beatmap.BeatmapInfo.BaseDifficulty.OverallDifficulty);
-            double perfectWindow = hitWindows.WindowFor(HitResult.Perfect) / clockRate;
-
-            double preempt = BeatmapDifficulty.DifficultyRange(beatmap.BeatmapInfo.BaseDifficulty.ApproachRate, 1800, 1200, 450) / clockRate;
-
             int maxCombo = beatmap.HitObjects.Count;
 
             return new SoyokazeDifficultyAttributes
             {
-                SpeedStrain = speedRating,
-                ReadStrain = readRating,
                 StarRating = starRating,
-                ApproachRate = preempt > 1200 ? (1800 - preempt) / 120 : (1200 - preempt) / 150 + 5,
-                OverallDifficulty = (80 - perfectWindow) / 6,
                 Mods = mods,
                 MaxCombo = maxCombo,
                 Skills = skills,
@@ -57,16 +46,25 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
 
         protected override IEnumerable<DifficultyHitObject> CreateDifficultyHitObjects(IBeatmap beatmap, double clockRate)
         {
-            SoyokazeHitObject[] hitObjects = beatmap.HitObjects as SoyokazeHitObject[];
-
-            for (int i = 0; i < hitObjects.Length - SoyokazeDifficultyHitObject.COUNT; i++)
-                yield return new SoyokazeDifficultyHitObject(clockRate, hitObjects.Skip(i).Take(SoyokazeDifficultyHitObject.COUNT).ToArray());
+            for (int i = 0; i < beatmap.HitObjects.Count - SoyokazeDifficultyHitObject.COUNT; i++)
+            {
+                SoyokazeDifficultyHitObject difficultyObject = new SoyokazeDifficultyHitObject(clockRate, beatmap.HitObjects.Skip(i).Take(SoyokazeDifficultyHitObject.COUNT).ToArray());
+                yield return difficultyObject;
+            }
         }
 
         protected override Skill[] CreateSkills(IBeatmap beatmap, Mod[] mods) => new Skill[]
         {
             new SkillSpeed(mods),
             new SkillRead(mods),
+        };
+
+        protected override Mod[] DifficultyAdjustmentMods => new Mod[]
+        {
+            new SoyokazeModDoubleTime(),
+            new SoyokazeModHalfTime(),
+            new SoyokazeModEasy(),
+            new SoyokazeModHardRock(),
         };
     }
 }
