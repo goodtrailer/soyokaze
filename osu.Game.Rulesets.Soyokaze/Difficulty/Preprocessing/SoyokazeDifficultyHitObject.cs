@@ -24,7 +24,6 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty.Preprocessing
         {
             Button = (hitObjects[COUNT - 1] as SoyokazeHitObject).Button;
 
-
             for (int i = hitObjects.Length - 1; i >= 0; i--)
             {
                 if ((hitObjects[i] as SoyokazeHitObject).Button != Button)
@@ -32,7 +31,7 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty.Preprocessing
                 Consecutive++;
             }
 
-            bool[] counted = new bool[COUNT]; ;
+            bool[] counted = new bool[COUNT];
             foreach (SoyokazeHitObject hitObject in hitObjects)
             {
                 if (counted[(int)hitObject.Button])
