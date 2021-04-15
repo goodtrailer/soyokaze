@@ -8,6 +8,9 @@
 
 An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game.
 
+### Video Showcase (YouTube)
+[![Preview Image](assets/preview.png)](https://www.youtube.com/watch?v=hWjG0W7EiAE)
+
 ### Skinning
 Default skin PNGs (they're all white): [/osu.Game.Rulesets.Soyokaze/Resources/Textures/Gameplay/soyokaze](/osu.Game.Rulesets.Soyokaze/Resources/Textures/Gameplay/soyokaze).
 
