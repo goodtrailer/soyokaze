@@ -43,10 +43,12 @@ KiaiVisualizerFlash: 255, 255 255
 1. ✓ Kiai visuals
 1. ✓ End-game statistics
 1. ✓ Difficulty calculation
-1. Editor support (at the very least, prevent crashing)
 
 ### Extras
 These are mods that I think would be really fun, but are pretty annoying to implement (besides +SE, but that's the least fun of the three). I may or may not implement these in the future if I find the time to.
 1. Spinner mod (+SP)
 1. Sliders mod (+SL)
 1. Sliderends mod (+SE)
+
+This one is sorta doable, but no one will actually be able to use it without a custom build of osu!, because the legacy beatmap decoder gets angry at any non-legacy (unofficial) rulesets. I tried finding a solution, but nobody else seemed to be able to work around it. Tau and lazer-swing were the only functional rulesets that I found that implemented custom editors, but neither of them worked without a custom osu! build.
+1. Editor support
