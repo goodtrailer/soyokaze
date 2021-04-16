@@ -29,6 +29,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             Alpha = 1;
             Origin = Anchor.Centre;
+            Anchor = Anchor.Centre;
         }
 
         [BackgroundDependencyLoader]
