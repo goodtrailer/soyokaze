@@ -20,22 +20,10 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
 
         protected override bool IsImportant(SoyokazeReplayFrame frame) => true;
 
-        protected Vector2 Position
-        {
-            get
-            {
-                var frame = CurrentFrame;
-
-                if (frame == null)
-                    return Vector2.Zero;
-
-                return NextFrame != null ? Interpolation.ValueAt(CurrentTime.Value, frame.Position, NextFrame.Position, frame.Time, NextFrame.Time) : frame.Position;
-            }
-        }
-
         public override void CollectPendingInputs(List<IInput> inputs)
         {
-            inputs.Add(new MousePositionAbsoluteInput { Position = GamefieldToScreenSpace(Position) });
+            Vector2 position = Interpolation.ValueAt(CurrentTime, StartFrame.Position, EndFrame.Position, StartFrame.Time, EndFrame.Time);
+            inputs.Add(new MousePositionAbsoluteInput { Position = GamefieldToScreenSpace(position) });
             inputs.Add(new ReplayState<SoyokazeAction> { PressedActions = CurrentFrame?.Actions ?? new List<SoyokazeAction>() });
         }
     }
