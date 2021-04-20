@@ -19,6 +19,8 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
     public class SkinnableKiaiVisualizer : BeatSyncedContainer
     {
+        private Bindable<bool> showBindable = new Bindable<bool>();
+
         private Color4 firstFlashColour;
         private Color4 flashColour;
 
@@ -37,7 +39,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         private int kiaiIndex = 0;
 
         [BackgroundDependencyLoader]
-        private void load(ISkinSource skin)
+        private void load(ISkinSource skin, SoyokazeConfigManager cm)
         {
             AddInternal(composite);
 
@@ -53,6 +55,9 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
             defaultSpin = skin.GetConfig<SoyokazeSkinConfiguration, float>(SoyokazeSkinConfiguration.KiaiVisualizerDefaultSpin)?.Value ?? 1.5f;
             kiaiSpin = skin.GetConfig<SoyokazeSkinConfiguration, float>(SoyokazeSkinConfiguration.KiaiVisualizerKiaiSpin)?.Value ?? -60f;
+
+            cm.BindWith(SoyokazeConfig.ShowKiaiVisualizer, showBindable);
+            showBindable.BindValueChanged(valueChanged => Alpha = valueChanged.NewValue ? 1f : 0f, true);
         }
 
         protected override void OnNewBeat(int beatIndex, TimingControlPoint timingPoint, EffectControlPoint effectPoint, ChannelAmplitudes amplitudes)

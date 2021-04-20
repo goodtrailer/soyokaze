@@ -6,6 +6,7 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Input.Bindings;
+using osu.Framework.Logging;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
@@ -25,9 +26,6 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         private readonly SkinnableInputOverlay inputOverlay = new SkinnableInputOverlay { RelativeSizeAxes = Axes.Both, Origin = Anchor.Centre, Anchor = Anchor.Centre };
         private readonly SkinnableKiaiVisualizer kiaiVisualizer = new SkinnableKiaiVisualizer { RelativeSizeAxes = Axes.Both, Origin = Anchor.Centre, Anchor = Anchor.Centre };
         private SoyokazeConfigManager configManager;
-
-        private readonly Bindable<bool> showInputOverlayBindable = new Bindable<bool>(true);
-        private readonly Bindable<bool> showKiaiVisualizerBindable = new Bindable<bool>(true);
 
         protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
         protected override HitObjectLifetimeEntry CreateLifetimeEntry(HitObject hitObject) => new SoyokazeHitObjectLifetimeEntry(hitObject);
@@ -57,11 +55,6 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             });
 
             RegisterPool<HitCircle, DrawableHitCircle>(30);
-
-            configManager.BindWith(SoyokazeConfig.ShowInputOverlay, showInputOverlayBindable);
-            showInputOverlayBindable.BindValueChanged(valueChanged => inputOverlay.FadeTo(valueChanged.NewValue ? 1f : 0f, 300.0));
-            configManager.BindWith(SoyokazeConfig.ShowKiaiVisualizer, showKiaiVisualizerBindable);
-            showKiaiVisualizerBindable.BindValueChanged(valueChanged => kiaiVisualizer.FadeTo(valueChanged.NewValue ? 1f : 0f, 300.0));
         }
 
         protected override void OnNewDrawableHitObject(DrawableHitObject drawableObject)

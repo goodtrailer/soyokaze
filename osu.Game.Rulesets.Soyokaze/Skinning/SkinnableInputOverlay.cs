@@ -21,6 +21,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
         private Bindable<int> screenCenterDistanceBindable = new Bindable<int>();
         private Bindable<int> gapBindable = new Bindable<int>();
+        private Bindable<bool> showBindable = new Bindable<bool>();
 
         private int screenCenterDistance => screenCenterDistanceBindable.Value;
         private int gap => gapBindable.Value;
@@ -63,9 +64,11 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
             cm.BindWith(SoyokazeConfig.InputOverlayScreenCenterDistance, screenCenterDistanceBindable);
             cm.BindWith(SoyokazeConfig.InputOverlayGap, gapBindable);
+            cm.BindWith(SoyokazeConfig.ShowInputOverlay, showBindable);
 
             screenCenterDistanceBindable.BindValueChanged(_ => updatePositions(), true);
             gapBindable.BindValueChanged(_ => updatePositions(), true);
+            showBindable.BindValueChanged(valueChanged => Alpha = valueChanged.NewValue ? 1f : 0f, true);
         }
 
         private void updatePositions()
