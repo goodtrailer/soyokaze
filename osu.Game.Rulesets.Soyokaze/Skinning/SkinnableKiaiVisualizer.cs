@@ -38,7 +38,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         };
         private int kiaiIndex = 0;
 
-        [BackgroundDependencyLoader]
+        [BackgroundDependencyLoader(true)]
         private void load(ISkinSource skin, SoyokazeConfigManager cm)
         {
             AddInternal(composite);
@@ -56,7 +56,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             defaultSpin = skin.GetConfig<SoyokazeSkinConfiguration, float>(SoyokazeSkinConfiguration.KiaiVisualizerDefaultSpin)?.Value ?? 1.5f;
             kiaiSpin = skin.GetConfig<SoyokazeSkinConfiguration, float>(SoyokazeSkinConfiguration.KiaiVisualizerKiaiSpin)?.Value ?? -60f;
 
-            cm.BindWith(SoyokazeConfig.ShowKiaiVisualizer, showBindable);
+            cm?.BindWith(SoyokazeConfig.ShowKiaiVisualizer, showBindable);
             showBindable.BindValueChanged(valueChanged => Alpha = valueChanged.NewValue ? 1f : 0f, true);
         }
 

@@ -40,7 +40,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             NewResult += onNewResult;
         }
 
-        [BackgroundDependencyLoader]
+        [BackgroundDependencyLoader(true)]
         private void load(SoyokazeConfigManager cm)
         {
             configManager = cm;

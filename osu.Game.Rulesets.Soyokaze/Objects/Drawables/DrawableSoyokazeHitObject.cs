@@ -22,7 +22,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         protected override double InitialLifetimeOffset => HitObject.Preempt;
 
         private ShakeContainer shakeContainer;
-        private SoyokazeConfigManager configManager;
 
         public DrawableSoyokazeHitObject(SoyokazeHitObject hitObject)
             : base(hitObject)
@@ -32,7 +31,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             Anchor = Anchor.Centre;
         }
 
-        [BackgroundDependencyLoader]
+        [BackgroundDependencyLoader(true)]
         private void load(SoyokazeConfigManager cm)
         {
             shakeContainer = new ShakeContainer()
@@ -44,7 +43,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             };
             base.AddInternal(shakeContainer);
 
-            configManager = cm;
+            cm?.BindWith(SoyokazeConfig.HitCircleScreenCenterDistance, ScreenCenterDistanceBindable);
+            cm?.BindWith(SoyokazeConfig.HitCircleGap, GapBindable);
         }
 
         public abstract bool Hit(SoyokazeAction action);
@@ -55,8 +55,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.OnApply();
 
-            ScreenCenterDistanceBindable.BindTo(configManager.GetBindable<int>(SoyokazeConfig.HitCircleScreenCenterDistance));
-            GapBindable.BindTo(configManager.GetBindable<int>(SoyokazeConfig.HitCircleGap));
             ScaleBindable.BindTo(HitObject.ScaleBindable);
             ButtonBindable.BindTo(HitObject.ButtonBindable);
             IndexInCurrentComboBindable.BindTo(HitObject.IndexInCurrentComboBindable);
@@ -66,8 +64,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.OnFree();
 
-            ScreenCenterDistanceBindable.UnbindFrom(configManager.GetBindable<int>(SoyokazeConfig.HitCircleScreenCenterDistance));
-            GapBindable.UnbindFrom(configManager.GetBindable<int>(SoyokazeConfig.HitCircleGap));
             ScaleBindable.UnbindFrom(HitObject.ScaleBindable);
             ButtonBindable.UnbindFrom(HitObject.ButtonBindable);
             IndexInCurrentComboBindable.UnbindFrom(HitObject.IndexInCurrentComboBindable);

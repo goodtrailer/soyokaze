@@ -56,15 +56,15 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             }
         }
 
-        [BackgroundDependencyLoader]
+        [BackgroundDependencyLoader(true)]
         private void load(SoyokazeConfigManager cm)
         {
             AddRangeInternal(inputOverlayKeys);
             AddRangeInternal(inputOverlayBackgrounds);
 
-            cm.BindWith(SoyokazeConfig.InputOverlayScreenCenterDistance, screenCenterDistanceBindable);
-            cm.BindWith(SoyokazeConfig.InputOverlayGap, gapBindable);
-            cm.BindWith(SoyokazeConfig.ShowInputOverlay, showBindable);
+            cm?.BindWith(SoyokazeConfig.InputOverlayScreenCenterDistance, screenCenterDistanceBindable);
+            cm?.BindWith(SoyokazeConfig.InputOverlayGap, gapBindable);
+            cm?.BindWith(SoyokazeConfig.ShowInputOverlay, showBindable);
 
             screenCenterDistanceBindable.BindValueChanged(_ => updatePositions(), true);
             gapBindable.BindValueChanged(_ => updatePositions(), true);
