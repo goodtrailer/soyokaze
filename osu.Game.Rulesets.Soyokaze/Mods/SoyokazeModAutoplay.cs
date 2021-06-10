@@ -11,7 +11,7 @@ using osu.Game.Users;
 
 namespace osu.Game.Rulesets.Soyokaze.Mods
 {
-    public class SoyokazeModAutoplay : ModAutoplay<SoyokazeHitObject>
+    public class SoyokazeModAutoplay : ModAutoplay
     {
         public override Score CreateReplayScore(IBeatmap beatmap, IReadOnlyList<Mod> mods) => new Score
         {

@@ -53,7 +53,7 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
             }
         }
 
-        protected override Skill[] CreateSkills(IBeatmap beatmap, Mod[] mods) => new Skill[]
+        protected override Skill[] CreateSkills(IBeatmap beatmap, Mod[] mods, double clockrate) => new Skill[]
         {
             new SkillSpeed(mods),
             new SkillRead(mods),
