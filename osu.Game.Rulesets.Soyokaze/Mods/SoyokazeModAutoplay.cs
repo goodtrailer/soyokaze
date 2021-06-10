@@ -17,7 +17,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         {
             ScoreInfo = new ScoreInfo
             {
-                User = new User { Username = "Autoplay" },
+                User = new User { Username = "goodtrailer's super-duper autoplay bot" },
             },
             Replay = new SoyokazeAutoGenerator(beatmap, mods).Generate(),
         };
