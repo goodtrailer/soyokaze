@@ -23,8 +23,8 @@ An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game. You can 
 * [DUSTCELL - Anemone [Irrational]](https://osu.ppy.sh/b/2593243) 5.29⭐: Finger control is insane, see if you can resist cheesing and achieve an A rank
 * [Camellia - fastest crash (Camellia's "paroxysmal" Energetic Hitech Remix) [Terminal Velocity]](https://osu.ppy.sh/b/2730082) 6.87⭐: Fun low BPM tech bursts
 * [II-L - SPUTNIK-3 [Beyond OWC]](https://osu.ppy.sh/b/2719326) 7.10⭐: Rhythmic hell, except now even harder to read than ever before
-* [Frederic - oddloop [oldloop]](https://osu.ppy.sh/b/1137879) 4.82⭐: Slap on +EZ and then thank the heavens above that there is no notelock in soyokaze!
-* [xi - Freedom Dive[FOUR DIMENSIONS]](https://osu.ppy.sh/b/129891) 9.48⭐: Maybe passable if you use two fingers to tap one key, maybe keyboard viable
+* [Frederic - oddloop [oldloop]](https://osu.ppy.sh/b/1137879) 4.82⭐: Slap on +EZ and then thank the heavens above that soyokaze! has no notelock 
+* [xi - Freedom Dive[FOUR DIMENSIONS]](https://osu.ppy.sh/b/129891) 9.48⭐: Maybe acc-able if you use two fingers to tap one key, possibly keyboard viable
 
 ## Skinning
 Default skin PNGs (they're all white): [/osu.Game.Rulesets.Soyokaze/Resources/Textures/Gameplay/soyokaze](/osu.Game.Rulesets.Soyokaze/Resources/Textures/Gameplay/soyokaze).
