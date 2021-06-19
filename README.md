@@ -18,7 +18,7 @@ An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game. You can 
 * [Ito Kanako - Skyclad no Kansokusha [Time Travel]](https://osu.ppy.sh/b/907850) 6.07⭐: A good generic map to get started with, plus some streams
 * [Team Nekokan - Can't Defeat Airman [Holy Shit! It's Airman!!]](https://osu.ppy.sh/b/104229) 5.78⭐: The classic AR10 jump map, only now with a focus on reading
 * [Rita - Tonitrus [Beyond the World]](https://osu.ppy.sh/b/1935726) 5.71⭐: An alt-map on osu!standard turned single-tap, yet still highly enjoyable
-* [Idun Nicoline - Lost Without You (Boxplot Remix) [Wistful]](https://osu.ppy.sh/b/2725039) 6.08: Heavy and stamina-intensive burst map
+* [Idun Nicoline - Lost Without You (Boxplot Remix) [Wistful]](https://osu.ppy.sh/b/2725039) 6.08⭐: Heavy and stamina-intensive burst map
 * [Niji no Conquistador - Zutto Summer de Koishiteru [Summer Love]](https://osu.ppy.sh/b/2625911) 5.89⭐: Overwhelming jump map with difficult triples
 * [DUSTCELL - Anemone [Irrational]](https://osu.ppy.sh/b/2593243) 5.29⭐: Finger control is insane, see if you can resist cheesing and achieve an A rank
 * [Camellia - fastest crash (Camellia's "paroxysmal" Energetic Hitech Remix) [Terminal Velocity]](https://osu.ppy.sh/b/2730082) 6.87⭐: Fun low BPM tech bursts
