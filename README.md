@@ -46,27 +46,28 @@ KiaiVisualizerFirstFlash: 255, 255, 255
 KiaiVisualizerFlash: 255, 255 255
 ```
 
-## To-Do
-1. ✓ Rudimentary hit circles spawning and approach circles.
-1. ✓ Top-only hits (no piercing)
-1. ✓ Shaking (only for early-hits)
-1. ✓ Judgements
-1. ✓ Combos/accents
-1. ✓ Texturing/skinning
-1. ✓ Configuration/settings
-1. ✓ Key indicators
-1. ✓ Check stats are scaling properly (HP, CS, OD)
-1. ✓ Mods (+HT, +DC, +DT, +NC, +HR, +EZ, +DA, +AT, +CN, +NF, +SD, +PF, +WU, +WD, +RD)
-1. ✓ Replays
-1. ✓ Kiai visuals
-1. ✓ End-game statistics
-1. ✓ Difficulty calculation
+## Features
+1. No note-lock (still shakes for exceedingly early hits)
+1. Judgements (perfect, great, good, ok, meh)
+1. Combos & combo accents
+1. Skinning & skin configuration
+1. Settings
+1. Key indicators
+1. Mods (+HT, +DC, +DT, +NC, +HR, +EZ, +DA, +AT, +CN, +NF, +SD, +PF, +WU, +WD, +RD)
+1. Replays
+1. Kiai visuals
+1. Post-game statistics
+1. Custom star-rating calculation
 
 ## Extras
-These are mods that I think would be really fun, but are pretty annoying to implement (besides +SE, but that's the least fun of the three). I may or may not implement these in the future if I find the time to.
+These are mods that I think would be really fun, but are non-trivial to implement (unlike +DT, which took maybe 30 seconds). I may or may not implement these in the future depending on if I find the motivation to.
 1. Spinner mod (+SP)
-1. Sliders mod (+SL)
-1. Sliderends mod (+SE)
-
-This one is sorta doable, but no one will actually be able to use it without a custom build of osu!, because the legacy beatmap decoder gets angry at any non-legacy (unofficial) rulesets. I tried finding a solution, but nobody else seemed to be able to work around it. Tau and lazer-swing were the only functional rulesets that I found that implemented custom editors, but neither of them worked without a custom osu! build.
+    * Basically just note spam, taiko/MuseDash style
+1. Slider mod (+SL)
+    * Hold notes replace sliders
+1. Multi-note mod (+MT)
+    * Probably the hardest to implement, would have to look at ![LumpBloom7/sentakki](https://github.com/LumpBloom7/sentakki) for some clues, because beatmap generation is hard
+1. Sliderend mod (+SE)
+    * Instead of hold notes, slider ends are turned into circles too (by far the easiest to make, but seems like some pretty terrible gameplay)
 1. Editor support
+    * Unusable without a custom build of osu!, because the legacy beatmap decoder gets angry at non-legacy rulesets or something. Also probably the hardest to implement by far
