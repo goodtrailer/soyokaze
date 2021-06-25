@@ -91,8 +91,6 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         {
             inputOverlay.PressKey(action);
 
-
-
             foreach (var hitObject in HitObjectContainer.AliveObjects)
                 switch (hitObject)
                 {

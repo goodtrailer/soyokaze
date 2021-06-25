@@ -132,7 +132,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                     this.MoveToOffset(Vector2.Zero, miss_duration).Expire();
                     break;
             }
-
         }
 
         protected override void CheckForResult(bool userTriggered, double timeOffset)

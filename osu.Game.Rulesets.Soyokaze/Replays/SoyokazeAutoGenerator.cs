@@ -49,7 +49,6 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
                         break;
                 }
 
-
                 for (int j = i + 1; j < Beatmap.HitObjects.Count; j++)
                 {
                     SoyokazeHitObject nextObject = Beatmap.HitObjects[j];
