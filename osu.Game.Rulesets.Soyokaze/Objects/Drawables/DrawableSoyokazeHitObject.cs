@@ -7,7 +7,9 @@ using osu.Framework.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Configuration;
+using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.UI;
+using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
@@ -45,11 +47,27 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
             cm?.BindWith(SoyokazeConfig.HitCircleScreenCenterDistance, ScreenCenterDistanceBindable);
             cm?.BindWith(SoyokazeConfig.HitCircleGap, GapBindable);
+
+            ScaleBindable.BindValueChanged(_ => UpdateScale(), true);
+            ScreenCenterDistanceBindable.BindValueChanged(_ => UpdatePosition(), true);
+            GapBindable.BindValueChanged(_ => UpdatePosition(), true);
+            ButtonBindable.BindValueChanged(_ => UpdatePosition(), true);
         }
 
         public abstract bool Hit(SoyokazeAction action);
 
         public virtual void Shake(double maximumLength) => shakeContainer.Shake(maximumLength);
+
+        protected virtual void UpdatePosition()
+        {
+            Vector2[] positions = PositionExtensions.GetPositions(ScreenCenterDistanceBindable.Value, GapBindable.Value, true, Anchor.Centre);
+            Position = positions[(int)ButtonBindable.Value];
+        }
+
+        protected virtual void UpdateScale()
+        {
+            Scale = new Vector2(ScaleBindable.Value);
+        }
 
         protected override void OnApply()
         {

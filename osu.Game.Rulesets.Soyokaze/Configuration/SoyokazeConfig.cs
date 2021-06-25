@@ -14,5 +14,7 @@ namespace osu.Game.Rulesets.Soyokaze.Configuration
         ShowInputOverlay,
         KiaiVisualizerScreenCenterDistance,
         ShowKiaiVisualizer,
+        HighlightHolds,
+        HoldHighlightColour,
     }
 }

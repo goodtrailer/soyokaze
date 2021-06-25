@@ -21,8 +21,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             Anchor = Anchor.Centre;
 
             SoyokazeAction button = (drawableObject as DrawableSoyokazeHitObject)?.ButtonBindable.Value ?? default;
-            int screenCenterDistance = configManager?.Get<int>(SoyokazeConfig.JudgementScreenCenterDistance) ?? SoyokazeConfigManager.DEFAULT_JUDGEMENT_SCREEN_CENTER_DISTANCE;
-            int gap = configManager?.Get<int>(SoyokazeConfig.JudgementGap) ?? SoyokazeConfigManager.DEFAULT_JUDGEMENT_GAP;
+            int screenCenterDistance = configManager?.Get<int>(SoyokazeConfig.JudgementScreenCenterDistance) ?? 0;
+            int gap = configManager?.Get<int>(SoyokazeConfig.JudgementGap) ?? 0;
 
             Vector2[] positions = PositionExtensions.GetPositions(screenCenterDistance, gap, true, Anchor.Centre);
             Position = positions[(int)button];

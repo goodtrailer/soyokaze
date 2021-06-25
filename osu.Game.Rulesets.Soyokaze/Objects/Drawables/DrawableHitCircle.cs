@@ -3,10 +3,8 @@
 
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
-using osu.Framework.Graphics.Textures;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
-using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.Skinning;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
@@ -15,18 +13,18 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
     public class DrawableHitCircle : DrawableSoyokazeHitObject
     {
+        public new HitCircle HitObject => base.HitObject as HitCircle;
         public SkinnableApproachCircle ApproachCircle { get; private set; }
         public SkinnableHitCircle HitCircle { get; private set; }
         public Drawable ApproachCircleProxy => ApproachCircle;
-
-        public override bool HandlePositionalInput => true;
 
         public DrawableHitCircle()
             : this(null)
         {
         }
-        public DrawableHitCircle(SoyokazeHitObject hitObject = null)
-            : base(hitObject)
+
+        public DrawableHitCircle(HitCircle hitCircle = null)
+            : base(hitCircle)
         {
             ApproachCircle = new SkinnableApproachCircle
             {
@@ -42,21 +40,10 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         }
 
         [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
+        private void load()
         {
             AddInternal(ApproachCircle);
             AddInternal(HitCircle);
-
-            ScaleBindable.BindValueChanged(valueChanged => Scale = new Vector2(valueChanged.NewValue), true);
-            ScreenCenterDistanceBindable.BindValueChanged(_ => updatePosition(), true);
-            GapBindable.BindValueChanged(_ => updatePosition(), true);
-            ButtonBindable.BindValueChanged(_ => updatePosition(), true);
-        }
-
-        private void updatePosition()
-        {
-            Vector2[] positions = PositionExtensions.GetPositions(ScreenCenterDistanceBindable.Value, GapBindable.Value, true, Anchor.Centre);
-            Position = positions[(int)ButtonBindable.Value];
         }
 
         protected override void UpdateInitialTransforms()

@@ -27,6 +27,18 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             {
                 new SettingsCheckbox
                 {
+                    LabelText = "Highlight Holds (for +HO)",
+                    Current = configManager.GetBindable<bool>(SoyokazeConfig.HighlightHolds),
+                    ShowsDefaultIndicator = true,
+                },
+                new SettingsEnumDropdown<ColourEnum>
+                {
+                    LabelText = "Hold highlight colour (None = use skin's config or default)",
+                    Current = configManager.GetBindable<ColourEnum>(SoyokazeConfig.HoldHighlightColour),
+                    ShowsDefaultIndicator = true,
+                },
+                new SettingsCheckbox
+                {
                     LabelText = "Show Input Overlay",
                     Current = configManager.GetBindable<bool>(SoyokazeConfig.ShowInputOverlay),
                     ShowsDefaultIndicator = true,

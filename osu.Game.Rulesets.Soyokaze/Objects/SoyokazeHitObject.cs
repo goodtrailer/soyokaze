@@ -15,19 +15,10 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
 {
     public class SoyokazeHitObject : HitObject, IHasComboInformation
     {
-        /// <summary>
-        /// The radius of circles (radius does not change between circles, but scale does)
-        /// </summary>
         public const float OBJECT_RADIUS = 64;
 
-        /// <summary>
-        /// The base preempt time (AR10).
-        /// </summary>
         public const double BASE_PREEMPT = 450;
 
-        /// <summary>
-        /// The max (normal) fade in rate (can go lower for AR>10)
-        /// </summary>
         public const double BASE_FADEIN = 400;
 
         public readonly Bindable<SoyokazeAction> ButtonBindable = new Bindable<SoyokazeAction>();
