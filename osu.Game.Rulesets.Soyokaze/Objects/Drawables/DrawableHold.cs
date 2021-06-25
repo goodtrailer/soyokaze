@@ -4,6 +4,7 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Logging;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
@@ -110,14 +111,29 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
         protected override void UpdateHitStateTransforms(ArmedState state)
         {
+            const double hit_duration = 350;
+            const float hit_dilate = 1.5f;
+
+            const double miss_duration = 175;
+            const float miss_contract = 0.9f;
+            const float miss_offset = 10f;
+
             switch (state)
             {
                 case ArmedState.Hit:
+                    HoldProgress.ScaleTo(HoldProgress.Scale * hit_dilate, hit_duration, Easing.OutQuint);
+                    HoldProgress.FadeOut(hit_duration, Easing.OutQuint);
+                    this.MoveToOffset(Vector2.Zero, hit_duration).Expire();
+                    break;
+
                 case ArmedState.Miss:
-                    HoldProgress.FadeOut(50);
-                    Expire();
+                    HoldProgress.ScaleTo(HoldProgress.Scale * miss_contract, miss_duration, Easing.OutQuint);
+                    HoldProgress.MoveToOffset(new Vector2(0, miss_offset), miss_duration, Easing.In);
+                    HoldProgress.FadeOut(miss_duration, Easing.OutQuint);
+                    this.MoveToOffset(Vector2.Zero, miss_duration).Expire();
                     break;
             }
+
         }
 
         protected override void CheckForResult(bool userTriggered, double timeOffset)
