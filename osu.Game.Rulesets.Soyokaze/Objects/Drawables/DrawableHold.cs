@@ -4,9 +4,6 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Sprites;
-using osu.Framework.Graphics.Textures;
-using osu.Framework.Graphics.UserInterface;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
@@ -20,8 +17,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
     {
         public new Hold HitObject => base.HitObject as Hold;
         public DrawableHoldCircle HoldCircle => holdCircleContainer.Child;
-        public SpriteIcon HoldProgressBackground;
-        public CircularProgress HoldProgressCircle;
+        public SkinnableHoldProgress HoldProgress;
 
         private Container<DrawableHoldCircle> holdCircleContainer;
 
@@ -43,25 +39,10 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 Anchor = Anchor.Centre,
             };
 
-            HoldProgressBackground = new SpriteIcon
+            HoldProgress = new SkinnableHoldProgress
             {
                 RelativeSizeAxes = Axes.Both,
-                Icon = FontAwesome.Solid.Circle,
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                Scale = new Vector2(0.6f),
-                Colour = Colour4.White,
-            };
-
-            HoldProgressCircle = new CircularProgress
-            {
-                RelativeSizeAxes = Axes.Both,
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                Scale = new Vector2(0.5f),
-                InnerRadius = 1f,
                 Current = { Value = 0 },
-                Colour = Colour4.LimeGreen,
             };
 
             Size = new Vector2(SoyokazeHitObject.OBJECT_RADIUS * 2);
@@ -71,8 +52,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         private void load()
         {
             AddInternal(holdCircleContainer);
-            AddInternal(HoldProgressBackground);
-            AddInternal(HoldProgressCircle);
+            AddInternal(HoldProgress);
         }
 
         protected override void OnApply()
@@ -121,12 +101,10 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.UpdateInitialTransforms();
 
-            double fadeInTime = System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2);
-            HoldProgressBackground.FadeInFromZero(fadeInTime);
-            HoldProgressCircle.FadeInFromZero(fadeInTime);
+            HoldProgress.FadeInFromZero(System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
             using (BeginDelayedSequence(HitObject.Preempt))
             {
-                HoldProgressCircle.FillTo(1f, HitObject.Duration);
+                HoldProgress.FillTo(1.0, HitObject.Duration);
             }
         }
 
@@ -136,8 +114,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             {
                 case ArmedState.Hit:
                 case ArmedState.Miss:
-                    HoldProgressBackground.FadeOut(50);
-                    HoldProgressCircle.FadeOut(50);
+                    HoldProgress.FadeOut(50);
                     Expire();
                     break;
             }

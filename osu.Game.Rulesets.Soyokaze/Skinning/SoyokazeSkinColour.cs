@@ -5,6 +5,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
     public enum SoyokazeSkinColour
     {
+        HoldHighlight,
         KiaiVisualizerDefault,
         KiaiVisualizerFirstFlash,
         KiaiVisualizerFlash,

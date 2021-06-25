@@ -41,6 +41,7 @@ KiaiVisualizerFirstFlashOpacity: 255
 KiaiVisualizerFlashOpacity: 192
 
 [Colours]
+HoldHighlight: 255, 255, 0
 KiaiVisualizerDefault: 47, 79, 79
 KiaiVisualizerFirstFlash: 255, 255, 255
 KiaiVisualizerFlash: 255, 255 255

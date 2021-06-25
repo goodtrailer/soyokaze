@@ -74,6 +74,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
         private void updateState(DrawableHitObject drawableObject, ArmedState state)
         {
+            // fade out text even quicker
             switch (state)
             {
                 case ArmedState.Hit:
