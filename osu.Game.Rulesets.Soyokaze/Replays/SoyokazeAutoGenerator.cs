@@ -38,7 +38,18 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
                 SoyokazeAction currentButton = currentObject.Button;
                 addOrderedFrame(new SoyokazeReplayFrame(currentObject.StartTime, Vector2.Zero, currentButton));
 
-                double pressDuration = default_press_duration;
+                double pressDuration;
+                switch (currentObject)
+                {
+                    case Hold hold:
+                        pressDuration = hold.Duration;
+                        break;
+                    default:
+                        pressDuration = default_press_duration;
+                        break;
+                }
+
+
                 for (int j = i + 1; j < Beatmap.HitObjects.Count; j++)
                 {
                     SoyokazeHitObject nextObject = Beatmap.HitObjects[j];
