@@ -32,6 +32,8 @@ namespace osu.Game.Rulesets.Soyokaze.Configuration
             SetDefault(SoyokazeConfig.HighlightHolds, true);
             SetDefault(SoyokazeConfig.ShowInputOverlay, true);
             SetDefault(SoyokazeConfig.ShowKiaiVisualizer, true);
+
+            SetDefault(SoyokazeConfig.HoldHighlightColour, ColourEnum.None);
         }
     }
 }
