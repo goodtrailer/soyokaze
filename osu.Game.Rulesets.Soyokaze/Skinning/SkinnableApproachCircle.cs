@@ -44,7 +44,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             {
                 if (!highlightBindable.Value)
                     approachCircle.Colour = colourChanged.NewValue;
-            });
+            }, true);
 
             if (drawableObject is DrawableHoldCircle)
             {
@@ -58,7 +58,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
                     if (highlightBindable.Value)
                         approachCircle.Colour = highlightColour;
-                });
+                }, true);
 
                 cm?.BindWith(SoyokazeConfig.HighlightHolds, highlightBindable);
                 highlightBindable.BindValueChanged(valueChanged =>

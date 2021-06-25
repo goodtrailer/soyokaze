@@ -64,7 +64,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             {
                 if (!highlightBindable.Value)
                     circularProgress.Colour = colourChanged.NewValue;
-            });
+            }, true);
 
             cm?.BindWith(SoyokazeConfig.HoldHighlightColour, highlightColourEnumBindable);
             highlightColourEnumBindable.BindValueChanged(colourEnumChanged =>
@@ -76,7 +76,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
                 if (highlightBindable.Value)
                     circularProgress.Colour = highlightColour;
-            });
+            }, true);
 
             cm?.BindWith(SoyokazeConfig.HighlightHolds, highlightBindable);
             highlightBindable.BindValueChanged(valueChanged =>
