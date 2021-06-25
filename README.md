@@ -53,21 +53,22 @@ KiaiVisualizerFlash: 255, 255 255
 1. Skinning & skin configuration
 1. Settings
 1. Key indicators
-1. Mods (+HT, +DC, +DT, +NC, +HR, +EZ, +DA, +AT, +CN, +NF, +SD, +PF, +WU, +WD, +RD)
+1. Basic mods (+HT, +DC, +DT, +NC, +HR, +EZ, +DA, +AT, +CN, +NF, +SD, +PF, +WU, +WD, +RD)
 1. Replays
 1. Kiai visuals
 1. Post-game statistics
 1. Custom star-rating calculation
+1. Holds mod (+HO)
 
 ## Extras
-These are mods that I think would be really fun, but are non-trivial to implement (unlike +DT, which took maybe 30 seconds). I may or may not implement these in the future depending on if I find the motivation to.
-1. Spinner mod (+SP)
+These are features that I think would be really fun, but are non-trivial to implement (unlike +DT, which took maybe 30 seconds). I may or may not implement these in the future depending on if I find the motivation to.
+1. Hidden mod (+HD)
+    * Frankly I have no idea if this is even playable
+1. Spinners mod (+SP)
     * Basically just note spam, taiko/MuseDash style
-1. Slider mod (+SL)
-    * Hold notes replace sliders
-1. Multi-note mod (+MT)
-    * Probably the hardest to implement, would have to look at ![LumpBloom7/sentakki](https://github.com/LumpBloom7/sentakki) for some clues, because beatmap generation is hard
+1. Multi-notes mod (+MT)
+    * Probably the hardest mod to implement, would have to look at ![LumpBloom7/sentakki](https://github.com/LumpBloom7/sentakki) for some clues, because beatmap generation is hard
 1. Sliderend mod (+SE)
     * Instead of hold notes, slider ends are turned into circles too (by far the easiest to make, but seems like some pretty terrible gameplay)
 1. Editor support
-    * Unusable without a custom build of osu!, because the legacy beatmap decoder gets angry at non-legacy rulesets or something. Also probably the hardest to implement by far
+    * Unusable without a custom build of osu!, because the legacy beatmap decoder gets angry at non-legacy rulesets or something. Also definitely the hardest feature to implement by far

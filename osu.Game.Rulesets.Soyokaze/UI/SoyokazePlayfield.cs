@@ -2,11 +2,9 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
-using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Input.Bindings;
-using osu.Framework.Logging;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
@@ -54,7 +52,10 @@ namespace osu.Game.Rulesets.Soyokaze.UI
                 approachCircleContainer,
             });
 
-            RegisterPool<HitCircle, DrawableHitCircle>(30);
+            RegisterPool<HitCircle, DrawableHitCircle>(15, 100);
+
+            RegisterPool<Hold, DrawableHold>(15, 100);
+            RegisterPool<HoldCircle, DrawableHoldCircle>(15, 100);
         }
 
         protected override void OnNewDrawableHitObject(DrawableHitObject drawableObject)
@@ -80,6 +81,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             switch (drawableObject)
             {
                 case DrawableHitCircle _:
+                case DrawableHold _:
                     judgementContainer.Add(new DrawableSoyokazeJudgement(result, drawableObject, configManager));
                     break;
             }
@@ -88,11 +90,18 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         public bool OnPressed(SoyokazeAction action)
         {
             inputOverlay.PressKey(action);
+
+
+
             foreach (var hitObject in HitObjectContainer.AliveObjects)
                 switch (hitObject)
                 {
                     case DrawableHitCircle hitCircle:
                         if (hitCircle.Hit(action))
+                            return true;
+                        break;
+                    case DrawableHold hold:
+                        if (hold.Hit(action))
                             return true;
                         break;
                 }
@@ -136,6 +145,14 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         public void OnReleased(SoyokazeAction action)
         {
             inputOverlay.UnpressKey(action);
+            foreach (var hitObject in HitObjectContainer.AliveObjects)
+                switch (hitObject)
+                {
+                    case DrawableHold hold:
+                        if (hold.Release(action))
+                            return;
+                        break;
+                }
         }
     }
 }

@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Mods;
-using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Replays;
 using osu.Game.Scoring;
 using osu.Game.Users;
