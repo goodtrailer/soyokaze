@@ -49,7 +49,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 highlightBindable.BindValueChanged(valueChanged =>
                 {
                     if (valueChanged.NewValue)
-                        approachCircle.Colour = skin.GetConfig<SoyokazeSkinColour, Colour4>(SoyokazeSkinColour.HoldHighlight)?.Value ?? new Colour4(255, 255, 0, 255);
+                        approachCircle.Colour = skin.GetConfig<SoyokazeSkinColour, Colour4>(SoyokazeSkinColour.HoldHighlight)?.Value ?? Colour4.Lime;
                     else
                         approachCircle.Colour = accentColourBindable.Value;
                 }, true);

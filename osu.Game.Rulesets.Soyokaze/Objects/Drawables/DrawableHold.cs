@@ -59,7 +59,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.OnApply();
 
-            holdStartTime = -1.0;
+            holdStartTime = double.MinValue;
             holdDuration = 0.0;
         }
 
