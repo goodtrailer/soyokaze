@@ -4,7 +4,9 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Logging;
+using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
+using osu.Framework.Graphics.UserInterface;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
@@ -18,9 +20,11 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
     {
         public new Hold HitObject => base.HitObject as Hold;
         public DrawableHoldCircle HoldCircle => holdCircleContainer.Child;
-        public SkinnableApproachCircle OuterApproachCircle { get; private set; }
+        public SpriteIcon HoldProgressBackground;
+        public CircularProgress HoldProgressCircle;
 
         private Container<DrawableHoldCircle> holdCircleContainer;
+
         private double holdStartTime = double.MinValue;
         private double holdDuration = 0.0;
 
@@ -38,18 +42,37 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 Origin = Anchor.Centre,
                 Anchor = Anchor.Centre,
             };
-            OuterApproachCircle = new SkinnableApproachCircle
+
+            HoldProgressBackground = new SpriteIcon
             {
-                Alpha = 0,
-                Scale = new Vector2(4),
+                RelativeSizeAxes = Axes.Both,
+                Icon = FontAwesome.Solid.Circle,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Scale = new Vector2(0.6f),
+                Colour = Colour4.White,
             };
+
+            HoldProgressCircle = new CircularProgress
+            {
+                RelativeSizeAxes = Axes.Both,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Scale = new Vector2(0.5f),
+                InnerRadius = 1f,
+                Current = { Value = 0 },
+                Colour = Colour4.LimeGreen,
+            };
+
+            Size = new Vector2(SoyokazeHitObject.OBJECT_RADIUS * 2);
         }
 
         [BackgroundDependencyLoader]
         private void load()
         {
             AddInternal(holdCircleContainer);
-            AddInternal(OuterApproachCircle);
+            AddInternal(HoldProgressBackground);
+            AddInternal(HoldProgressCircle);
         }
 
         protected override void OnApply()
@@ -58,6 +81,11 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
             holdStartTime = -1.0;
             holdDuration = 0.0;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
         }
 
         protected override DrawableHitObject CreateNestedHitObject(HitObject hitObject)
@@ -93,9 +121,13 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.UpdateInitialTransforms();
 
-            OuterApproachCircle.FadeInFromZero(System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
-            OuterApproachCircle.ScaleTo(1f, HitObject.Preempt + HitObject.Duration);
-            OuterApproachCircle.Expire(true);
+            double fadeInTime = System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2);
+            HoldProgressBackground.FadeInFromZero(fadeInTime);
+            HoldProgressCircle.FadeInFromZero(fadeInTime);
+            using (BeginDelayedSequence(HitObject.Preempt))
+            {
+                HoldProgressCircle.FillTo(1f, HitObject.Duration);
+            }
         }
 
         protected override void UpdateHitStateTransforms(ArmedState state)
@@ -104,29 +136,10 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             {
                 case ArmedState.Hit:
                 case ArmedState.Miss:
-                    OuterApproachCircle.FadeOut(50);
+                    HoldProgressBackground.FadeOut(50);
+                    HoldProgressCircle.FadeOut(50);
                     Expire();
                     break;
-            }
-        }
-
-        public override double LifetimeStart
-        {
-            get => base.LifetimeStart;
-            set
-            {
-                base.LifetimeStart = value;
-                OuterApproachCircle.LifetimeStart = value;
-            }
-        }
-
-        public override double LifetimeEnd
-        {
-            get => base.LifetimeEnd;
-            set
-            {
-                base.LifetimeEnd = value;
-                OuterApproachCircle.LifetimeEnd = value;
             }
         }
 
@@ -144,22 +157,19 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             double holdCircleFraction =
                 (double)HoldCircle.TrueResult.Judgement.NumericResultFor(HoldCircle.TrueResult) /
                 HoldCircle.TrueResult.Judgement.MaxNumericResult;
-
             double scoreFraction = (holdCircleFraction + holdFraction) / 2;
-
-            Logger.Log("HIT RESULT: " + HoldCircle.TrueResult.Type.ToString() + " // " + holdCircleFraction.ToString("0.00") + " // " + holdFraction.ToString("0.00") + " // " + scoreFraction.ToString("0.00"));
 
             HitResult result;
 
             if (scoreFraction > 0.9)
                 result = HitResult.Perfect;
-            else if (scoreFraction > 0.7)
+            else if (scoreFraction > 0.8)
                 result = HitResult.Great;
-            else if (scoreFraction > 0.5)
+            else if (scoreFraction > 0.7)
                 result = HitResult.Good;
-            else if (scoreFraction > 0.3)
+            else if (scoreFraction > 0.6)
                 result = HitResult.Ok;
-            else if (scoreFraction > 0.1)
+            else if (scoreFraction > 0.5)
                 result = HitResult.Meh;
             else
                 result = HitResult.Miss;
@@ -179,8 +189,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             holdStartTime = Time.Current;
             HoldCircle.Hit(action);
 
-            Logger.Log("HIT: " + holdStartTime.ToString("0.00"));
-
             return true;
         }
 
@@ -198,8 +206,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 holdDuration += Time.Current - holdStartTime;
                 holdStartTime = double.MinValue;
             }
-
-            Logger.Log("RELEASE: " + holdDuration.ToString("0.00"));
 
             return true;
         }
