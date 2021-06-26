@@ -10,7 +10,9 @@
 An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game. You can also check it out over at [rūrusetto](https://rulesets.info/posts/soyokaze/), a website created by the [Rūrusetto team](https://github.com/Rurusetto) to catelog osu!lazer rulesets.
 
 ## Video Showcase (YouTube)
-[![Preview Image](assets/preview1.png)](https://www.youtube.com/watch?v=3Sj6tE2t4do)
+[![Preview1](assets/preview1.png)](https://www.youtube.com/watch?v=3Sj6tE2t4do)
+| [![Preview0](assets/preview0.png)](https://www.youtube.com/watch?v=hWjG0W7EiAE) | [![Blank](assets/blank.png)](#) | [![Blank](assets/blank.png)](#) |
+| --- | --- | --- |
 
 ## Fun Maps for soyokaze!
 * [Ren feat. Hatsune Miku - Tougetsu, Rinzen ni Kisu. [Touch Your Dreams]](https://osu.ppy.sh/b/2923009) 4.74⭐: Clean jump map for beginners
