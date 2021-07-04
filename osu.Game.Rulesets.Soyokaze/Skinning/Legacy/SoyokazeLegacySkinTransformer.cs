@@ -10,8 +10,8 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
 {
     public class SoyokazeLegacySkinTransformer : LegacySkinTransformer
     {
-        public SoyokazeLegacySkinTransformer(ISkinSource source)
-            : base(source)
+        public SoyokazeLegacySkinTransformer(ISkin skin)
+            : base(skin)
         {
         }
 
@@ -33,7 +33,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
                     };
 
                 default:
-                    return null;
+                    return base.GetDrawableComponent(component);
             }
         }
 
@@ -42,9 +42,9 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
             switch (lookup)
             {
                 case SoyokazeSkinColour colour:
-                    return Source.GetConfig<SkinCustomColourLookup, TValue>(new SkinCustomColourLookup(colour));
+                    return base.GetConfig<SkinCustomColourLookup, TValue>(new SkinCustomColourLookup(colour));
                 default:
-                    return Source.GetConfig<TLookup, TValue>(lookup);
+                    return base.GetConfig<TLookup, TValue>(lookup);
             }
         }
     }

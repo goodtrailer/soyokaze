@@ -56,7 +56,7 @@ namespace osu.Game.Rulesets.Soyokaze
         public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods = null) =>
             new DrawableSoyokazeRuleset(this, beatmap, mods);
 
-        public override ISkin CreateLegacySkinProvider(ISkinSource source, IBeatmap beatmap) => new SoyokazeLegacySkinTransformer(source);
+        public override ISkin CreateLegacySkinProvider(ISkin skin, IBeatmap beatmap) => new SoyokazeLegacySkinTransformer(skin);
 
         public override IConvertibleReplayFrame CreateConvertibleReplayFrame() => new SoyokazeReplayFrame();
 
