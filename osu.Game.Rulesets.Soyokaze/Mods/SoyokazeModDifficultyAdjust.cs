@@ -2,7 +2,6 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using System.Linq;
-using osu.Framework.Bindables;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
 using osu.Game.Rulesets.Mods;
@@ -12,33 +11,25 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
     // ripped from https://github.com/ppy/osu/blob/master/osu.Game.Rulesets.Osu/Mods/OsuModDifficultyAdjust.cs
     public class SoyokazeModDifficultyAdjust : ModDifficultyAdjust
     {
-        [SettingSource("Circle Size", "Override a beatmap's set CS.", FIRST_SETTING_ORDER - 1)]
-        public BindableNumber<float> CircleSize { get; } = new BindableFloatWithLimitExtension
+        [SettingSource("Circle Size", "Override a beatmap's set CS.", FIRST_SETTING_ORDER - 1, SettingControlType = typeof(DifficultyAdjustSettingsControl))]
+        public DifficultyBindable CircleSize { get; } = new DifficultyBindable
         {
             Precision = 0.1f,
             MinValue = 0,
             MaxValue = 10,
-            Default = 5,
-            Value = 5,
+            ExtendedMaxValue = 11,
+            ReadCurrentFromDifficulty = diff => diff.CircleSize,
         };
 
-        [SettingSource("Approach Rate", "Override a beatmap's set AR.", LAST_SETTING_ORDER + 1)]
-        public BindableNumber<float> ApproachRate { get; } = new BindableFloatWithLimitExtension
+        [SettingSource("Approach Rate", "Override a beatmap's set AR.", LAST_SETTING_ORDER + 1, SettingControlType = typeof(DifficultyAdjustSettingsControl))]
+        public DifficultyBindable ApproachRate { get; } = new DifficultyBindable
         {
             Precision = 0.1f,
             MinValue = 0,
             MaxValue = 10,
-            Default = 5,
-            Value = 5,
+            ExtendedMaxValue = 11,
+            ReadCurrentFromDifficulty = diff => diff.ApproachRate,
         };
-
-        protected override void ApplyLimits(bool extended)
-        {
-            base.ApplyLimits(extended);
-
-            CircleSize.MaxValue = extended ? 11 : 10;
-            ApproachRate.MaxValue = extended ? 11 : 10;
-        }
 
         public override string SettingDescription
         {
@@ -56,20 +47,12 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
             }
         }
 
-        protected override void TransferSettings(BeatmapDifficulty difficulty)
-        {
-            base.TransferSettings(difficulty);
-
-            TransferSetting(CircleSize, difficulty.CircleSize);
-            TransferSetting(ApproachRate, difficulty.ApproachRate);
-        }
-
         protected override void ApplySettings(BeatmapDifficulty difficulty)
         {
             base.ApplySettings(difficulty);
 
-            ApplySetting(CircleSize, cs => difficulty.CircleSize = cs);
-            ApplySetting(ApproachRate, ar => difficulty.ApproachRate = ar);
+            if (CircleSize.Value != null) difficulty.CircleSize = CircleSize.Value.Value;
+            if (ApproachRate.Value != null) difficulty.ApproachRate = ApproachRate.Value.Value;
         }
     }
 }

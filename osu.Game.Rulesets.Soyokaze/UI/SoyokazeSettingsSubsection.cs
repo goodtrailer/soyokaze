@@ -3,6 +3,7 @@
 
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
+using osu.Framework.Localisation;
 using osu.Game.Overlays.Settings;
 using osu.Game.Rulesets.Soyokaze.Configuration;
 
@@ -10,7 +11,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 {
     public class SoyokazeSettingsSubsection : RulesetSettingsSubsection
     {
-        protected override string Header => "soyokaze!";
+        protected override LocalisableString Header => "soyokaze!";
 
         public SoyokazeSettingsSubsection(Ruleset ruleset)
             : base(ruleset)
