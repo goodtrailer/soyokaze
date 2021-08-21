@@ -8,7 +8,7 @@ using osu.Game.Rulesets.Soyokaze.Difficulty.Preprocessing;
 
 namespace osu.Game.Rulesets.Soyokaze.Difficulty.Skills
 {
-    public class SkillSpeed : StrainSkill
+    public class SkillSpeed : StrainDecaySkill
     {
         // fast decay and high multiplier = buff short and fast bursts/triples
         protected override double SkillMultiplier => 13.5;

@@ -8,7 +8,7 @@ using osu.Game.Rulesets.Soyokaze.Difficulty.Preprocessing;
 
 namespace osu.Game.Rulesets.Soyokaze.Difficulty.Skills
 {
-    public class SkillRead : StrainSkill
+    public class SkillRead : StrainDecaySkill
     {
         // slow decay and medium multiplier = buff consistently fast and cluttered maps
         protected override double SkillMultiplier => 7.0;
