@@ -4,6 +4,7 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
@@ -145,9 +146,16 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             Release(ButtonBindable.Value);
 
             double holdFraction = holdDuration / HitObject.Duration;
-            double holdCircleFraction =
-                (double)HoldCircle.TrueResult.Judgement.NumericResultFor(HoldCircle.TrueResult) /
-                HoldCircle.TrueResult.Judgement.MaxNumericResult;
+            double holdCircleFraction = 0.0;
+
+            JudgementResult trueRes = HoldCircle.TrueResult;
+            if (trueRes != null)
+            {
+                Judgement judgement = trueRes.Judgement;
+                holdCircleFraction = (double) judgement.NumericResultFor(trueRes)
+                    / judgement.MaxNumericResult;
+            }
+
             double scoreFraction = (holdCircleFraction + holdFraction) / 2;
 
             HitResult result;
