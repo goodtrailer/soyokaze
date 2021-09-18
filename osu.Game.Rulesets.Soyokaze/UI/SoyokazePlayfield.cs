@@ -5,6 +5,7 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Input.Bindings;
+using osu.Framework.Input.Events;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
@@ -87,19 +88,19 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             }
         }
 
-        public bool OnPressed(SoyokazeAction action)
+        public bool OnPressed(KeyBindingPressEvent<SoyokazeAction> e)
         {
-            inputOverlay.PressKey(action);
+            inputOverlay.PressKey(e.Action);
 
             foreach (var hitObject in HitObjectContainer.AliveObjects)
                 switch (hitObject)
                 {
                     case DrawableHitCircle hitCircle:
-                        if (hitCircle.Hit(action))
+                        if (hitCircle.Hit(e.Action))
                             return true;
                         break;
                     case DrawableHold hold:
-                        if (hold.Hit(action))
+                        if (hold.Hit(e.Action))
                             return true;
                         break;
                 }
@@ -140,14 +141,14 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             #endregion
         }
 
-        public void OnReleased(SoyokazeAction action)
+        public void OnReleased(KeyBindingReleaseEvent<SoyokazeAction> e)
         {
-            inputOverlay.UnpressKey(action);
+            inputOverlay.UnpressKey(e.Action);
             foreach (var hitObject in HitObjectContainer.AliveObjects)
                 switch (hitObject)
                 {
                     case DrawableHold hold:
-                        if (hold.Release(action))
+                        if (hold.Release(e.Action))
                             return;
                         break;
                 }
