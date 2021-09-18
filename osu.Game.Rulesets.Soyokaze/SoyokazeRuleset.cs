@@ -133,6 +133,7 @@ namespace osu.Game.Rulesets.Soyokaze
                         new SoyokazeModHardRock(),
                         new MultiMod(new SoyokazeModSuddenDeath(), new SoyokazeModPerfect()),
                         new MultiMod(new SoyokazeModDoubleTime(), new SoyokazeModNightcore()),
+                        new SoyokazeModHidden(),
                         new SoyokazeModHolds(),
                     };
 

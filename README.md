@@ -50,28 +50,24 @@ KiaiVisualizerFlash: 255, 255 255
 ```
 
 ## Features
-1. No note-lock (still shakes for exceedingly early hits)
-1. Judgements (perfect, great, good, ok, meh)
+1. No note-lock
+1. 6 judgements (perfect, great, good, ok, meh, miss)
 1. Combos & combo accents
-1. Skinning & skin configuration
+1. Skinning
 1. Settings
 1. Key indicators
-1. Basic mods (+HT, +DC, +DT, +NC, +HR, +EZ, +DA, +AT, +CN, +NF, +SD, +PF, +WU, +WD, +RD)
+1. Basic mods (+HT, +DC, +DT, +NC, +HR, +EZ, +HD, +DA, +AT, +CN, +NF, +SD, +PF, +WU, +WD, +RD)
 1. Replays
 1. Kiai visuals
-1. Post-game statistics
-1. Custom star-rating calculation
+1. Post-beatmap statistics
+1. Star-rating calculation
 1. Holds mod (+HO)
 
 ## Extras
 These are features that I think would be really fun, but are non-trivial to implement (unlike +DT, which took maybe 30 seconds). I may or may not implement these in the future depending on if I find the motivation to.
-1. Hidden mod (+HD)
-    * Frankly I have no idea if this is even playable
 1. Spinners mod (+SP)
     * Basically just note spam, taiko/MuseDash style
 1. Multi-notes mod (+MT)
-    * Probably the hardest mod to implement, would have to look at ![LumpBloom7/sentakki](https://github.com/LumpBloom7/sentakki) for some clues, because beatmap generation is hard
-1. Sliderend mod (+SE)
-    * Instead of hold notes, slider ends are turned into circles too (by far the easiest to make, but seems like some pretty terrible gameplay)
+    * Pretty hard mod to implement, would have to look at ![LumpBloom7/sentakki](https://github.com/LumpBloom7/sentakki) for some clues, because I'm not sure how to decide when to do singles, doubles, and triples
 1. Editor support
-    * Unusable without a custom build of osu!, because the legacy beatmap decoder gets angry at non-legacy rulesets or something. Also definitely the hardest feature to implement by far
+    * Currently unusable without a custom build of osu!, because the legacy beatmap decoder gets angry at non-legacy rulesets or something. Also definitely the hardest feature to implement by far
