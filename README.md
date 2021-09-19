@@ -10,8 +10,8 @@
 An osu! ruleset mimicking Genshin Impact's Ballads of Breeze mini-game. You can also check it out over at [rūrusetto](https://rulesets.info/posts/soyokaze/), a website created by the [Rūrusetto team](https://github.com/Rurusetto) to catelog osu!lazer rulesets.
 
 ## Video Showcase (YouTube)
-[![Preview1](assets/preview1.png)](https://www.youtube.com/watch?v=3Sj6tE2t4do)
-| [![Preview0](assets/preview0.png)](https://www.youtube.com/watch?v=hWjG0W7EiAE) | [![Blank](assets/blank.png)](#) | [![Blank](assets/blank.png)](#) |
+[![Preview1](assets/preview1.png)](https://youtu.be/3Sj6tE2t4do)
+| [![Preview0](assets/preview0.png)](https://youtu.be/hWjG0W7EiAE) | [![Preview2](assets/preview2.png)](https://youtu.be/uX0HBadqPzs) | [![Preview3](assets/preview3.png)](https://youtu.be/_QKinzhlMes) |
 | --- | --- | --- |
 
 ## Fun Maps for soyokaze!
