@@ -26,7 +26,8 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         private readonly SkinnableKiaiVisualizer kiaiVisualizer = new SkinnableKiaiVisualizer { RelativeSizeAxes = Axes.Both, Origin = Anchor.Centre, Anchor = Anchor.Centre };
         private SoyokazeConfigManager configManager;
 
-        protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
+        // DEPRECATED: see SoyokazeCursorContainer
+        // protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
         protected override HitObjectLifetimeEntry CreateLifetimeEntry(HitObject hitObject) => new SoyokazeHitObjectLifetimeEntry(hitObject);
 
         private class ProxyContainer : LifetimeManagementContainer

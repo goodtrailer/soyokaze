@@ -9,6 +9,7 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
+    // DEPRECATED: see SoyokazeCursorContainer
     public class SkinnableCursor : Container
     {
         public SkinnableCursor()

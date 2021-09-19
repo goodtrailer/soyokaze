@@ -14,7 +14,7 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
 {
     public class SoyokazeReplayFrame : ReplayFrame, IConvertibleReplayFrame
     {
-        public Vector2 Position;
+        public Vector2 Position;    // DEPRECATED: see SoyokazeCursorContainer
         public List<SoyokazeAction> Actions = new List<SoyokazeAction>();
 
         private enum SoyokazeActionFlag
