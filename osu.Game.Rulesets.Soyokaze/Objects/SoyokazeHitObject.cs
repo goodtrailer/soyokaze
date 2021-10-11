@@ -41,11 +41,11 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
         public double FadeIn = BASE_FADEIN;
 
         // HitObject Impl ----------------------------------------------
-        protected override void ApplyDefaultsToSelf(ControlPointInfo controlPointInfo, BeatmapDifficulty difficulty)
+        protected override void ApplyDefaultsToSelf(ControlPointInfo controlPointInfo, IBeatmapDifficultyInfo difficulty)
         {
             base.ApplyDefaultsToSelf(controlPointInfo, difficulty);
 
-            Preempt = (float)BeatmapDifficulty.DifficultyRange(difficulty.ApproachRate, 1800, 1200, BASE_PREEMPT);
+            Preempt = (float)IBeatmapDifficultyInfo.DifficultyRange(difficulty.ApproachRate, 1800, 1200, BASE_PREEMPT);
 
             // i refuse to use Math.Min because min funcs are the hardest thing to read i swear. even though i see them it all the time in math LOL
             FadeIn = BASE_FADEIN;
