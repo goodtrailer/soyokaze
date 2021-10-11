@@ -65,9 +65,11 @@ KiaiVisualizerFlash: 255, 255 255
 
 ## Extras
 These are features that I think would be really fun, but are non-trivial to implement (unlike +DT, which took maybe 30 seconds). I may or may not implement these in the future depending on if I find the motivation to.
-1. Spinners mod (+SP)
+1. Star rating rework
+    * osu!'s star ratings suck real bad for soyokaze!. I tried making my own star rating calculator, and it works *slightly* better. It still undervalues reading and rhythm complexity a ton.
+3. Spinners mod (+SP)
     * Basically just note spam, taiko/MuseDash style
-1. Multi-notes mod (+MT)
+4. Multi-notes mod (+MT)
     * Pretty hard mod to implement, would have to look at ![LumpBloom7/sentakki](https://github.com/LumpBloom7/sentakki) for some clues, because I'm not sure how to decide when to do singles, doubles, and triples
-1. Editor support
+5. Editor support
     * Currently unusable without a custom build of osu!, because the legacy beatmap decoder gets angry at non-legacy rulesets or something. Also definitely the hardest feature to implement by far
