@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/github/license/goodtrailer/soyokaze.svg?color=blue&style=flat-square)](https://github.com/goodtrailer/soyokaze/blob/master/LICENSE)
 [![Downloads](https://img.shields.io/github/downloads/goodtrailer/soyokaze/total.svg?color=orange&style=flat-square)](https://somsubhra.github.io/github-release-stats/?username=goodtrailer&repository=soyokaze&page=1&per_page=0)
 
-An [osu!](https://github.com/ppy/osu) ruleset mimicking [Genshin Impact](https://genshin.mihoyo.com)'s Ballads of Breeze [mini-game](https://youtu.be/ZsacXMduSFY). You can also check it out over at [rūrusetto](https://rulesets.info/rulesets/soyokaze), a website created by the [Rūrusetto team](https://github.com/Rurusetto) to catelog osu!lazer rulesets.
+An [osu!](https://github.com/ppy/osu) ruleset mimicking [Genshin Impact](https://genshin.mihoyo.com)'s Ballads of Breeze [mini-game](https://youtu.be/ZsacXMduSFY). You can also check it out over at [rūrusetto](https://rulesets.info/rulesets/soyokaze), a website created by the [Rūrusetto team](https://github.com/Rurusetto) to catelog osu! rulesets.
 
 ## Video Showcase (YouTube)
 [![Preview1](assets/preview1.png)](https://youtu.be/3Sj6tE2t4do)
