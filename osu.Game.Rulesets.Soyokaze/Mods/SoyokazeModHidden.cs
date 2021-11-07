@@ -80,7 +80,6 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
                 case DrawableHitCircle circle:
                     fadeTarget = circle.HitCircle;
                     if (!increaseVisibility)
-                        // using (circle.BeginAbsoluteSequence(hitObject.StartTime - hitObject.Preempt))
                         using (circle.BeginAbsoluteSequence(FadingApproachCircle.Value? fadeOutStartTime : hitObject.StartTime - hitObject.Preempt))
                         {
                             if (FadingApproachCircle.Value)
