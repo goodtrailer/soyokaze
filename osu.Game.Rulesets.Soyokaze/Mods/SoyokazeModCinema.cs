@@ -17,7 +17,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         {
             ScoreInfo = new ScoreInfo
             {
-                User = new APIUser { Username = "goodtrailer's super duper theater bot" }
+                User = new APIUser { Username = "goodtrailer's really cool theater bot" }
             },
             Replay = new SoyokazeAutoGenerator(beatmap, mods).Generate(),
         };
