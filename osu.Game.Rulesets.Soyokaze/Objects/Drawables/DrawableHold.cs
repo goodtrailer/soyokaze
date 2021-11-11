@@ -1,15 +1,19 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
+using System.Collections.Generic;
+using System.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Game.Audio;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Skinning;
 using osu.Game.Rulesets.Soyokaze.UI;
+using osu.Game.Skinning;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
@@ -19,6 +23,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         public new Hold HitObject => base.HitObject as Hold;
         public DrawableHoldCircle HoldCircle => holdCircleContainer.Child;
         public SkinnableHoldProgress HoldProgress;
+
+        private PausableSkinnableSound holdSamples;
 
         private Container<DrawableHoldCircle> holdCircleContainer;
 
@@ -33,27 +39,27 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         public DrawableHold(Hold hold = null)
             : base(hold)
         {
-            holdCircleContainer = new Container<DrawableHoldCircle>
-            {
-                RelativeSizeAxes = Axes.Both,
-                Origin = Anchor.Centre,
-                Anchor = Anchor.Centre,
-            };
-
-            HoldProgress = new SkinnableHoldProgress
-            {
-                RelativeSizeAxes = Axes.Both,
-                Current = { Value = 0 },
-            };
-
             Size = new Vector2(SoyokazeHitObject.OBJECT_RADIUS * 2);
         }
 
         [BackgroundDependencyLoader]
         private void load()
         {
-            AddInternal(holdCircleContainer);
-            AddInternal(HoldProgress);
+            InternalChildren = new Drawable[]
+            {
+                holdCircleContainer = new Container<DrawableHoldCircle>
+                {
+                    RelativeSizeAxes = Axes.Both,
+                    Origin = Anchor.Centre,
+                    Anchor = Anchor.Centre,
+                },
+                HoldProgress = new SkinnableHoldProgress
+                {
+                    RelativeSizeAxes = Axes.Both,
+                    Current = { Value = 0 },
+                },
+                holdSamples = new PausableSkinnableSound { Looping = true },
+            };
         }
 
         protected override void OnApply()
@@ -64,9 +70,37 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             holdDuration = 0.0;
         }
 
-        protected override void Update()
+        protected override void OnFree()
         {
-            base.Update();
+            base.OnFree();
+
+            holdSamples.Samples = null;
+        }
+        protected override void LoadSamples()
+        {
+            base.LoadSamples();
+
+            if (HitObject.HoldSamples == null)
+                return;
+
+            var slidingSamples = new List<ISampleInfo>();
+
+            var normalSample = HitObject.HoldSamples.FirstOrDefault(s => s.Name == HitSampleInfo.HIT_NORMAL);
+            if (normalSample != null)
+                slidingSamples.Add(HitObject.SampleControlPoint.ApplyTo(normalSample).With("sliderslide"));
+
+            var whistleSample = HitObject.HoldSamples.FirstOrDefault(s => s.Name == HitSampleInfo.HIT_WHISTLE);
+            if (whistleSample != null)
+                slidingSamples.Add(HitObject.SampleControlPoint.ApplyTo(whistleSample).With("sliderwhistle"));
+
+            holdSamples.Samples = slidingSamples.ToArray();
+        }
+
+        public override void StopAllSamples()
+        {
+            base.StopAllSamples();
+
+            holdSamples.Stop();
         }
 
         protected override DrawableHitObject CreateNestedHitObject(HitObject hitObject)
@@ -152,7 +186,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             if (trueRes != null)
             {
                 Judgement judgement = trueRes.Judgement;
-                holdCircleFraction = (double) judgement.NumericResultFor(trueRes)
+                holdCircleFraction = (double)judgement.NumericResultFor(trueRes)
                     / judgement.MaxNumericResult;
             }
 
@@ -188,6 +222,11 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             holdStartTime = Time.Current;
             HoldCircle.Hit(action);
 
+            const float hold_scale = 0.8f;
+            const double hold_duration = 80;
+            HoldProgress.ScaleTo(new Vector2(hold_scale), hold_duration, Easing.OutQuint);
+            holdSamples.Play();
+
             return true;
         }
 
@@ -205,6 +244,11 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 holdDuration += Time.Current - holdStartTime;
                 holdStartTime = double.MinValue;
             }
+
+            const float hold_scale = 1f;
+            const double hold_duration = 120;
+            HoldProgress.ScaleTo(new Vector2(hold_scale), hold_duration, Easing.OutQuint);
+            holdSamples.Stop();
 
             return true;
         }

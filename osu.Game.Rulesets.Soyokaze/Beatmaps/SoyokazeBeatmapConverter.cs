@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using osu.Framework.Bindables;
+using osu.Framework.Logging;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Types;
@@ -41,17 +42,40 @@ namespace osu.Game.Rulesets.Soyokaze.Beatmaps
                     row = i;
             SoyokazeAction button = (SoyokazeAction)PositionExtensions.PositionToButton(column + PositionExtensions.NUM_COLUMNS * row);
 
-            SoyokazeHitObject hitObject = new HitCircle { };
+            SoyokazeHitObject hitObject;
             switch (original)
             {
                 case IHasPathWithRepeats slider:
-                    if (CreateHolds.Value)
-                        hitObject = new Hold { Duration = slider.Duration };
+                    if (!CreateHolds.Value)
+                        goto default;
+                    hitObject = new Hold
+                    {
+                        Duration = slider.Duration,
+                        StartSamples = slider.NodeSamples[0],
+                        HoldSamples = original.Samples,
+                        EndSamples = slider.NodeSamples[slider.NodeSamples.Count - 1],
+                    };
+                    break;
+
+                case IHasDuration longNote:
+                    if (!CreateHolds.Value)
+                        goto default;
+                    hitObject = new Hold
+                    {
+                        Duration = longNote.Duration,
+                        EndSamples = original.Samples,
+                    };
+                    break;
+
+                default:
+                    hitObject = new HitCircle
+                    {
+                        Samples = original.Samples,
+                    };
                     break;
             }
 
             hitObject.Button = button;
-            hitObject.Samples = original.Samples;
             hitObject.StartTime = original.StartTime;
             hitObject.NewCombo = comboData?.NewCombo ?? false;
             hitObject.ComboOffset = comboData?.ComboOffset ?? 0;

@@ -16,7 +16,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         public override double ScoreMultiplier => 1.09;
         public override string Description => "IT'S UNREADABLE.";
 
-        private const double fade_in_fraction= 0.4;
+        private const double fade_in_fraction = 0.4;
         private const double fade_out_fraction = 0.3;
 
         public override void ApplyToBeatmap(IBeatmap beatmap)

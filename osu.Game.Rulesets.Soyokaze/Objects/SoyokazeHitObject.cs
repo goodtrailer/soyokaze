@@ -86,7 +86,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
         }
 
         public Bindable<int> ComboIndexWithOffsetsBindable { get; } = new Bindable<int>();
-        
+
         public int ComboIndexWithOffsets
         {
             get => ComboIndexWithOffsetsBindable.Value;
