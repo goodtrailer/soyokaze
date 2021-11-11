@@ -19,7 +19,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         public Bindable<bool> FadingApproachCircle { get; } = new BindableBool(true);
 
         public override double ScoreMultiplier => 1.09;
-        public override string Description => "IT'S UNREADABLE.";
+        public override string Description => "Play with fading circles.";
 
         private const double fade_in_fraction= 0.4;
         private const double fade_out_fraction = 0.3;
