@@ -18,7 +18,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         [SettingSource("Fading Approach Circle", "Allow approach circles to fade instead of disappearing")]
         public Bindable<bool> FadingApproachCircle { get; } = new BindableBool(true);
 
-        public override double ScoreMultiplier => 1.09;
+        public override double ScoreMultiplier => 1.06;
         public override string Description => "Play with fading circles.";
 
         private const double fade_in_fraction = 0.4;
