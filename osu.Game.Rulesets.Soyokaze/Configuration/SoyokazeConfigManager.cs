@@ -18,16 +18,8 @@ namespace osu.Game.Rulesets.Soyokaze.Configuration
         {
             base.InitialiseDefaults();
 
-            SetDefault(SoyokazeConfig.HitCircleScreenCenterDistance, 220, 0, PositionExtensions.SCREEN_WIDTH / 2);
-            SetDefault(SoyokazeConfig.HitCircleGap, 120, 0, PositionExtensions.SCREEN_WIDTH / 2);
-
-            SetDefault(SoyokazeConfig.JudgementScreenCenterDistance, 220, 0, PositionExtensions.SCREEN_WIDTH / 2);
-            SetDefault(SoyokazeConfig.JudgementGap, 120, 0, PositionExtensions.SCREEN_WIDTH / 2);
-
-            SetDefault(SoyokazeConfig.InputOverlayScreenCenterDistance, 220, 0, PositionExtensions.SCREEN_WIDTH / 2);
-            SetDefault(SoyokazeConfig.InputOverlayGap, 20, 0, PositionExtensions.SCREEN_WIDTH / 2);
-
-            SetDefault(SoyokazeConfig.KiaiVisualizerScreenCenterDistance, 220, 0, PositionExtensions.SCREEN_WIDTH / 2);
+            SetDefault(SoyokazeConfig.ScreenCenterGap, 220, 0, PositionExtensions.SCREEN_WIDTH / 2);
+            SetDefault(SoyokazeConfig.ObjectGap, 120, 0, PositionExtensions.SCREEN_WIDTH / 2);
 
             SetDefault(SoyokazeConfig.HighlightHolds, true);
             SetDefault(SoyokazeConfig.ShowInputOverlay, true);

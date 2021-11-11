@@ -20,7 +20,7 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
         public const int NUM_COLUMNS = 4;
         public const int NUM_ROWS = 2;
 
-        public static Vector2[] GetPositions(int screenCenterDistance, int gap, bool inButtonOrder, Anchor origin)
+        public static Vector2[] GetPositions(int screenCenterGap, int objectGap, bool inButtonOrder, Anchor origin)
         {
             Vector2 offset = new Vector2(0);
 
@@ -36,15 +36,15 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
 
             Vector2[] positions = new Vector2[]
             {
-                new Vector2(offset.X - screenCenterDistance - gap,        offset.Y      ),
-                new Vector2(offset.X - screenCenterDistance,              offset.Y - gap),
-                new Vector2(offset.X + screenCenterDistance - gap,        offset.Y      ),
-                new Vector2(offset.X + screenCenterDistance,              offset.Y - gap),
+                new Vector2(offset.X - screenCenterGap - objectGap,        offset.Y      ),
+                new Vector2(offset.X - screenCenterGap,              offset.Y - objectGap),
+                new Vector2(offset.X + screenCenterGap - objectGap,        offset.Y      ),
+                new Vector2(offset.X + screenCenterGap,              offset.Y - objectGap),
 
-                new Vector2(offset.X - screenCenterDistance,              offset.Y + gap),
-                new Vector2(offset.X - screenCenterDistance + gap,        offset.Y      ),
-                new Vector2(offset.X + screenCenterDistance,              offset.Y + gap),
-                new Vector2(offset.X + screenCenterDistance + gap,        offset.Y      )
+                new Vector2(offset.X - screenCenterGap,              offset.Y + objectGap),
+                new Vector2(offset.X - screenCenterGap + objectGap,        offset.Y      ),
+                new Vector2(offset.X + screenCenterGap,              offset.Y + objectGap),
+                new Vector2(offset.X + screenCenterGap + objectGap,        offset.Y      )
             };
 
             if (!inButtonOrder)

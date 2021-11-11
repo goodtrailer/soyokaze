@@ -18,8 +18,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         public readonly Bindable<float> ScaleBindable = new Bindable<float>();
         public readonly Bindable<SoyokazeAction> ButtonBindable = new Bindable<SoyokazeAction>();
         public readonly Bindable<int> IndexInCurrentComboBindable = new Bindable<int>();
-        public readonly Bindable<int> ScreenCenterDistanceBindable = new Bindable<int>();
-        public readonly Bindable<int> GapBindable = new Bindable<int>();
+        public readonly Bindable<int> ScreenCenterGapBindable = new Bindable<int>();
+        public readonly Bindable<int> ObjectGapBindable = new Bindable<int>();
 
         protected override double InitialLifetimeOffset => HitObject.Preempt;
 
@@ -45,12 +45,12 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             };
             base.AddInternal(shakeContainer);
 
-            cm?.BindWith(SoyokazeConfig.HitCircleScreenCenterDistance, ScreenCenterDistanceBindable);
-            cm?.BindWith(SoyokazeConfig.HitCircleGap, GapBindable);
+            cm?.BindWith(SoyokazeConfig.ScreenCenterGap, ScreenCenterGapBindable);
+            cm?.BindWith(SoyokazeConfig.ObjectGap, ObjectGapBindable);
 
             ScaleBindable.BindValueChanged(_ => UpdateScale(), true);
-            ScreenCenterDistanceBindable.BindValueChanged(_ => UpdatePosition(), true);
-            GapBindable.BindValueChanged(_ => UpdatePosition(), true);
+            ScreenCenterGapBindable.BindValueChanged(_ => UpdatePosition(), true);
+            ObjectGapBindable.BindValueChanged(_ => UpdatePosition(), true);
             ButtonBindable.BindValueChanged(_ => UpdatePosition(), true);
         }
 
@@ -60,7 +60,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
         protected virtual void UpdatePosition()
         {
-            Vector2[] positions = PositionExtensions.GetPositions(ScreenCenterDistanceBindable.Value, GapBindable.Value, true, Anchor.Centre);
+            Vector2[] positions = PositionExtensions.GetPositions(ScreenCenterGapBindable.Value, ObjectGapBindable.Value, true, Anchor.Centre);
             Position = positions[(int)ButtonBindable.Value];
         }
 

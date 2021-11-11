@@ -52,44 +52,14 @@ namespace osu.Game.Rulesets.Soyokaze.UI
                 },
                 new SettingsSlider<int>
                 {
-                    LabelText = "Hit Circle distance from screen center",
-                    Current = configManager.GetBindable<int>(SoyokazeConfig.HitCircleScreenCenterDistance),
+                    LabelText = "Screen center gap",
+                    Current = configManager.GetBindable<int>(SoyokazeConfig.ScreenCenterGap),
                     ShowsDefaultIndicator = true,
                 },
                 new SettingsSlider<int>
                 {
-                    LabelText = "Hit Circle gap",
-                    Current = configManager.GetBindable<int>(SoyokazeConfig.HitCircleGap),
-                    ShowsDefaultIndicator = true,
-                },
-                new SettingsSlider<int>
-                {
-                    LabelText = "Judgement distance from screen center",
-                    Current = configManager.GetBindable<int>(SoyokazeConfig.JudgementScreenCenterDistance),
-                    ShowsDefaultIndicator = true,
-                },
-                new SettingsSlider<int>
-                {
-                    LabelText = "Judgement gap",
-                    Current = configManager.GetBindable<int>(SoyokazeConfig.JudgementGap),
-                    ShowsDefaultIndicator = true,
-                },
-                new SettingsSlider<int>
-                {
-                    LabelText = "Input Overlay distance from screen center",
-                    Current = configManager.GetBindable<int>(SoyokazeConfig.InputOverlayScreenCenterDistance),
-                    ShowsDefaultIndicator = true,
-                },
-                new SettingsSlider<int>
-                {
-                    LabelText = "Input Overlay gap",
-                    Current = configManager.GetBindable<int>(SoyokazeConfig.InputOverlayGap),
-                    ShowsDefaultIndicator = true,
-                },
-                new SettingsSlider<int>
-                {
-                    LabelText = "Kiai Visualizer distance from screen center",
-                    Current = configManager.GetBindable<int>(SoyokazeConfig.KiaiVisualizerScreenCenterDistance),
+                    LabelText = "Object gap",
+                    Current = configManager.GetBindable<int>(SoyokazeConfig.ObjectGap),
                     ShowsDefaultIndicator = true,
                 },
             };

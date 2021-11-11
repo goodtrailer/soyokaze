@@ -7,6 +7,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
     {
         HitCirclePrefix,
         HitCircleOverlap,
+        InputOverlayKeyGap,
         KiaiVisualizerDefaultOpacity,
         KiaiVisualizerFirstFlashOpacity,
         KiaiVisualizerFlashOpacity,

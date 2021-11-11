@@ -19,19 +19,18 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         private SkinnableDrawable[] inputOverlayKeys = new SkinnableDrawable[8];
         private SkinnableDrawable[] inputOverlayBackgrounds = new SkinnableDrawable[2];
 
-        private Bindable<int> screenCenterDistanceBindable = new Bindable<int>();
-        private Bindable<int> gapBindable = new Bindable<int>();
+        private Bindable<int> screenCenterGapBindable = new Bindable<int>();
         private Bindable<bool> showBindable = new Bindable<bool>();
 
-        private int screenCenterDistance => screenCenterDistanceBindable.Value;
-        private int gap => gapBindable.Value;
+        private int screenCenterGap => screenCenterGapBindable.Value;
+        private int keyGap;
 
         private const double press_duration = 60d;
         private const float press_scale = 0.6f;
 
         public SkinnableInputOverlay()
         {
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < inputOverlayKeys.Length; i++)
             {
                 inputOverlayKeys[i] = new SkinnableDrawable(
                     new SoyokazeSkinComponent(SoyokazeSkinComponents.InputOverlayKey),
@@ -43,7 +42,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 };
             }
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < inputOverlayBackgrounds.Length; i++)
             {
                 inputOverlayBackgrounds[i] = new SkinnableDrawable(
                     new SoyokazeSkinComponent(SoyokazeSkinComponents.InputOverlayBackground),
@@ -57,28 +56,27 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         }
 
         [BackgroundDependencyLoader(true)]
-        private void load(SoyokazeConfigManager cm)
+        private void load(ISkinSource skin, SoyokazeConfigManager cm)
         {
             AddRangeInternal(inputOverlayKeys);
             AddRangeInternal(inputOverlayBackgrounds);
 
-            cm?.BindWith(SoyokazeConfig.InputOverlayScreenCenterDistance, screenCenterDistanceBindable);
-            cm?.BindWith(SoyokazeConfig.InputOverlayGap, gapBindable);
+            cm?.BindWith(SoyokazeConfig.ScreenCenterGap, screenCenterGapBindable);
             cm?.BindWith(SoyokazeConfig.ShowInputOverlay, showBindable);
+            keyGap = skin.GetConfig<SoyokazeSkinConfiguration, int>(SoyokazeSkinConfiguration.InputOverlayKeyGap)?.Value ?? 20;
 
-            screenCenterDistanceBindable.BindValueChanged(_ => updatePositions(), true);
-            gapBindable.BindValueChanged(_ => updatePositions(), true);
+            screenCenterGapBindable.BindValueChanged(_ => updatePositions(), true);
             showBindable.BindValueChanged(valueChanged => Alpha = valueChanged.NewValue ? 1f : 0f, true);
         }
 
         private void updatePositions()
         {
-            Vector2[] positions = PositionExtensions.GetPositions(screenCenterDistance, gap, true, Anchor.Centre);
+            Vector2[] positions = PositionExtensions.GetPositions(screenCenterGap, keyGap, true, Anchor.Centre);
             for (int i = 0; i < 8; i++)
                 inputOverlayKeys[i].Position = positions[i];
 
-            inputOverlayBackgrounds[0].Position = new Vector2(-screenCenterDistance, 0);
-            inputOverlayBackgrounds[1].Position = new Vector2(screenCenterDistance, 0);
+            inputOverlayBackgrounds[0].Position = new Vector2(-screenCenterGap, 0);
+            inputOverlayBackgrounds[1].Position = new Vector2(screenCenterGap, 0);
         }
 
         public void PressKey(SoyokazeAction button)

@@ -54,10 +54,10 @@ namespace osu.Game.Rulesets.Soyokaze.UI
                 approachCircleContainer,
             });
 
-            RegisterPool<HitCircle, DrawableHitCircle>(15, 100);
+            RegisterPool<HitCircle, DrawableHitCircle>(15, 30);
 
-            RegisterPool<Hold, DrawableHold>(15, 100);
-            RegisterPool<HoldCircle, DrawableHoldCircle>(15, 100);
+            RegisterPool<Hold, DrawableHold>(15, 30);
+            RegisterPool<HoldCircle, DrawableHoldCircle>(15, 30);
         }
 
         protected override void OnNewDrawableHitObject(DrawableHitObject drawableObject)

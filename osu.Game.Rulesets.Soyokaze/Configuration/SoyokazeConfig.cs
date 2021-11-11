@@ -5,14 +5,9 @@ namespace osu.Game.Rulesets.Soyokaze.Configuration
 {
     public enum SoyokazeConfig
     {
-        HitCircleScreenCenterDistance,
-        HitCircleGap,
-        JudgementScreenCenterDistance,
-        JudgementGap,
-        InputOverlayScreenCenterDistance,
-        InputOverlayGap,
+        ScreenCenterGap,
+        ObjectGap,
         ShowInputOverlay,
-        KiaiVisualizerScreenCenterDistance,
         ShowKiaiVisualizer,
         HighlightHolds,
         HoldHighlightColour,

@@ -106,7 +106,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             {
                 AddRangeInternal(kiaiSquares);
 
-                cm.BindWith(SoyokazeConfig.KiaiVisualizerScreenCenterDistance, screenCenterDistanceBindable);
+                cm.BindWith(SoyokazeConfig.ScreenCenterGap, screenCenterDistanceBindable);
                 screenCenterDistanceBindable.BindValueChanged(_ => updatePositions(), true);
             }
 
