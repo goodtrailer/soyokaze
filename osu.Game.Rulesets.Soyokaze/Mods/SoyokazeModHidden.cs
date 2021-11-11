@@ -2,8 +2,10 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using System.Linq;
+using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Game.Beatmaps;
+using osu.Game.Configuration;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Objects;
@@ -13,8 +15,11 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
 {
     public class SoyokazeModHidden : ModHidden
     {
+        [SettingSource("Fading Approach Circle", "Allow approach circles to fade instead of disappearing")]
+        public Bindable<bool> FadingApproachCircle { get; } = new BindableBool(true);
+
         public override double ScoreMultiplier => 1.09;
-        public override string Description => "IT'S UNREADABLE.";
+        public override string Description => "Play with fading circles.";
 
         private const double fade_in_fraction = 0.4;
         private const double fade_out_fraction = 0.3;
@@ -65,11 +70,17 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
                 case DrawableHitCircle circle:
                     fadeTarget = circle.HitCircle;
                     if (!increaseVisibility)
-                        using (circle.BeginAbsoluteSequence(hitObject.StartTime - hitObject.Preempt))
-                        {
-                            circle.ApproachCircle.Hide();
-                        }
-                    goto default;
+                        if (FadingApproachCircle.Value)
+                            using (circle.BeginAbsoluteSequence(fadeOutStartTime))
+                            {
+                                circle.ApproachCircle.FadeOut(fadeOutDuration * 0.8);
+                            }
+                        else
+                            using (circle.BeginAbsoluteSequence(hitObject.StartTime - hitObject.Preempt))
+                            {
+                                circle.ApproachCircle.Hide();
+                            }
+                        goto default;
                 default:
                     using (fadeTarget.BeginAbsoluteSequence(fadeOutStartTime))
                     {
