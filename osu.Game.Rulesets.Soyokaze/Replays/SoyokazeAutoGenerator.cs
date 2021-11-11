@@ -2,6 +2,7 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using System.Collections.Generic;
+using System.Linq;
 using osu.Game.Beatmaps;
 using osu.Game.Replays;
 using osu.Game.Rulesets.Mods;
@@ -14,8 +15,9 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
 {
     public class SoyokazeAutoGenerator : AutoGenerator
     {
-        protected Replay Replay;
-        protected List<ReplayFrame> Frames => Replay.Frames;
+        private Replay replay;
+        private LinkedList<double> releaseFrameTimes = new LinkedList<double>();
+        private KeyPress[] keyPresses = new KeyPress[8];
 
         private const double default_press_duration = 75.0;
         private const double default_press_safety_buffer = 5.0;
@@ -25,18 +27,35 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
         public SoyokazeAutoGenerator(IBeatmap beatmap, IReadOnlyList<Mod> mods)
             : base(beatmap)
         {
-            Replay = new Replay();
+            replay = new Replay();
         }
 
         public override Replay Generate()
         {
-            Frames.Add(new SoyokazeReplayFrame(-100000, Vector2.Zero));
+            replay.Frames.Clear();
+            releaseFrameTimes.Clear();
+            for (int i = 0; i < keyPresses.Length; i++)
+                keyPresses[i] = new KeyPress
+                {
+                    Start = -1.0,
+                    End = -1.0,
+                };
+
+            addOrderedFrame(new SoyokazeReplayFrame(-1000, Vector2.Zero));
 
             for (int i = 0; i < Beatmap.HitObjects.Count; i++)
             {
                 SoyokazeHitObject currentObject = Beatmap.HitObjects[i];
                 SoyokazeAction currentButton = currentObject.Button;
-                addOrderedFrame(new SoyokazeReplayFrame(currentObject.StartTime, Vector2.Zero, currentButton));
+
+                for (var node = releaseFrameTimes.First; node != null; node = node.Next)
+                {
+                    if (node.Value >= currentObject.StartTime)
+                        continue;
+
+                    addOrderedFrame(generateReplayFrame(node.Value));
+                    releaseFrameTimes.Remove(node);
+                }
 
                 double pressDuration;
                 switch (currentObject)
@@ -49,6 +68,7 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
                         break;
                 }
 
+                // Determine press duration
                 for (int j = i + 1; j < Beatmap.HitObjects.Count; j++)
                 {
                     SoyokazeHitObject nextObject = Beatmap.HitObjects[j];
@@ -64,10 +84,33 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
                     }
                 }
 
-                addOrderedFrame(new SoyokazeReplayFrame(currentObject.StartTime + pressDuration, Vector2.Zero));
+                keyPresses[(int)currentButton].Start = currentObject.StartTime;
+                keyPresses[(int)currentButton].End = currentObject.StartTime + pressDuration;
+                addOrderedFrame(generateReplayFrame(currentObject.StartTime));
+                releaseFrameTimes.AddLast(currentObject.StartTime + pressDuration);
             }
 
-            return Replay;
+            for (var node = releaseFrameTimes.First; node != null; node = node.Next)
+                addOrderedFrame(generateReplayFrame(node.Value));
+
+            return replay;
+        }
+
+        private struct KeyPress
+        {
+            public double Start;
+            public double End;
+        }
+
+        private SoyokazeReplayFrame generateReplayFrame(double time)
+        {
+            List<SoyokazeAction> buttons = new List<SoyokazeAction>();
+
+            for (int i = 0; i < keyPresses.Length; i++)
+                if (keyPresses[i].Start <= time && time < keyPresses[i].End)
+                    buttons.Add((SoyokazeAction)i);
+
+            return new SoyokazeReplayFrame(time, Vector2.Zero, buttons.ToArray());
         }
 
         private class FrameComparer : IComparer<ReplayFrame>
@@ -102,11 +145,11 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
 
             #endregion
 
-            int index = Frames.Count;
-            while (index > 0 && Frames[index - 1].Time > frame.Time)
+            int index = replay.Frames.Count;
+            while (index > 0 && replay.Frames[index - 1].Time > frame.Time)
                 index--;
 
-            Frames.Insert(index, frame);
+            replay.Frames.Insert(index, frame);
         }
     }
 }
