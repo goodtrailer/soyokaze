@@ -16,17 +16,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
     public class SoyokazeModHidden : ModHidden
     {
         [SettingSource("Fading Approach Circle", "Allow approach circles to fade instead of disappearing")]
-        public Bindable<bool> FadingApproachCircle { get; } = new BindableBool(false);
-
-        [SettingSource("Fading Approach Circle Speed", "Adjust the fading speed of approach circles")]
-        public Bindable<double> FadingApproachCircleSpeed { get; } = new BindableDouble
-        {
-            Precision = 0.05f,
-            MinValue = 0.5,
-            MaxValue = 2.0,
-            Default = 1.0,
-            Value = 1.0
-        };
+        public Bindable<bool> FadingApproachCircle { get; } = new BindableBool(true);
 
         public override double ScoreMultiplier => 1.09;
         public override string Description => "IT'S UNREADABLE.";
@@ -80,14 +70,17 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
                 case DrawableHitCircle circle:
                     fadeTarget = circle.HitCircle;
                     if (!increaseVisibility)
-                        using (circle.BeginAbsoluteSequence(FadingApproachCircle.Value? fadeOutStartTime : hitObject.StartTime - hitObject.Preempt))
-                        {
-                            if (FadingApproachCircle.Value)
-                                circle.ApproachCircle.FadeOut(fadeOutDuration / FadingApproachCircleSpeed.Value);
-                            else
+                        if (FadingApproachCircle.Value)
+                            using (circle.BeginAbsoluteSequence(fadeOutStartTime))
+                            {
+                                circle.ApproachCircle.FadeOut(fadeOutDuration * 0.8);
+                            }
+                        else
+                            using (circle.BeginAbsoluteSequence(hitObject.StartTime - hitObject.Preempt))
+                            {
                                 circle.ApproachCircle.Hide();
-                        }
-                    goto default;
+                            }
+                        goto default;
                 default:
                     using (fadeTarget.BeginAbsoluteSequence(fadeOutStartTime))
                     {
