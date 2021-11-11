@@ -3,11 +3,11 @@
 
 using System.Collections.Generic;
 using osu.Game.Beatmaps;
+using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Replays;
 using osu.Game.Scoring;
-using osu.Game.Users;
 
 namespace osu.Game.Rulesets.Soyokaze.Mods
 {
@@ -17,7 +17,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         {
             ScoreInfo = new ScoreInfo
             {
-                User = new User { Username = "Cinema" }
+                User = new APIUser { Username = "goodtrailer's super duper theater bot" }
             },
             Replay = new SoyokazeAutoGenerator(beatmap, mods).Generate(),
         };
