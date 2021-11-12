@@ -125,6 +125,7 @@ namespace osu.Game.Rulesets.Soyokaze
                         new SoyokazeModEasy(),
                         new SoyokazeModNoFail(),
                         new MultiMod(new SoyokazeModHalfTime(), new SoyokazeModDaycore()),
+                        new SoyokazeModStaccato(),
                     };
 
                 case ModType.DifficultyIncrease:
@@ -134,7 +135,6 @@ namespace osu.Game.Rulesets.Soyokaze
                         new MultiMod(new SoyokazeModSuddenDeath(), new SoyokazeModPerfect()),
                         new MultiMod(new SoyokazeModDoubleTime(), new SoyokazeModNightcore()),
                         new SoyokazeModHidden(),
-                        new SoyokazeModHolds(),
                     };
 
                 case ModType.Automation:
@@ -154,6 +154,12 @@ namespace osu.Game.Rulesets.Soyokaze
                     return new Mod[]
                     {
                         new MultiMod(new ModWindUp(), new ModWindDown()),
+                    };
+
+                case ModType.System:
+                    return new Mod[]
+                    {
+                        new SoyokazeModHolds(),
                     };
 
                 default:

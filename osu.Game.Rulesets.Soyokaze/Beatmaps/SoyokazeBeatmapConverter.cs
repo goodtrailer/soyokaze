@@ -18,7 +18,7 @@ namespace osu.Game.Rulesets.Soyokaze.Beatmaps
 {
     public class SoyokazeBeatmapConverter : BeatmapConverter<SoyokazeHitObject>
     {
-        public BindableBool CreateHolds { get; } = new BindableBool(false);
+        public BindableBool CreateHolds { get; } = new BindableBool(true);
 
         public SoyokazeBeatmapConverter(IBeatmap beatmap, Ruleset ruleset)
             : base(beatmap, ruleset)
