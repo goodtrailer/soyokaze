@@ -50,8 +50,8 @@ namespace osu.Game.Rulesets.Soyokaze
 
         public override RulesetSettingsSubsection CreateSettings() => new SoyokazeSettingsSubsection(this);
 
-        public override DifficultyCalculator CreateDifficultyCalculator(WorkingBeatmap beatmap) =>
-            new SoyokazeDifficultyCalculator(this, beatmap);
+        public override DifficultyCalculator CreateDifficultyCalculator(IWorkingBeatmap beatmap) =>
+            new SoyokazeDifficultyCalculator(RulesetInfo, beatmap);
 
         public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods = null) =>
             new DrawableSoyokazeRuleset(this, beatmap, mods);
