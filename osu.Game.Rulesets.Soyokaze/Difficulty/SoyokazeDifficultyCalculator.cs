@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using osu.Framework.Logging;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Difficulty.Preprocessing;
@@ -32,8 +31,6 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
                 {
                     Mods = mods,
                 };
-
-            Logger.Log("skills.Length: " + skills.Length);
 
             double speedRating = Math.Sqrt(skills[0].DifficultyValue()) * difficulty_multiplier;
             double readRating = Math.Sqrt(skills[1].DifficultyValue()) * difficulty_multiplier;
