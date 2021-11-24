@@ -19,7 +19,7 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
     {
         private const double difficulty_multiplier = 0.445;
 
-        public SoyokazeDifficultyCalculator(Ruleset ruleset, WorkingBeatmap beatmap)
+        public SoyokazeDifficultyCalculator(IRulesetInfo ruleset, IWorkingBeatmap beatmap)
             : base(ruleset, beatmap)
         {
         }
@@ -27,10 +27,14 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
         protected override DifficultyAttributes CreateDifficultyAttributes(IBeatmap beatmap, Mod[] mods, Skill[] skills, double clockRate)
         {
             if (beatmap.HitObjects.Count == 0)
-                return new DifficultyAttributes(mods, skills, 0);
+                return new DifficultyAttributes
+                {
+                    Mods = mods,
+                };
 
             double speedRating = Math.Sqrt(skills[0].DifficultyValue()) * difficulty_multiplier;
             double readRating = Math.Sqrt(skills[1].DifficultyValue()) * difficulty_multiplier;
+
             double starRating = speedRating + readRating + (speedRating - readRating) / 3;
 
             int maxCombo = beatmap.HitObjects.Count;
@@ -40,7 +44,6 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
                 StarRating = starRating,
                 Mods = mods,
                 MaxCombo = maxCombo,
-                Skills = skills,
             };
         }
 

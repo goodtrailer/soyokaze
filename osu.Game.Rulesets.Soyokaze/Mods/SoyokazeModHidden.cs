@@ -80,7 +80,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
                             {
                                 circle.ApproachCircle.Hide();
                             }
-                        goto default;
+                    goto default;
                 default:
                     using (fadeTarget.BeginAbsoluteSequence(fadeOutStartTime))
                     {
