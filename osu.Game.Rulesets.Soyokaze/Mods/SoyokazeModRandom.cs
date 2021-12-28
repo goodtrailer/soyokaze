@@ -18,7 +18,18 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
             foreach (var obj in beatmap.HitObjects)
             {
                 if (obj is SoyokazeHitObject hitObject)
+                {
+                    if (obj is HoldCircle) continue;
                     hitObject.Button = (SoyokazeAction)RNG.Next(8);
+                    if (hitObject is Hold hold)
+                    {
+                        foreach (var nestedObj in hold.NestedHitObjects)
+                        {
+                            if (nestedObj is SoyokazeHitObject nestedHitObject)
+                                nestedHitObject.Button = hitObject.Button;
+                        }
+                    }
+                }
             }
         }
     }
