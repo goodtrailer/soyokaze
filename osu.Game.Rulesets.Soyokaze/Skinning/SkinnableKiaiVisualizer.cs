@@ -8,6 +8,7 @@ using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Beatmaps.ControlPoints;
+using osu.Game.Beatmaps.Timing;
 using osu.Game.Graphics.Containers;
 using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Skinning.Defaults;
@@ -66,7 +67,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             {
                 if (kiaiIndex == 0)
                     composite.FlashColour(firstFlashColour.Opacity(firstFlashOpacity), timingPoint.BeatLength * 2, Easing.In);
-                else if (kiaiIndex % (int)timingPoint.TimeSignature == 0)
+                else if (kiaiIndex % timingPoint.TimeSignature.Numerator == 0)
                     composite.FlashColour(flashColour.Opacity(flashOpacity), timingPoint.BeatLength * 2, Easing.In);
 
                 composite.Spin(timingPoint.BeatLength, kiaiSpin);
