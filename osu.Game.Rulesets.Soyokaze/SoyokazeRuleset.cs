@@ -74,31 +74,32 @@ namespace osu.Game.Rulesets.Soyokaze
                 HitEventsLists[(int)soyokazeObject.Button].Add(hitEvent);
             }
 
-            Container accuracyGraphsContainer = new Container()
-            {
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                AutoSizeAxes = Axes.Both,
-            };
-
-            Vector2[] positions = PositionExtensions.GetPositions(250, 130, true, Anchor.Centre);
-            for (int i = 0; i < positions.Length; i++)
-                accuracyGraphsContainer.Add(new AccuracyGraph(HitEventsLists[i]) { Position = positions[i] });
-
             return new StatisticRow[]
             {
                 new StatisticRow
                 {
                     Columns = new StatisticItem[]
                     {
-                        new StatisticItem("Button Accuracies", accuracyGraphsContainer),
+                        new StatisticItem("Button Accuracies", () =>
+                        {
+                            Container accuracyGraphsContainer = new Container()
+                            {
+                                Anchor = Anchor.Centre,
+                                Origin = Anchor.Centre,
+                                AutoSizeAxes = Axes.Both,
+                            };
+                            Vector2[] positions = PositionExtensions.GetPositions(250, 130, true, Anchor.Centre);
+                            for (int i = 0; i < positions.Length; i++)
+                                accuracyGraphsContainer.Add(new AccuracyGraph(HitEventsLists[i]) { Position = positions[i] });
+                            return accuracyGraphsContainer;
+                        }),
                     },
                 },
                 new StatisticRow
                 {
                     Columns = new StatisticItem[]
                     {
-                        new StatisticItem("Overall Distribution", new HitEventTimingDistributionGraph(score.HitEvents)
+                        new StatisticItem("Overall Distribution", () => new HitEventTimingDistributionGraph(score.HitEvents)
                         {
                             RelativeSizeAxes = Axes.X,
                             Size = new Vector2(1f, 100f)
@@ -109,7 +110,12 @@ namespace osu.Game.Rulesets.Soyokaze
                 {
                     Columns = new StatisticItem[]
                     {
-                        new StatisticItem("", new UnstableRate(score.HitEvents){ AutoSizeAxes = Axes.None, RelativeSizeAxes = Axes.X, Size = new Vector2(0.2f, 10f) }),
+                        new StatisticItem("", () => new UnstableRate(score.HitEvents)
+                        {
+                            AutoSizeAxes = Axes.None,
+                            RelativeSizeAxes = Axes.X,
+                            Size = new Vector2(0.2f, 10f)
+                        }),
                     },
                 },
             };
