@@ -49,11 +49,16 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
 
         protected override IEnumerable<DifficultyHitObject> CreateDifficultyHitObjects(IBeatmap beatmap, double clockRate)
         {
+            var diffObjects = new List<DifficultyHitObject>();
+
             for (int i = 0; i < beatmap.HitObjects.Count - SoyokazeDifficultyHitObject.COUNT; i++)
             {
-                SoyokazeDifficultyHitObject difficultyObject = new SoyokazeDifficultyHitObject(clockRate, beatmap.HitObjects.Skip(i).Take(SoyokazeDifficultyHitObject.COUNT).ToArray());
-                yield return difficultyObject;
+                var hitObjects = beatmap.HitObjects.Skip(i).Take(SoyokazeDifficultyHitObject.COUNT).ToArray();
+                var diffObject = new SoyokazeDifficultyHitObject(clockRate, hitObjects, diffObjects, i);
+                diffObjects.Add(diffObject);
             }
+
+            return diffObjects;
         }
 
         protected override Skill[] CreateSkills(IBeatmap beatmap, Mod[] mods, double clockrate) => new Skill[]
