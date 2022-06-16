@@ -22,6 +22,16 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
 
             switch (soyokazeComponent.Component)
             {
+                case SoyokazeSkinComponents.ApproachCircle:
+                case SoyokazeSkinComponents.Cursor:
+                case SoyokazeSkinComponents.HitCircle:
+                case SoyokazeSkinComponents.HitCircleOverlay:
+                case SoyokazeSkinComponents.HoldOverlay:
+                case SoyokazeSkinComponents.InputOverlayKey:
+                case SoyokazeSkinComponents.InputOverlayBackground:
+                case SoyokazeSkinComponents.KiaiVisualizerSquare:
+                    return null;
+
                 case SoyokazeSkinComponents.HitCircleText:
                     if (!this.HasFont(LegacyFont.HitCircle))
                         return null;

@@ -6,6 +6,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
+using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
@@ -18,13 +19,14 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
         }
 
         [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
+        private void load(TextureStore textures, ISkinSource skin)
         {
+            var textureName = new SoyokazeSkinComponent(SoyokazeSkinComponents.HoldOverlay).LookupName;
             AddInternal(new Sprite
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Texture = textures.Get(new SoyokazeSkinComponent(SoyokazeSkinComponents.HoldOverlay).LookupName),
+                Texture = skin.GetTexture(textureName) ?? textures.Get(textureName),
             });
         }
     }
