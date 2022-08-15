@@ -2,11 +2,14 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using System.Collections.Generic;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Rendering;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Bindings;
+using osu.Framework.Platform;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
 using osu.Game.Overlays.Settings;
@@ -187,27 +190,42 @@ namespace osu.Game.Rulesets.Soyokaze
             new KeyBinding(InputKey.L, SoyokazeAction.Button7),
         };
 
-        public override Drawable CreateIcon() => new Container
+        public override Drawable CreateIcon() => new SoyokazeIcon(this);
+
+        public class SoyokazeIcon : Container
         {
-            AutoSizeAxes = Axes.Both,
-            Children = new Drawable[]
+            private Sprite sprite;
+            private Ruleset ruleset;
+
+            public SoyokazeIcon(Ruleset ruleset)
             {
-                new SpriteIcon
+                AutoSizeAxes = Axes.Both;
+                Children = new Drawable[]
                 {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Icon = FontAwesome.Regular.Circle,
-                },
-                new Sprite
-                {
-                    RelativeSizeAxes = Axes.Both,
-                    Size = new Vector2(1),
-                    Scale = new Vector2(.65f),
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Texture = new TextureStore(new TextureLoaderStore(CreateResourceStore()), false).Get("Textures/icon"),
-                },
+                    new SpriteIcon
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Icon = FontAwesome.Regular.Circle,
+                    },
+                    sprite = new Sprite
+                    {
+                        RelativeSizeAxes = Axes.Both,
+                        Size = new Vector2(1),
+                        Scale = new Vector2(.65f),
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                    },
+                };
+
+                this.ruleset = ruleset;
             }
-        };
+
+            [BackgroundDependencyLoader]
+            private void load(IRenderer renderer)
+            {
+                sprite.Texture = new TextureStore(renderer, new TextureLoaderStore(ruleset.CreateResourceStore()), false).Get("Textures/icon");
+            }
+        }
     }
 }
