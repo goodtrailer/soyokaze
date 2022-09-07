@@ -2,6 +2,7 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Localisation;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Beatmaps;
@@ -12,7 +13,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
     {
         public override string Name => "Staccato";
         public override string Acronym => "ST";
-        public override string Description => "We hate hold notes!";
+        public override LocalisableString Description => "We hate hold notes!";
         public override double ScoreMultiplier => 0.86;
         public override IconUsage? Icon => FontAwesome.Regular.DotCircle;
         public override ModType Type => ModType.DifficultyReduction;
