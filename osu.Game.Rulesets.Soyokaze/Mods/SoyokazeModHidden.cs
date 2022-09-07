@@ -4,6 +4,7 @@
 using System.Linq;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
+using osu.Framework.Localisation;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
 using osu.Game.Rulesets.Mods;
@@ -19,7 +20,7 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         public Bindable<bool> FadingApproachCircle { get; } = new BindableBool(true);
 
         public override double ScoreMultiplier => 1.06;
-        public override string Description => "Play with fading circles.";
+        public override LocalisableString Description => "Play with fading circles.";
 
         private const double fade_in_fraction = 0.4;
         private const double fade_out_fraction = 0.3;
