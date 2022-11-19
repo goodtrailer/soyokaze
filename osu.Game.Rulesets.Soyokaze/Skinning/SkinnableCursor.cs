@@ -20,7 +20,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         [BackgroundDependencyLoader]
         private void load()
         {
-            AddInternal(new SkinnableDrawable(new SoyokazeSkinComponent(SoyokazeSkinComponents.Cursor), _ => new DefaultCursor()));
+            AddInternal(new SkinnableDrawable(new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.Cursor), _ => new DefaultCursor()));
         }
     }
 }

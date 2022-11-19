@@ -91,7 +91,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 for (int i = 0; i < 2; i++)
                 {
                     kiaiSquares[i] = new SkinnableDrawable(
-                        new SoyokazeSkinComponent(SoyokazeSkinComponents.KiaiVisualizerSquare),
+                        new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.KiaiVisualizerSquare),
                         _ => new DefaultKiaiVisualizerSquare()
                     )
                     {

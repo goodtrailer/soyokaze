@@ -37,7 +37,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         [BackgroundDependencyLoader]
         private void load(ISkinSource skin, SoyokazeConfigManager cm)
         {
-            AddInternal(approachCircle = new SkinnableDrawable(new SoyokazeSkinComponent(SoyokazeSkinComponents.ApproachCircle), _ => new DefaultApproachCircle()));
+            AddInternal(approachCircle = new SkinnableDrawable(new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.ApproachCircle), _ => new DefaultApproachCircle()));
 
             accentColourBindable.BindTo(drawableObject.AccentColour);
             accentColourBindable.BindValueChanged(colourChanged =>
