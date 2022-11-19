@@ -33,7 +33,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             for (int i = 0; i < inputOverlayKeys.Length; i++)
             {
                 inputOverlayKeys[i] = new SkinnableDrawable(
-                    new SoyokazeSkinComponent(SoyokazeSkinComponents.InputOverlayKey),
+                    new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.InputOverlayKey),
                     _ => new DefaultInputOverlayKey()
                 )
                 {
@@ -45,7 +45,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             for (int i = 0; i < inputOverlayBackgrounds.Length; i++)
             {
                 inputOverlayBackgrounds[i] = new SkinnableDrawable(
-                    new SoyokazeSkinComponent(SoyokazeSkinComponents.InputOverlayBackground),
+                    new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.InputOverlayBackground),
                     _ => new DefaultInputOverlayBackground()
                 )
                 {

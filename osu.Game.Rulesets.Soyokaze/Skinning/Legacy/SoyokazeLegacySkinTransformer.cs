@@ -15,9 +15,9 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
         {
         }
 
-        public override Drawable GetDrawableComponent(ISkinComponent component)
+        public override Drawable GetDrawableComponent(ISkinComponentLookup component)
         {
-            if (!(component is SoyokazeSkinComponent soyokazeComponent))
+            if (!(component is SoyokazeSkinComponentLookup soyokazeComponent))
                 return null;
 
             switch (soyokazeComponent.Component)

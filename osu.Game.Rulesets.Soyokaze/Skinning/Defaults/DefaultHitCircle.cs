@@ -21,7 +21,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
         [BackgroundDependencyLoader]
         private void load(TextureStore textures, ISkinSource skin)
         {
-            var textureName = new SoyokazeSkinComponent(SoyokazeSkinComponents.HitCircle).LookupName;
+            var textureName = new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HitCircle).LookupName;
             AddInternal(new Sprite
             {
                 Anchor = Anchor.Centre,

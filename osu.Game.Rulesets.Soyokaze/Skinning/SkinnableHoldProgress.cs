@@ -47,7 +47,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 Current = { Value = 0 },
             };
 
-            background = new SkinnableDrawable(new SoyokazeSkinComponent(SoyokazeSkinComponents.HoldOverlay), _ => new DefaultHoldOverlay());
+            background = new SkinnableDrawable(new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HoldOverlay), _ => new DefaultHoldOverlay());
         }
 
         [BackgroundDependencyLoader]
