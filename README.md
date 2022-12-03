@@ -7,6 +7,8 @@
 [![License](https://img.shields.io/github/license/goodtrailer/soyokaze.svg?color=blue&style=flat-square)](https://github.com/goodtrailer/soyokaze/blob/master/LICENSE)
 [![Downloads](https://img.shields.io/github/downloads/goodtrailer/soyokaze/total.svg?color=orange&style=flat-square)](https://somsubhra.github.io/github-release-stats/?username=goodtrailer&repository=soyokaze&page=1&per_page=0)
 
+***Note.*** soyokaze!'s source code is a mess and does not follow osu!'s conventions particularly well. If you want to write your own ruleset, look at osu!standard's or osu!taiko's. You are looking at a bargain-bin ruleset that I've been half-assedly maintaining for a while and for which I may eventually rewrite large portions of.
+
 An [osu!](https://github.com/ppy/osu) ruleset mimicking [Genshin Impact](https://genshin.mihoyo.com)'s Ballads of Breeze [mini-game](https://youtu.be/ZsacXMduSFY). For more info, you can also check it out over at [rūrusetto](https://rulesets.info/rulesets/soyokaze), a website created by the [Rūrusetto team](https://github.com/Rurusetto) to catelog osu! rulesets.
 
 ## Video Showcase (YouTube)

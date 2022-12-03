@@ -2,11 +2,14 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using System.Collections.Generic;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Rendering;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Bindings;
+using osu.Framework.Platform;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
 using osu.Game.Overlays.Settings;
@@ -56,7 +59,17 @@ namespace osu.Game.Rulesets.Soyokaze
         public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods = null) =>
             new DrawableSoyokazeRuleset(this, beatmap, mods);
 
-        public override ISkin CreateLegacySkinProvider(ISkin skin, IBeatmap beatmap) => new SoyokazeLegacySkinTransformer(skin);
+        public override ISkin CreateSkinTransformer(ISkin skin, IBeatmap beatmap)
+        {
+            switch (skin)
+            {
+                case LegacySkin:
+                    return new SoyokazeLegacySkinTransformer(skin);
+
+                default:
+                    return null;
+            }
+        }
 
         public override IConvertibleReplayFrame CreateConvertibleReplayFrame() => new SoyokazeReplayFrame();
 
@@ -74,31 +87,32 @@ namespace osu.Game.Rulesets.Soyokaze
                 HitEventsLists[(int)soyokazeObject.Button].Add(hitEvent);
             }
 
-            Container accuracyGraphsContainer = new Container()
-            {
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                AutoSizeAxes = Axes.Both,
-            };
-
-            Vector2[] positions = PositionExtensions.GetPositions(250, 130, true, Anchor.Centre);
-            for (int i = 0; i < positions.Length; i++)
-                accuracyGraphsContainer.Add(new AccuracyGraph(HitEventsLists[i]) { Position = positions[i] });
-
             return new StatisticRow[]
             {
                 new StatisticRow
                 {
                     Columns = new StatisticItem[]
                     {
-                        new StatisticItem("Button Accuracies", accuracyGraphsContainer),
+                        new StatisticItem("Button Accuracies", () =>
+                        {
+                            Container accuracyGraphsContainer = new Container()
+                            {
+                                Anchor = Anchor.Centre,
+                                Origin = Anchor.Centre,
+                                AutoSizeAxes = Axes.Both,
+                            };
+                            Vector2[] positions = PositionExtensions.GetPositions(250, 130, true, Anchor.Centre);
+                            for (int i = 0; i < positions.Length; i++)
+                                accuracyGraphsContainer.Add(new AccuracyGraph(HitEventsLists[i]) { Position = positions[i] });
+                            return accuracyGraphsContainer;
+                        }),
                     },
                 },
                 new StatisticRow
                 {
                     Columns = new StatisticItem[]
                     {
-                        new StatisticItem("Overall Distribution", new HitEventTimingDistributionGraph(score.HitEvents)
+                        new StatisticItem("Overall Distribution", () => new HitEventTimingDistributionGraph(score.HitEvents)
                         {
                             RelativeSizeAxes = Axes.X,
                             Size = new Vector2(1f, 100f)
@@ -109,7 +123,12 @@ namespace osu.Game.Rulesets.Soyokaze
                 {
                     Columns = new StatisticItem[]
                     {
-                        new StatisticItem("", new UnstableRate(score.HitEvents){ AutoSizeAxes = Axes.None, RelativeSizeAxes = Axes.X, Size = new Vector2(0.2f, 10f) }),
+                        new StatisticItem("", () => new UnstableRate(score.HitEvents)
+                        {
+                            AutoSizeAxes = Axes.None,
+                            RelativeSizeAxes = Axes.X,
+                            Size = new Vector2(0.2f, 10f)
+                        }),
                     },
                 },
             };
@@ -181,27 +200,42 @@ namespace osu.Game.Rulesets.Soyokaze
             new KeyBinding(InputKey.L, SoyokazeAction.Button7),
         };
 
-        public override Drawable CreateIcon() => new Container
+        public override Drawable CreateIcon() => new SoyokazeIcon(this);
+
+        public class SoyokazeIcon : Container
         {
-            AutoSizeAxes = Axes.Both,
-            Children = new Drawable[]
+            private Sprite sprite;
+            private Ruleset ruleset;
+
+            public SoyokazeIcon(Ruleset ruleset)
             {
-                new SpriteIcon
+                AutoSizeAxes = Axes.Both;
+                Children = new Drawable[]
                 {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Icon = FontAwesome.Regular.Circle,
-                },
-                new Sprite
-                {
-                    RelativeSizeAxes = Axes.Both,
-                    Size = new Vector2(1),
-                    Scale = new Vector2(.65f),
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Texture = new TextureStore(new TextureLoaderStore(CreateResourceStore()), false).Get("Textures/icon"),
-                },
+                    new SpriteIcon
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Icon = FontAwesome.Regular.Circle,
+                    },
+                    sprite = new Sprite
+                    {
+                        RelativeSizeAxes = Axes.Both,
+                        Size = new Vector2(1),
+                        Scale = new Vector2(.65f),
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                    },
+                };
+
+                this.ruleset = ruleset;
             }
-        };
+
+            [BackgroundDependencyLoader]
+            private void load(IRenderer renderer)
+            {
+                sprite.Texture = new TextureStore(renderer, new TextureLoaderStore(ruleset.CreateResourceStore()), false).Get("Textures/icon");
+            }
+        }
     }
 }

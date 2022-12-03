@@ -3,22 +3,18 @@
 
 using System.Collections.Generic;
 using osu.Game.Beatmaps;
-using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Replays;
-using osu.Game.Scoring;
 
 namespace osu.Game.Rulesets.Soyokaze.Mods
 {
     public class SoyokazeModAutoplay : ModAutoplay
     {
-        public override Score CreateReplayScore(IBeatmap beatmap, IReadOnlyList<Mod> mods) => new Score
+        public override ModReplayData CreateReplayData(IBeatmap beatmap, IReadOnlyList<Mod> mods)
         {
-            ScoreInfo = new ScoreInfo
-            {
-                User = new APIUser { Username = "goodtrailer's super-duper autoplay bot" },
-            },
-            Replay = new SoyokazeAutoGenerator(beatmap, mods).Generate(),
-        };
+            var replay = new SoyokazeAutoGenerator(beatmap, mods).Generate();
+            var user = new ModCreatedUser { Username = "goodtrailer's super-duper autoplay bot" };
+            return new ModReplayData(replay, user);
+        }
     }
 }

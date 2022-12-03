@@ -89,6 +89,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
         protected override void AddInternal(Drawable drawable) => shakeContainer.Add(drawable);
         protected override void ClearInternal(bool disposeChildren = true) => shakeContainer.Clear(disposeChildren);
-        protected override bool RemoveInternal(Drawable drawable) => shakeContainer.Remove(drawable);
+        protected override bool RemoveInternal(Drawable drawable, bool disposeImmediately) => shakeContainer.Remove(drawable, disposeImmediately);
     }
 }

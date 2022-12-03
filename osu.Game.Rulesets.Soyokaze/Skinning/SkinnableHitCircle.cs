@@ -35,17 +35,17 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             Masking = true;
 
             hitCircle = new SkinnableDrawable(
-                new SoyokazeSkinComponent(SoyokazeSkinComponents.HitCircle),
+                new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HitCircle),
                 _ => new DefaultHitCircle()
             );
 
             hitCircleOverlay = new SkinnableDrawable(
-                new SoyokazeSkinComponent(SoyokazeSkinComponents.HitCircleOverlay),
+                new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HitCircleOverlay),
                 _ => new DefaultHitCircleOverlay()
             );
 
             hitCircleText = new SkinnableSpriteText(
-                new SoyokazeSkinComponent(SoyokazeSkinComponents.HitCircleText),
+                new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HitCircleText),
                 _ => new DefaultHitCircleText() { Alpha = use_default_text ? 1 : 0 },
                 confineMode: ConfineMode.NoScaling
             );

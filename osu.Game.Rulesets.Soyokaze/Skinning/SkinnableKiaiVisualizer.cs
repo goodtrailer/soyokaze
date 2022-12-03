@@ -66,7 +66,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             {
                 if (kiaiIndex == 0)
                     composite.FlashColour(firstFlashColour.Opacity(firstFlashOpacity), timingPoint.BeatLength * 2, Easing.In);
-                else if (kiaiIndex % (int)timingPoint.TimeSignature == 0)
+                else if (kiaiIndex % timingPoint.TimeSignature.Numerator == 0)
                     composite.FlashColour(flashColour.Opacity(flashOpacity), timingPoint.BeatLength * 2, Easing.In);
 
                 composite.Spin(timingPoint.BeatLength, kiaiSpin);
@@ -91,7 +91,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 for (int i = 0; i < 2; i++)
                 {
                     kiaiSquares[i] = new SkinnableDrawable(
-                        new SoyokazeSkinComponent(SoyokazeSkinComponents.KiaiVisualizerSquare),
+                        new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.KiaiVisualizerSquare),
                         _ => new DefaultKiaiVisualizerSquare()
                     )
                     {

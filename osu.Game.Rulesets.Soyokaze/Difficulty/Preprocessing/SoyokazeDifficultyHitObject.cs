@@ -2,6 +2,7 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using System;
+using System.Collections.Generic;
 using osu.Game.Rulesets.Difficulty.Preprocessing;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Soyokaze.Objects;
@@ -11,15 +12,16 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty.Preprocessing
 {
     public class SoyokazeDifficultyHitObject : DifficultyHitObject
     {
-        public const int COUNT = 8;
+        public const int MIN_COUNT = 2;
+        public const int MAX_COUNT = 8;
 
         public SoyokazeAction Button = (SoyokazeAction)(-1);
-        public int ButtonVariety = 0;
-        public double TotalDeltaTime = 0.0;
-        public double ConsecutiveDeltaTime = 0.0;
+        public int ButtonVariety;
+        public double TotalDeltaTime;
+        public double ConsecutiveDeltaTime;
 
-        public SoyokazeDifficultyHitObject(double clockRate, params HitObject[] hitObjects)
-            : base(hitObjects[^1], hitObjects[^2], clockRate)
+        public SoyokazeDifficultyHitObject(double clockRate, HitObject[] hitObjects, List<DifficultyHitObject> diffObjects, int index)
+            : base(hitObjects[^1], hitObjects[^2], clockRate, diffObjects, index)
         {
             Button = (hitObjects[^1] as SoyokazeHitObject).Button;
 

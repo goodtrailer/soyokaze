@@ -15,13 +15,23 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
         {
         }
 
-        public override Drawable GetDrawableComponent(ISkinComponent component)
+        public override Drawable GetDrawableComponent(ISkinComponentLookup component)
         {
-            if (!(component is SoyokazeSkinComponent soyokazeComponent))
+            if (!(component is SoyokazeSkinComponentLookup soyokazeComponent))
                 return null;
 
             switch (soyokazeComponent.Component)
             {
+                case SoyokazeSkinComponents.ApproachCircle:
+                case SoyokazeSkinComponents.Cursor:
+                case SoyokazeSkinComponents.HitCircle:
+                case SoyokazeSkinComponents.HitCircleOverlay:
+                case SoyokazeSkinComponents.HoldOverlay:
+                case SoyokazeSkinComponents.InputOverlayKey:
+                case SoyokazeSkinComponents.InputOverlayBackground:
+                case SoyokazeSkinComponents.KiaiVisualizerSquare:
+                    return null;
+
                 case SoyokazeSkinComponents.HitCircleText:
                     if (!this.HasFont(LegacyFont.HitCircle))
                         return null;
