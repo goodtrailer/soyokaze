@@ -14,7 +14,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Statistics
 {
-    public class AccuracyGraph : FillFlowContainer
+    public partial class AccuracyGraph : FillFlowContainer
     {
         public AccuracyGraph(List<HitEvent> hitEvents)
         {

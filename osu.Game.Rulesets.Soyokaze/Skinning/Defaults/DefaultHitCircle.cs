@@ -10,7 +10,7 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
-    public class DefaultHitCircle : CompositeDrawable
+    public partial class DefaultHitCircle : CompositeDrawable
     {
         public DefaultHitCircle()
         {

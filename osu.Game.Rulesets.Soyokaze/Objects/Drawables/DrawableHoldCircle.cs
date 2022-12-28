@@ -9,7 +9,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
-    public class DrawableHoldCircle : DrawableHitCircle
+    public partial class DrawableHoldCircle : DrawableHitCircle
     {
         public new HoldCircle HitObject => (HoldCircle)base.HitObject;
         public override bool DisplayResult => false;

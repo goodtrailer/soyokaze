@@ -11,7 +11,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
-    public class DrawableHitCircle : DrawableSoyokazeHitObject
+    public partial class DrawableHitCircle : DrawableSoyokazeHitObject
     {
         public new HitCircle HitObject => base.HitObject as HitCircle;
         public SkinnableApproachCircle ApproachCircle { get; private set; }

@@ -13,7 +13,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
-    public abstract class DrawableSoyokazeHitObject : DrawableHitObject<SoyokazeHitObject>
+    public abstract partial class DrawableSoyokazeHitObject : DrawableHitObject<SoyokazeHitObject>
     {
         public readonly Bindable<float> ScaleBindable = new Bindable<float>();
         public readonly Bindable<SoyokazeAction> ButtonBindable = new Bindable<SoyokazeAction>();

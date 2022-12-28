@@ -10,7 +10,7 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
-    public class DefaultApproachCircle : CompositeDrawable
+    public partial class DefaultApproachCircle : CompositeDrawable
     {
         public DefaultApproachCircle()
         {

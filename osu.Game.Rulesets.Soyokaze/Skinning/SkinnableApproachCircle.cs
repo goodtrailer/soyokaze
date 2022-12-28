@@ -15,7 +15,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
-    public class SkinnableApproachCircle : Container
+    public partial class SkinnableApproachCircle : Container
     {
         public override bool RemoveWhenNotAlive => false;
 

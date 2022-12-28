@@ -202,7 +202,7 @@ namespace osu.Game.Rulesets.Soyokaze
 
         public override Drawable CreateIcon() => new SoyokazeIcon(this);
 
-        public class SoyokazeIcon : Container
+        public partial class SoyokazeIcon : Container
         {
             private Sprite sprite;
             private Ruleset ruleset;

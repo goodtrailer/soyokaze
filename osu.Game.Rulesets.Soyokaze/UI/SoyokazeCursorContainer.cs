@@ -12,7 +12,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
      * I realized that having to reach over and grab your mouse is an absolute
      * pain.
      */
-    public class SoyokazeCursorContainer : GameplayCursorContainer
+    public partial class SoyokazeCursorContainer : GameplayCursorContainer
     {
         protected override Drawable CreateCursor() => new SkinnableCursor();
     }

@@ -18,7 +18,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
-    public class DrawableHold : DrawableSoyokazeHitObject
+    public partial class DrawableHold : DrawableSoyokazeHitObject
     {
         public new Hold HitObject => base.HitObject as Hold;
         public DrawableHoldCircle HoldCircle => holdCircleContainer.Child;

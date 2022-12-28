@@ -17,7 +17,7 @@ using osu.Game.Scoring;
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
     [Cached]
-    public class DrawableSoyokazeRuleset : DrawableRuleset<SoyokazeHitObject>
+    public partial class DrawableSoyokazeRuleset : DrawableRuleset<SoyokazeHitObject>
     {
         public DrawableSoyokazeRuleset(SoyokazeRuleset ruleset, IBeatmap beatmap, IReadOnlyList<Mod> mods = null)
             : base(ruleset, beatmap, mods)

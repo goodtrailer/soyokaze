@@ -12,7 +12,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 {
-    public class DrawableSoyokazeJudgement : DrawableJudgement
+    public partial class DrawableSoyokazeJudgement : DrawableJudgement
     {
         public DrawableSoyokazeJudgement(JudgementResult result, DrawableHitObject drawableObject, SoyokazeConfigManager configManager)
             : base(result, drawableObject)
