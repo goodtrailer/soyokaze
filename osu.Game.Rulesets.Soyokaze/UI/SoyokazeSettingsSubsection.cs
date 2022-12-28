@@ -9,7 +9,7 @@ using osu.Game.Rulesets.Soyokaze.Configuration;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
-    public class SoyokazeSettingsSubsection : RulesetSettingsSubsection
+    public partial class SoyokazeSettingsSubsection : RulesetSettingsSubsection
     {
         protected override LocalisableString Header => "soyokaze!";
 

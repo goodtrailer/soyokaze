@@ -13,7 +13,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
-    public class SkinnableHitCircle : Container
+    public partial class SkinnableHitCircle : Container
     {
         [Resolved]
         private DrawableHitObject drawableObject { get; set; }

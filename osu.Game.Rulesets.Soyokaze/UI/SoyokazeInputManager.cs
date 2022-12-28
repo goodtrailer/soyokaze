@@ -7,7 +7,7 @@ using osu.Game.Rulesets.UI;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
-    public class SoyokazeInputManager : RulesetInputManager<SoyokazeAction>
+    public partial class SoyokazeInputManager : RulesetInputManager<SoyokazeAction>
     {
         public SoyokazeInputManager(RulesetInfo ruleset)
             : base(ruleset, 0, SimultaneousBindingMode.Unique)

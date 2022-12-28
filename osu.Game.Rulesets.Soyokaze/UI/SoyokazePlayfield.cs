@@ -18,7 +18,7 @@ using osu.Game.Rulesets.UI;
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
     [Cached]
-    public class SoyokazePlayfield : Playfield, IKeyBindingHandler<SoyokazeAction>
+    public partial class SoyokazePlayfield : Playfield, IKeyBindingHandler<SoyokazeAction>
     {
         private readonly ProxyContainer approachCircleContainer = new ProxyContainer { RelativeSizeAxes = Axes.Both };
         private readonly JudgementContainer<DrawableSoyokazeJudgement> judgementContainer = new JudgementContainer<DrawableSoyokazeJudgement> { RelativeSizeAxes = Axes.Both };
@@ -30,7 +30,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
         // protected override GameplayCursorContainer CreateCursor() => new SoyokazeCursorContainer();
         protected override HitObjectLifetimeEntry CreateLifetimeEntry(HitObject hitObject) => new SoyokazeHitObjectLifetimeEntry(hitObject);
 
-        private class ProxyContainer : LifetimeManagementContainer
+        private partial class ProxyContainer : LifetimeManagementContainer
         {
             public void Add(Drawable proxy) => AddInternal(proxy);
         }

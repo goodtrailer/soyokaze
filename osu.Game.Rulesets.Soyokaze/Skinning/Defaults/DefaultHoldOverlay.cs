@@ -10,7 +10,7 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
-    public class DefaultHoldOverlay : CompositeDrawable
+    public partial class DefaultHoldOverlay : CompositeDrawable
     {
         public DefaultHoldOverlay()
         {

@@ -14,7 +14,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
-    public class SkinnableInputOverlay : Container
+    public partial class SkinnableInputOverlay : Container
     {
         private SkinnableDrawable[] inputOverlayKeys = new SkinnableDrawable[8];
         private SkinnableDrawable[] inputOverlayBackgrounds = new SkinnableDrawable[2];

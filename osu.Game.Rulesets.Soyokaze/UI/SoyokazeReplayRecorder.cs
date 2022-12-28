@@ -10,7 +10,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.UI
 {
-    public class SoyokazeReplayRecorder : ReplayRecorder<SoyokazeAction>
+    public partial class SoyokazeReplayRecorder : ReplayRecorder<SoyokazeAction>
     {
         public SoyokazeReplayRecorder(Score score)
             : base(score)

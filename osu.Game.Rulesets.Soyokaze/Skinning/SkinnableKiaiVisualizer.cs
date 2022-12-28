@@ -17,7 +17,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
-    public class SkinnableKiaiVisualizer : BeatSyncedContainer
+    public partial class SkinnableKiaiVisualizer : BeatSyncedContainer
     {
         private Bindable<bool> showBindable = new Bindable<bool>();
 
@@ -80,7 +80,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             }
         }
 
-        private class KiaiSquaresComposite : CompositeDrawable
+        private partial class KiaiSquaresComposite : CompositeDrawable
         {
             private SkinnableDrawable[] kiaiSquares = new SkinnableDrawable[2];
             private Bindable<int> screenCenterDistanceBindable = new Bindable<int>();

@@ -10,7 +10,7 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
-    public class DefaultCursor : CompositeDrawable
+    public partial class DefaultCursor : CompositeDrawable
     {
         [BackgroundDependencyLoader]
         private void load(TextureStore textures, ISkinSource skin)

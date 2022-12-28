@@ -10,7 +10,7 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
-    public class DefaultInputOverlayKey : CompositeDrawable
+    public partial class DefaultInputOverlayKey : CompositeDrawable
     {
         public DefaultInputOverlayKey()
         {

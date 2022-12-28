@@ -17,7 +17,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
-    public class SkinnableHoldProgress : Container
+    public partial class SkinnableHoldProgress : Container
     {
         public override bool RemoveWhenNotAlive => false;
         public Bindable<double> Current { get => circularProgress.Current; set => circularProgress.Current = value; }

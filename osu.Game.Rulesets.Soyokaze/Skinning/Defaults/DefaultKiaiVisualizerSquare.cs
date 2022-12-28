@@ -10,7 +10,7 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
-    public class DefaultKiaiVisualizerSquare : CompositeDrawable
+    public partial class DefaultKiaiVisualizerSquare : CompositeDrawable
     {
         public DefaultKiaiVisualizerSquare()
         {

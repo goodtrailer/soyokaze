@@ -5,7 +5,7 @@ using osu.Framework.Graphics.Sprites;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
-    public class DefaultHitCircleText : SpriteText
+    public partial class DefaultHitCircleText : SpriteText
     {
         public DefaultHitCircleText()
         {
