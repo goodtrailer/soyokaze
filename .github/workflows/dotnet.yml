@@ -18,7 +18,7 @@ jobs:
     - name: Restore .NET dependencies
       run: dotnet restore
     - name: Build .NET
-      run: dotnet build --no-restore --output ./artifacts --configuration Release
+      run: dotnet build osu.Game.Rulesets.Soyokaze --no-restore --output ./artifacts --configuration Release
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
