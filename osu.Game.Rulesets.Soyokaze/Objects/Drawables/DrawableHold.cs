@@ -74,7 +74,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.OnFree();
 
-            holdSamples.Samples = null;
+            holdSamples?.ClearSamples();
         }
         protected override void LoadSamples()
         {
