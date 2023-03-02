@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
+using System;
 using osu.Framework.Allocation;
 using osu.Framework.Audio.Track;
 using osu.Framework.Bindables;
@@ -36,7 +37,9 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             Origin = Anchor.Centre,
             Anchor = Anchor.Centre,
         };
-        private int kiaiIndex = 0;
+
+        private bool isFirstFlash = true;
+        private int slowKiaiSpinBeatIndex = int.MaxValue;
 
         [BackgroundDependencyLoader(true)]
         private void load(ISkinSource skin, SoyokazeConfigManager cm)
@@ -51,7 +54,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             firstFlashOpacity = skin.GetConfig<SoyokazeSkinConfiguration, byte>(SoyokazeSkinConfiguration.KiaiVisualizerFirstFlashOpacity)?.Value ?? 255;
 
             flashColour = skin.GetConfig<SoyokazeSkinColour, Color4>(SoyokazeSkinColour.KiaiVisualizerFlash)?.Value ?? Color4.White;
-            flashOpacity = skin.GetConfig<SoyokazeSkinConfiguration, byte>(SoyokazeSkinConfiguration.KiaiVisualizerFlashOpacity)?.Value ?? 192;
+            flashOpacity = skin.GetConfig<SoyokazeSkinConfiguration, byte>(SoyokazeSkinConfiguration.KiaiVisualizerFlashOpacity)?.Value ?? 152;
 
             defaultSpin = skin.GetConfig<SoyokazeSkinConfiguration, float>(SoyokazeSkinConfiguration.KiaiVisualizerDefaultSpin)?.Value ?? 1.5f;
             kiaiSpin = skin.GetConfig<SoyokazeSkinConfiguration, float>(SoyokazeSkinConfiguration.KiaiVisualizerKiaiSpin)?.Value ?? -60f;
@@ -62,21 +65,37 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
         protected override void OnNewBeat(int beatIndex, TimingControlPoint timingPoint, EffectControlPoint effectPoint, ChannelAmplitudes amplitudes)
         {
+            int beatsPerMeasure = timingPoint.TimeSignature.Numerator;
+            double beatLength = timingPoint.BeatLength;
+
             if (effectPoint.KiaiMode)
             {
-                if (kiaiIndex == 0)
-                    composite.FlashColour(firstFlashColour.Opacity(firstFlashOpacity), timingPoint.BeatLength * 2, Easing.In);
-                else if (kiaiIndex % timingPoint.TimeSignature.Numerator == 0)
-                    composite.FlashColour(flashColour.Opacity(flashOpacity), timingPoint.BeatLength * 2, Easing.In);
+                int fastKiaiSpinBeatLength = Math.Min(beatsPerMeasure * 3 / 4, 1);
 
-                composite.Spin(timingPoint.BeatLength, kiaiSpin);
+                if (isFirstFlash)
+                {
+                    composite.FlashColour(firstFlashColour.Opacity(firstFlashOpacity), beatLength * 2, Easing.In);
+                    isFirstFlash = false;
 
-                kiaiIndex++;
+                    composite.Spin(beatsPerMeasure * beatLength, 0.65f * beatsPerMeasure * kiaiSpin, Easing.Out);
+                    slowKiaiSpinBeatIndex = beatIndex + fastKiaiSpinBeatLength;
+                }
+                else if (beatIndex % beatsPerMeasure == 0)
+                {
+                    composite.FlashColour(flashColour.Opacity(flashOpacity), beatLength * 2, Easing.In);
+
+                    composite.Spin(beatsPerMeasure * beatLength, 0.65f * beatsPerMeasure * kiaiSpin, Easing.Out);
+                    slowKiaiSpinBeatIndex = beatIndex + fastKiaiSpinBeatLength;
+                }
+                else if (beatIndex >= slowKiaiSpinBeatIndex)
+                {
+                    composite.Spin(beatsPerMeasure * beatLength, beatsPerMeasure * kiaiSpin);
+                }
             }
             else
             {
-                composite.Spin(timingPoint.BeatLength, defaultSpin);
-                kiaiIndex = 0;
+                composite.Spin(beatLength, defaultSpin);
+                isFirstFlash = true;
             }
         }
 

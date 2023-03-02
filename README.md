@@ -29,7 +29,7 @@ KiaiVisualizerDefaultSpin: 1.5
 KiaiVisualizerKiaiSpin: -60
 KiaiVisualizerDefaultOpacity: 128
 KiaiVisualizerFirstFlashOpacity: 255
-KiaiVisualizerFlashOpacity: 192
+KiaiVisualizerFlashOpacity: 152
 
 [Colours]
 HoldHighlight: 0, 255, 0
