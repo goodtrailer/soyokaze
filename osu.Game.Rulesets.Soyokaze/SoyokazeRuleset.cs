@@ -9,6 +9,7 @@ using osu.Framework.Graphics.Rendering;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Bindings;
+using osu.Framework.Logging;
 using osu.Framework.Platform;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
@@ -25,6 +26,7 @@ using osu.Game.Rulesets.Soyokaze.Extensions;
 using osu.Game.Rulesets.Soyokaze.Mods;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Replays;
+using osu.Game.Rulesets.Soyokaze.Scoring;
 using osu.Game.Rulesets.Soyokaze.Skinning.Legacy;
 using osu.Game.Rulesets.Soyokaze.Statistics;
 using osu.Game.Rulesets.Soyokaze.UI;
@@ -50,6 +52,8 @@ namespace osu.Game.Rulesets.Soyokaze
         public override IBeatmapProcessor CreateBeatmapProcessor(IBeatmap beatmap) => new BeatmapProcessor(beatmap);
 
         public override IRulesetConfigManager CreateConfig(SettingsStore settings) => new SoyokazeConfigManager(settings, RulesetInfo);
+
+        public override ScoreProcessor CreateScoreProcessor() => new SoyokazeScoreProcessor(this);
 
         public override RulesetSettingsSubsection CreateSettings() => new SoyokazeSettingsSubsection(this);
 
@@ -84,6 +88,8 @@ namespace osu.Game.Rulesets.Soyokaze
                 if (!(hitEvent.HitObject is SoyokazeHitObject soyokazeObject))
                     continue;
 
+                Logger.Log("OBJECT: " + hitEvent.HitObject.GetType());
+
                 HitEventsLists[(int)soyokazeObject.Button].Add(hitEvent);
             }
 
@@ -101,7 +107,7 @@ namespace osu.Game.Rulesets.Soyokaze
                                 Origin = Anchor.Centre,
                                 AutoSizeAxes = Axes.Both,
                             };
-                            Vector2[] positions = PositionExtensions.GetPositions(250, 130, true, Anchor.Centre);
+                            Vector2[] positions = PositionExtensions.GetPositions(220, 110, true, Anchor.Centre);
                             for (int i = 0; i < positions.Length; i++)
                                 accuracyGraphsContainer.Add(new AccuracyGraph(HitEventsLists[i]) { Position = positions[i] });
                             return accuracyGraphsContainer;
