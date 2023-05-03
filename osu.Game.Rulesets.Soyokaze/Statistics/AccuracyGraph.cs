@@ -29,14 +29,11 @@ namespace osu.Game.Rulesets.Soyokaze.Statistics
                 {
                     Text = (calculateAccuracy(hitEvents) * 100).ToString("0.00") + "%",
                     Colour = Color4Extensions.FromHex("#66FFCC"),
-                    Font = OsuFont.Torus.With(size: 56),
-                    MaxWidth = 170f,
+                    Font = OsuFont.Torus.With(size: 42),
                     AllowMultiline = false,
 
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
-                    RelativeSizeAxes = Axes.Both,
-                    Size = new Vector2(0.8f, 0.4f),
                 },
                 new UnstableRate(hitEvents)
                 {
@@ -47,7 +44,7 @@ namespace osu.Game.Rulesets.Soyokaze.Statistics
                     RelativeSizeAxes = Axes.Both,
                     Size = new Vector2(0.8f, 0.13f),
                 },
-                new HitEventTimingDistributionGraph(hitEvents)
+                new MiniHitEventTimingDistributionGraph(hitEvents)
                 {
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
@@ -63,8 +60,6 @@ namespace osu.Game.Rulesets.Soyokaze.Statistics
 
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
-                    RelativeSizeAxes = Axes.Both,
-                    Size = new Vector2(0.3f, 0.07f),
                 },
             });
         }

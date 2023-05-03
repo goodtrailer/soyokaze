@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
@@ -11,6 +13,7 @@ using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
+using osu.Game.Rulesets.Soyokaze.Judgements;
 using osu.Game.Rulesets.Soyokaze.Skinning;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osu.Game.Skinning;
@@ -169,6 +172,8 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             }
         }
 
+        protected override JudgementResult CreateResult(Judgement judgement) => new SoyokazeHoldJudgementResult(HitObject, judgement);
+
         protected override void CheckForResult(bool userTriggered, double timeOffset)
         {
             if (userTriggered || Time.Current < HitObject.EndTime)
@@ -207,7 +212,14 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             else
                 result = HitResult.Miss;
 
-            ApplyResult(r => r.Type = result);
+            ApplyResult(r =>
+            {
+                if (!(r is SoyokazeHoldJudgementResult hr))
+                    throw new InvalidOperationException($"Expected result of type {nameof(SoyokazeHoldJudgementResult)}");
+
+                hr.Type = result;
+                hr.TrueTimeOffset = HoldCircle.TrueTimeOffset;
+            });
         }
 
         public override bool Hit(SoyokazeAction action)

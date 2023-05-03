@@ -14,6 +14,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         public new HoldCircle HitObject => (HoldCircle)base.HitObject;
         public override bool DisplayResult => false;
         public JudgementResult TrueResult { get; private set; }
+        public double TrueTimeOffset { get; private set; }
 
         protected DrawableHold Hold => (DrawableHold)ParentHitObject;
 
@@ -43,6 +44,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 if (!HitObject.HitWindows.CanBeHit(timeOffset))
                 {
                     TrueResult = new JudgementResult(HitObject, new SoyokazeJudgement()) { Type = HitResult.Miss };
+                    TrueTimeOffset = timeOffset;
                     ApplyResult(r => r.Type = HitResult.IgnoreMiss);
                 }
                 return;
@@ -58,6 +60,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             }
 
             TrueResult = new JudgementResult(HitObject, new SoyokazeJudgement()) { Type = result };
+            TrueTimeOffset = timeOffset;
             ApplyResult(r => r.Type = HitResult.IgnoreHit);
         }
 
