@@ -79,6 +79,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
             holdSamples?.ClearSamples();
         }
+
         protected override void LoadSamples()
         {
             base.LoadSamples();
@@ -90,11 +91,11 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
             var normalSample = HitObject.HoldSamples.FirstOrDefault(s => s.Name == HitSampleInfo.HIT_NORMAL);
             if (normalSample != null)
-                slidingSamples.Add(HitObject.SampleControlPoint.ApplyTo(normalSample).With("sliderslide"));
+                slidingSamples.Add(normalSample.With("sliderslide"));
 
             var whistleSample = HitObject.HoldSamples.FirstOrDefault(s => s.Name == HitSampleInfo.HIT_WHISTLE);
             if (whistleSample != null)
-                slidingSamples.Add(HitObject.SampleControlPoint.ApplyTo(whistleSample).With("sliderwhistle"));
+                slidingSamples.Add(whistleSample.With("sliderwhistle"));
 
             holdSamples.Samples = slidingSamples.ToArray();
         }
