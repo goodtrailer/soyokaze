@@ -9,8 +9,6 @@ using osu.Framework.Graphics.Rendering;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Bindings;
-using osu.Framework.Logging;
-using osu.Framework.Platform;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
 using osu.Game.Overlays.Settings;
@@ -77,66 +75,46 @@ namespace osu.Game.Rulesets.Soyokaze
 
         public override IConvertibleReplayFrame CreateConvertibleReplayFrame() => new SoyokazeReplayFrame();
 
-        public override StatisticRow[] CreateStatisticsForScore(ScoreInfo score, IBeatmap playableBeatmap)
+        public override StatisticItem[] CreateStatisticsForScore(ScoreInfo score, IBeatmap playableBeatmap)
         {
-            List<HitEvent>[] HitEventsLists = new List<HitEvent>[8];
-            for (int i = 0; i < HitEventsLists.Length; i++)
-                HitEventsLists[i] = new List<HitEvent>();
+            var hitEventLists = new List<HitEvent>[8];
+            for (int i = 0; i < hitEventLists.Length; i++)
+                hitEventLists[i] = new List<HitEvent>();
 
-            foreach (HitEvent hitEvent in score.HitEvents)
+            foreach (var hitEvent in score.HitEvents)
             {
                 if (!(hitEvent.HitObject is SoyokazeHitObject soyokazeObject))
                     continue;
 
-                Logger.Log("OBJECT: " + hitEvent.HitObject.GetType());
-
-                HitEventsLists[(int)soyokazeObject.Button].Add(hitEvent);
+                hitEventLists[(int)soyokazeObject.Button].Add(hitEvent);
             }
 
-            return new StatisticRow[]
+            return new[]
             {
-                new StatisticRow
+                new StatisticItem("Button Accuracies", () =>
                 {
-                    Columns = new StatisticItem[]
+                    Container accuracyGraphsContainer = new Container()
                     {
-                        new StatisticItem("Button Accuracies", () =>
-                        {
-                            Container accuracyGraphsContainer = new Container()
-                            {
-                                Anchor = Anchor.Centre,
-                                Origin = Anchor.Centre,
-                                AutoSizeAxes = Axes.Both,
-                            };
-                            Vector2[] positions = PositionExtensions.GetPositions(220, 110, true, Anchor.Centre);
-                            for (int i = 0; i < positions.Length; i++)
-                                accuracyGraphsContainer.Add(new AccuracyGraph(HitEventsLists[i]) { Position = positions[i] });
-                            return accuracyGraphsContainer;
-                        }),
-                    },
-                },
-                new StatisticRow
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        AutoSizeAxes = Axes.Both,
+                    };
+                    Vector2[] positions = PositionExtensions.GetPositions(220, 110, true, Anchor.Centre);
+                    for (int i = 0; i < positions.Length; i++)
+                        accuracyGraphsContainer.Add(new AccuracyGraph(hitEventLists[i]) { Position = positions[i] });
+                    return accuracyGraphsContainer;
+                }, true),
+                new StatisticItem("Overall Distribution", () => new HitEventTimingDistributionGraph(score.HitEvents)
                 {
-                    Columns = new StatisticItem[]
-                    {
-                        new StatisticItem("Overall Distribution", () => new HitEventTimingDistributionGraph(score.HitEvents)
-                        {
-                            RelativeSizeAxes = Axes.X,
-                            Size = new Vector2(1f, 100f)
-                        }),
-                    }
-                },
-                new StatisticRow
+                    RelativeSizeAxes = Axes.X,
+                    Size = new Vector2(1f, 100f)
+                }, true),
+                new StatisticItem("", () => new UnstableRate(score.HitEvents)
                 {
-                    Columns = new StatisticItem[]
-                    {
-                        new StatisticItem("", () => new UnstableRate(score.HitEvents)
-                        {
-                            AutoSizeAxes = Axes.None,
-                            RelativeSizeAxes = Axes.X,
-                            Size = new Vector2(0.2f, 10f)
-                        }),
-                    },
-                },
+                    AutoSizeAxes = Axes.None,
+                    RelativeSizeAxes = Axes.X,
+                    Size = new Vector2(0.2f, 10f)
+                }, true),
             };
         }
 
