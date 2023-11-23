@@ -36,7 +36,7 @@ using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze
 {
-    public class SoyokazeRuleset : Ruleset
+    public partial class SoyokazeRuleset : Ruleset
     {
         public const string SHORT_NAME = "soyokaze";
 
