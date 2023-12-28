@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using osu.Framework.Logging;
 using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Difficulty.Preprocessing;
@@ -18,6 +19,12 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
     public class SoyokazeDifficultyCalculator : DifficultyCalculator
     {
         private const double difficulty_multiplier = 0.445;
+
+        // SR values which are good and should be exponentially curved between
+        private const double x1 = 1.3;
+        private const double x2 = 6.8;
+        private static readonly double k = Math.Pow(x1, x2 / (x2 - x1)) * Math.Pow(x2, x1 / (x1 - x2));
+        private static readonly double a = Math.Pow(x1 / x2, 1 / (x1 - x2));
 
         public SoyokazeDifficultyCalculator(IRulesetInfo ruleset, IWorkingBeatmap beatmap)
             : base(ruleset, beatmap)
@@ -34,16 +41,15 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
 
             double speedRating = Math.Sqrt(skills[0].DifficultyValue()) * difficulty_multiplier;
             double readRating = Math.Sqrt(skills[1].DifficultyValue()) * difficulty_multiplier;
+            double baseStarRating = speedRating + readRating + (speedRating - readRating) / 3;
 
-            double starRating = speedRating + readRating + (speedRating - readRating) / 3;
-
-            int maxCombo = beatmap.HitObjects.Count;
+            double starRating = k * Math.Pow(a, baseStarRating);
 
             return new SoyokazeDifficultyAttributes
             {
                 StarRating = starRating,
                 Mods = mods,
-                MaxCombo = maxCombo,
+                MaxCombo = beatmap.HitObjects.Count,
             };
         }
 
@@ -51,10 +57,13 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
         {
             var diffObjects = new List<DifficultyHitObject>();
 
-            for (int i = 0; i < beatmap.HitObjects.Count - SoyokazeDifficultyHitObject.COUNT; i++)
+            for (int i = SoyokazeDifficultyHitObject.MIN_COUNT; i <= beatmap.HitObjects.Count; i++)
             {
-                var hitObjects = beatmap.HitObjects.Skip(i).Take(SoyokazeDifficultyHitObject.COUNT).ToArray();
-                var diffObject = new SoyokazeDifficultyHitObject(clockRate, hitObjects, diffObjects, i);
+                int begin = Math.Max(0, i - SoyokazeDifficultyHitObject.MAX_COUNT);
+                int end = i;
+                var hitObjects = beatmap.HitObjects.Skip(begin).Take(end - begin).ToArray();
+                var diffObject = new SoyokazeDifficultyHitObject(clockRate, hitObjects, diffObjects, i - SoyokazeDifficultyHitObject.MIN_COUNT);
+
                 diffObjects.Add(diffObject);
             }
 
