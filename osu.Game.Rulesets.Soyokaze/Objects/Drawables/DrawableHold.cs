@@ -14,6 +14,7 @@ using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Judgements;
+using osu.Game.Rulesets.Soyokaze.Scoring;
 using osu.Game.Rulesets.Soyokaze.Skinning;
 using osu.Game.Rulesets.Soyokaze.UI;
 using osu.Game.Skinning;
@@ -140,7 +141,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
         {
             base.UpdateInitialTransforms();
 
-            HoldProgress.FadeInFromZero(System.Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
+            HoldProgress.FadeInFromZero(Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
             using (BeginDelayedSequence(HitObject.Preempt))
             {
                 HoldProgress.FillTo(1.0, HitObject.Duration);
@@ -188,18 +189,18 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             double holdFraction = holdDuration / HitObject.Duration;
             double holdCircleFraction = 0.0;
 
-            JudgementResult trueRes = HoldCircle.TrueResult;
-            if (trueRes != null)
+            JudgementResult trueResult = HoldCircle.TrueResult;
+            if (trueResult != null)
             {
-                Judgement judgement = trueRes.Judgement;
-                holdCircleFraction = (double)judgement.NumericResultFor(trueRes)
-                    / judgement.MaxNumericResult;
+                SoyokazeScoreProcessor scorer = new SoyokazeScoreProcessor();
+                double score = scorer.GetBaseScoreForResult(trueResult.Type);
+                double max = scorer.GetBaseScoreForResult(trueResult.Judgement.MaxResult);
+                holdCircleFraction = score / max;
             }
 
             double scoreFraction = (holdCircleFraction + holdFraction) / 2;
 
             HitResult result;
-
             if (scoreFraction > 0.9)
                 result = HitResult.Perfect;
             else if (scoreFraction > 0.8)

@@ -7,8 +7,8 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osu.Game.Graphics;
-using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Scoring;
+using osu.Game.Rulesets.Soyokaze.Scoring;
 using osu.Game.Screens.Ranking.Statistics;
 using osuTK;
 
@@ -68,15 +68,12 @@ namespace osu.Game.Rulesets.Soyokaze.Statistics
         {
             int maxScore = 0;
             int score = 0;
-
+            
+            SoyokazeScoreProcessor scorer = new SoyokazeScoreProcessor();
             foreach (HitEvent hitEvent in hitEvents)
             {
-                JudgementResult result = new JudgementResult(hitEvent.HitObject, hitEvent.HitObject.CreateJudgement())
-                {
-                    Type = hitEvent.Result
-                };
-                score += result.Judgement.NumericResultFor(result);
-                maxScore += result.Judgement.MaxNumericResult;
+                score += scorer.GetBaseScoreForResult(hitEvent.Result);
+                maxScore += scorer.GetBaseScoreForResult(hitEvent.HitObject.CreateJudgement().MaxResult);
             }
 
             return (float)score / maxScore;
