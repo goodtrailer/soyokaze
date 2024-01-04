@@ -9,8 +9,8 @@ namespace osu.Game.Rulesets.Soyokaze.Scoring
 {
     public partial class SoyokazeScoreProcessor : ScoreProcessor
     {
-        public SoyokazeScoreProcessor(Ruleset ruleset)
-            : base(ruleset)
+        public SoyokazeScoreProcessor(SoyokazeRuleset ruleset = null)
+            : base(ruleset ?? new SoyokazeRuleset())
         {
         }
 
@@ -19,7 +19,7 @@ namespace osu.Game.Rulesets.Soyokaze.Scoring
             var hitEvent = base.CreateHitEvent(result);
 
             if (result is SoyokazeHoldJudgementResult hr)
-                hitEvent = new HitEvent(hr.TrueTimeOffset, hitEvent.Result, hitEvent.HitObject, hitEvent.LastHitObject, hitEvent.Position);
+                hitEvent = new HitEvent(hr.TrueTimeOffset, hitEvent.GameplayRate, hitEvent.Result, hitEvent.HitObject, hitEvent.LastHitObject, hitEvent.Position);
 
             return hitEvent;
         }
