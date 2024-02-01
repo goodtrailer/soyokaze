@@ -13,7 +13,10 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         {
         }
 
-        public string LookupName => string.Join('/', new[] { "Gameplay", RulesetPrefix, ComponentName }.Where(s => !string.IsNullOrEmpty(s)));
+        // TODO: THIS IS A HORROR
+        public string LookupName => ComponentName;
+
+        public string StoreName => string.Join('/', new[] { "Gameplay", RulesetPrefix, ComponentName }.Where(s => !string.IsNullOrEmpty(s)));
 
         protected override string RulesetPrefix => SoyokazeRuleset.SHORT_NAME;
 
