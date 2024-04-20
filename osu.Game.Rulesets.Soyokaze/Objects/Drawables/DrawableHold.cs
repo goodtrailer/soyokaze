@@ -214,8 +214,6 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             else
                 result = HitResult.Miss;
 
-            var payload = new { result, HoldCircle.TrueTimeOffset };
-
             ApplyResult(static (r, p) =>
             {
                 if (!(r is SoyokazeHoldJudgementResult hr))
@@ -223,7 +221,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
                 hr.Type = p.result;
                 hr.TrueTimeOffset = p.TrueTimeOffset;
-            }, payload);
+            }, new { result, HoldCircle.TrueTimeOffset });
         }
 
         public override bool Hit(SoyokazeAction action)
