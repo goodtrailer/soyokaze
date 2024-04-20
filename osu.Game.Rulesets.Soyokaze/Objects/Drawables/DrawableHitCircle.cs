@@ -115,7 +115,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             if (!userTriggered)
             {
                 if (!HitObject.HitWindows.CanBeHit(timeOffset))
-                    ApplyResult(r => r.Type = r.Judgement.MinResult);
+                    ApplyResult(static (r, _) => r.Type = r.Judgement.MinResult, 0);
                 return;
             }
 
@@ -128,7 +128,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 return;
             }
 
-            ApplyResult(r => r.Type = result);
+            ApplyResult(result);
         }
 
         public override bool Hit(SoyokazeAction action)

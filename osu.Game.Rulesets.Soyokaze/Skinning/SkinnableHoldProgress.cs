@@ -20,7 +20,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
     public partial class SkinnableHoldProgress : Container
     {
         public override bool RemoveWhenNotAlive => false;
-        public Bindable<double> Current { get => circularProgress.Current; set => circularProgress.Current = value; }
+        public double Progress { get => circularProgress.Progress; set => circularProgress.Progress = value; }
 
         [Resolved]
         private DrawableHitObject drawableObject { get; set; }
@@ -44,7 +44,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 Origin = Anchor.Centre,
                 Scale = new Vector2(0.5f),
                 InnerRadius = 1f,
-                Current = { Value = 0 },
+                Progress = 0.0,
             };
 
             background = new SkinnableDrawable(new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HoldOverlay), _ => new DefaultHoldOverlay());
@@ -88,6 +88,6 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             }, true);
         }
 
-        public TransformSequence<CircularProgress> FillTo(double newValue, double duration = 0, Easing easing = Easing.None) => circularProgress.FillTo(newValue, duration, easing);
+        public TransformSequence<CircularProgress> ProgressTo(double newValue, double duration = 0, Easing easing = Easing.None) => circularProgress.ProgressTo(newValue, duration, easing);
     }
 }
