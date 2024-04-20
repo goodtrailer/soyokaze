@@ -60,7 +60,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 HoldProgress = new SkinnableHoldProgress
                 {
                     RelativeSizeAxes = Axes.Both,
-                    Current = { Value = 0 },
+                    Progress = 0.0,
                 },
                 holdSamples = new PausableSkinnableSound { Looping = true },
             };
@@ -144,7 +144,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             HoldProgress.FadeInFromZero(Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
             using (BeginDelayedSequence(HitObject.Preempt))
             {
-                HoldProgress.FillTo(1.0, HitObject.Duration);
+                HoldProgress.ProgressTo(1.0, HitObject.Duration);
             }
         }
 
@@ -214,14 +214,16 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             else
                 result = HitResult.Miss;
 
-            ApplyResult(r =>
+            var payload = new { result, HoldCircle.TrueTimeOffset };
+
+            ApplyResult(static (r, p) =>
             {
                 if (!(r is SoyokazeHoldJudgementResult hr))
                     throw new InvalidOperationException($"Expected result of type {nameof(SoyokazeHoldJudgementResult)}");
 
-                hr.Type = result;
-                hr.TrueTimeOffset = HoldCircle.TrueTimeOffset;
-            });
+                hr.Type = p.result;
+                hr.TrueTimeOffset = p.TrueTimeOffset;
+            }, payload);
         }
 
         public override bool Hit(SoyokazeAction action)

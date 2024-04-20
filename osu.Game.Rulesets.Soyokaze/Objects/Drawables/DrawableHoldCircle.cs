@@ -45,7 +45,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 {
                     TrueResult = new JudgementResult(HitObject, new SoyokazeJudgement()) { Type = HitResult.Miss };
                     TrueTimeOffset = timeOffset;
-                    ApplyResult(r => r.Type = HitResult.IgnoreMiss);
+                    ApplyResult(HitResult.IgnoreMiss);
                 }
                 return;
             }
@@ -61,7 +61,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
 
             TrueResult = new JudgementResult(HitObject, new SoyokazeJudgement()) { Type = result };
             TrueTimeOffset = timeOffset;
-            ApplyResult(r => r.Type = HitResult.IgnoreHit);
+            ApplyResult(HitResult.IgnoreHit);
         }
 
         protected override void UpdatePosition()
