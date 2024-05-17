@@ -18,8 +18,8 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
         public string StoreName => string.Join('/', new[] { "Gameplay", RulesetPrefix, ComponentName }.Where(s => !string.IsNullOrEmpty(s)));
 
-        protected override string RulesetPrefix => SoyokazeRuleset.SHORT_NAME;
+        public string RulesetPrefix => SoyokazeRuleset.SHORT_NAME;
 
-        protected override string ComponentName => Component.ToString().ToLower();
+        public string ComponentName => Component.ToString().ToLower();
     }
 }
