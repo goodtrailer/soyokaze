@@ -46,21 +46,21 @@ namespace osu.Game.Rulesets.Soyokaze.Replays
             Position = currentFrame.Position;
             SoyokazeActionFlag soyokazeButtonFlags = (SoyokazeActionFlag)currentFrame.ButtonState;
 
-            if (soyokazeButtonFlags.HasFlagFast(SoyokazeActionFlag.Button0))
+            if (soyokazeButtonFlags.HasFlag(SoyokazeActionFlag.Button0))
                 Actions.Add(SoyokazeAction.Button0);
-            if (soyokazeButtonFlags.HasFlagFast(SoyokazeActionFlag.Button1))
+            if (soyokazeButtonFlags.HasFlag(SoyokazeActionFlag.Button1))
                 Actions.Add(SoyokazeAction.Button1);
-            if (soyokazeButtonFlags.HasFlagFast(SoyokazeActionFlag.Button2))
+            if (soyokazeButtonFlags.HasFlag(SoyokazeActionFlag.Button2))
                 Actions.Add(SoyokazeAction.Button2);
-            if (soyokazeButtonFlags.HasFlagFast(SoyokazeActionFlag.Button3))
+            if (soyokazeButtonFlags.HasFlag(SoyokazeActionFlag.Button3))
                 Actions.Add(SoyokazeAction.Button3);
-            if (soyokazeButtonFlags.HasFlagFast(SoyokazeActionFlag.Button4))
+            if (soyokazeButtonFlags.HasFlag(SoyokazeActionFlag.Button4))
                 Actions.Add(SoyokazeAction.Button4);
-            if (soyokazeButtonFlags.HasFlagFast(SoyokazeActionFlag.Button5))
+            if (soyokazeButtonFlags.HasFlag(SoyokazeActionFlag.Button5))
                 Actions.Add(SoyokazeAction.Button5);
-            if (soyokazeButtonFlags.HasFlagFast(SoyokazeActionFlag.Button6))
+            if (soyokazeButtonFlags.HasFlag(SoyokazeActionFlag.Button6))
                 Actions.Add(SoyokazeAction.Button6);
-            if (soyokazeButtonFlags.HasFlagFast(SoyokazeActionFlag.Button7))
+            if (soyokazeButtonFlags.HasFlag(SoyokazeActionFlag.Button7))
                 Actions.Add(SoyokazeAction.Button7);
         }
 
