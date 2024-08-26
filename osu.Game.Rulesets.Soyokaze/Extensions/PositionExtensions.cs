@@ -24,14 +24,14 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
         {
             Vector2 offset = new Vector2(0);
 
-            if (origin.HasFlagFast(Anchor.x0))
+            if (origin.HasFlag(Anchor.x0))
                 offset.X = SCREEN_WIDTH / 2;
-            else if (origin.HasFlagFast(Anchor.x2))
+            else if (origin.HasFlag(Anchor.x2))
                 offset.X = -SCREEN_WIDTH / 2;
 
-            if (origin.HasFlagFast(Anchor.y0))
+            if (origin.HasFlag(Anchor.y0))
                 offset.Y = SCREEN_HEIGHT / 2;
-            else if (origin.HasFlagFast(Anchor.y2))
+            else if (origin.HasFlag(Anchor.y2))
                 offset.Y = -SCREEN_HEIGHT / 2;
 
             Vector2[] positions = new Vector2[]

@@ -9,6 +9,7 @@ using osu.Framework.Input.Events;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
+using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Configuration;
 using osu.Game.Rulesets.Soyokaze.Objects;
 using osu.Game.Rulesets.Soyokaze.Objects.Drawables;
@@ -22,6 +23,7 @@ namespace osu.Game.Rulesets.Soyokaze.UI
     {
         private readonly ProxyContainer approachCircleContainer = new ProxyContainer { RelativeSizeAxes = Axes.Both };
         private readonly JudgementContainer<DrawableSoyokazeJudgement> judgementContainer = new JudgementContainer<DrawableSoyokazeJudgement> { RelativeSizeAxes = Axes.Both };
+        private readonly JudgementPooler<DrawableSoyokazeJudgement> judgementPooler;
         private readonly SkinnableInputOverlay inputOverlay = new SkinnableInputOverlay { RelativeSizeAxes = Axes.Both, Origin = Anchor.Centre, Anchor = Anchor.Centre };
         private readonly SkinnableKiaiVisualizer kiaiVisualizer = new SkinnableKiaiVisualizer { RelativeSizeAxes = Axes.Both, Origin = Anchor.Centre, Anchor = Anchor.Centre };
         private SoyokazeConfigManager configManager;
@@ -37,14 +39,6 @@ namespace osu.Game.Rulesets.Soyokaze.UI
 
         public SoyokazePlayfield()
         {
-            NewResult += onNewResult;
-        }
-
-        [BackgroundDependencyLoader(true)]
-        private void load(SoyokazeConfigManager cm)
-        {
-            configManager = cm;
-
             AddRangeInternal(new Drawable[]
             {
                 kiaiVisualizer,
@@ -53,6 +47,25 @@ namespace osu.Game.Rulesets.Soyokaze.UI
                 judgementContainer,
                 approachCircleContainer,
             });
+
+            AddInternal(judgementPooler = new JudgementPooler<DrawableSoyokazeJudgement>(new[]
+            {
+                HitResult.Perfect,
+                HitResult.Great,
+                HitResult.Good,
+                HitResult.Ok,
+                HitResult.Meh,
+                HitResult.Miss,
+                HitResult.IgnoreHit,
+            }));
+
+            NewResult += onNewResult;
+        }
+
+        [BackgroundDependencyLoader(true)]
+        private void load(SoyokazeConfigManager cm)
+        {
+            configManager = cm;
 
             RegisterPool<HitCircle, DrawableHitCircle>(15, 30);
 
@@ -75,16 +88,16 @@ namespace osu.Game.Rulesets.Soyokaze.UI
             }
         }
 
-        private void onNewResult(DrawableHitObject drawableObject, JudgementResult result)
+        private void onNewResult(DrawableHitObject judgedObject, JudgementResult result)
         {
-            if (!drawableObject.DisplayResult || !DisplayJudgements.Value)
+            if (!judgedObject.DisplayResult || !DisplayJudgements.Value)
                 return;
 
-            switch (drawableObject)
+            switch (judgedObject)
             {
                 case DrawableHitCircle _:
                 case DrawableHold _:
-                    judgementContainer.Add(new DrawableSoyokazeJudgement(result, drawableObject, configManager));
+                    judgementContainer.Add(judgementPooler.Get(result.Type, dsj => dsj.Apply(result, judgedObject)));
                     break;
             }
         }
