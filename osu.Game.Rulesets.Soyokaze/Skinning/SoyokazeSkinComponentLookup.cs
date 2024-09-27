@@ -6,7 +6,7 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning
 {
-    public class SoyokazeSkinComponentLookup : GameplaySkinComponentLookup<SoyokazeSkinComponents>
+    public class SoyokazeSkinComponentLookup : SkinComponentLookup<SoyokazeSkinComponents>
     {
         public SoyokazeSkinComponentLookup(SoyokazeSkinComponents component)
             : base(component)
