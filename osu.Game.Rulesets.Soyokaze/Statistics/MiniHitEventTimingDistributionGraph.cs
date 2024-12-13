@@ -62,7 +62,7 @@ namespace osu.Game.Rulesets.Soyokaze.Statistics
         /// <param name="hitEvents">The <see cref="HitEvent"/>s to display the timing distribution of.</param>
         public MiniHitEventTimingDistributionGraph(IReadOnlyList<HitEvent> hitEvents)
         {
-            this.hitEvents = hitEvents.Where(e => !(e.HitObject.HitWindows is HitWindows.EmptyHitWindows) && e.Result.IsHit()).ToList();
+            this.hitEvents = hitEvents.Where(e => e.HitObject.HitWindows != HitWindows.Empty && e.Result.IsHit()).ToList();
             bins = Enumerable.Range(0, total_timing_distribution_bins).Select(_ => new Dictionary<HitResult, int>()).ToArray<IDictionary<HitResult, int>>();
         }
 
