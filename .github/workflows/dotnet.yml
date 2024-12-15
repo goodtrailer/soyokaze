@@ -20,7 +20,7 @@ jobs:
     - name: Build .NET
       run: dotnet build osu.Game.Rulesets.Soyokaze --no-restore --output ./artifacts --configuration Release
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: artifacts
         path: ./artifacts
