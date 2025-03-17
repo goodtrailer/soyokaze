@@ -32,7 +32,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
             RelativeSizeAxes = Axes.Both;
-            Masking = true;
+            Masking = false;
 
             hitCircle = new SkinnableDrawable(
                 new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HitCircle),
