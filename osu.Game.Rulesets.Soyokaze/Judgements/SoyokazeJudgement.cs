@@ -8,7 +8,7 @@ namespace osu.Game.Rulesets.Soyokaze.Judgements
 {
     public class SoyokazeJudgement : Judgement
     {
-        public override HitResult MaxResult => HitResult.Perfect;
+        public override HitResult MaxResult => HitResult.Great;
 
         protected override double HealthIncreaseFor(HitResult result)
         {

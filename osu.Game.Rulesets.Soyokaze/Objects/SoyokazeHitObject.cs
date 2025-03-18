@@ -9,6 +9,7 @@ using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Types;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Judgements;
+using osu.Game.Rulesets.Soyokaze.Scoring;
 using osu.Game.Rulesets.Soyokaze.UI;
 
 namespace osu.Game.Rulesets.Soyokaze.Objects
@@ -57,7 +58,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects
 
         public override Judgement CreateJudgement() => new SoyokazeJudgement();
 
-        protected override HitWindows CreateHitWindows() => new HitWindows();
+        protected override HitWindows CreateHitWindows() => new SoyokazeHitWindows();
 
         // IHasComboInformation Impl -----------------------------------
 

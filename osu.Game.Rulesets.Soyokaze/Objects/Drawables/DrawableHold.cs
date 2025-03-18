@@ -201,15 +201,11 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             double scoreFraction = (holdCircleFraction + holdFraction) / 2;
 
             HitResult result;
-            if (scoreFraction > 0.9)
-                result = HitResult.Perfect;
-            else if (scoreFraction > 0.8)
+            if (scoreFraction > 0.8)
                 result = HitResult.Great;
-            else if (scoreFraction > 0.7)
-                result = HitResult.Good;
-            else if (scoreFraction > 0.6)
-                result = HitResult.Ok;
             else if (scoreFraction > 0.5)
+                result = HitResult.Ok;
+            else if (scoreFraction > 0.3)
                 result = HitResult.Meh;
             else
                 result = HitResult.Miss;
