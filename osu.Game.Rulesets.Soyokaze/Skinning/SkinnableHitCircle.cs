@@ -84,7 +84,8 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
             accentColourBindable.BindValueChanged(colourChanged => hitCircle.Colour = colourChanged.NewValue, true);
             indexInCurrentComboBindable.BindValueChanged(indexChanged => hitCircleText.Text = (indexChanged.NewValue + 1).ToString(), true);
-            buttonBindable.BindValueChanged(buttonChanged => {
+            buttonBindable.BindValueChanged(buttonChanged =>
+            {
                 float rotation = PositionExtensions.ButtonToRotation(buttonChanged.NewValue);
                 hitCircle.Rotation = rotation;
                 hitCircleOverlay.Rotation = rotation;
