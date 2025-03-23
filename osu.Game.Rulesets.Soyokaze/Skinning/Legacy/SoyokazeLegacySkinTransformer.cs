@@ -57,7 +57,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
                         case SoyokazeSkinComponents.HitCircleText:
                             if (!this.HasFont(LegacyFont.HitCircle))
                                 return null;
-                            
+
                             // stable applies a blanket 0.8x scale to hitcircle fonts;
                             // see OsuLegacySkinTransformer.GetDrawableComponent(ISkinComponentLookup lookup)
                             const float hitcircle_text_scale = 0.8f;

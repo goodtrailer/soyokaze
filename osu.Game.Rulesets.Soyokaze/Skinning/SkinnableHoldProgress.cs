@@ -5,7 +5,6 @@ using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Transforms;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Soyokaze.Configuration;
@@ -94,7 +93,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 background,
                 progressContainer,
             };
-            
+
             DrawableSoyokazeHitObject drawableSoyokazeObject = (DrawableSoyokazeHitObject)drawableObject;
 
             accentColourBindable.BindTo(drawableSoyokazeObject.AccentColour);

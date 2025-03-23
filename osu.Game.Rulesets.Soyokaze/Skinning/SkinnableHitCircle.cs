@@ -90,7 +90,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 hitCircle.Rotation = rotation;
                 hitCircleOverlay.Rotation = rotation;
             }, true);
-            
+
             drawableObject.ApplyCustomUpdateState += updateState;
         }
 
