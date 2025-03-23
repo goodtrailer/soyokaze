@@ -61,6 +61,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                         AutoSizeAxes = Axes.Both,
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
+                        Alpha = 0f,
                     },
                     progressMask = new Container
                     {
@@ -106,7 +107,8 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             }, true);
             buttonBindable.BindValueChanged(buttonChanged =>
             {
-                float rotation = PositionExtensions.ButtonToRotation(buttonChanged.NewValue);
+                bool doRotation = skin.GetConfig<SoyokazeSkinConfiguration, bool>(SoyokazeSkinConfiguration.RotateHoldProgress)?.Value ?? true;
+                float rotation = doRotation ? PositionExtensions.ButtonToRotation(buttonChanged.NewValue) : 0f;
                 background.Rotation = rotation;
                 progressContainer.Rotation = rotation;
             }, true);
@@ -133,6 +135,22 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             }, true);
         }
 
-        public TransformSequence<Container> ProgressTo(float newValue, double duration = 0, Easing easing = Easing.None) => progressMask.ResizeHeightTo(newValue, duration, easing);
+        public TransformSequence<Container> ProgressTo(float newValue, double duration = 0, Easing easing = Easing.None)
+        {
+            TransformSequence<Container> resize = progressMask.ResizeHeightTo(newValue, duration, easing);
+
+            if (newValue > 0f)
+            {
+                return resize.Append(_ => progress.FadeTo(1f));
+            }
+            else
+            {
+                return resize.Append(_ =>
+                {
+                    using (BeginDelayedSequence(duration))
+                        progress.FadeTo(0f);
+                });
+            }
+        }
     }
 }

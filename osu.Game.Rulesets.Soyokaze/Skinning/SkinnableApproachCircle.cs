@@ -60,7 +60,11 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 if (!highlightBindable.Value)
                     approachCircle.Colour = colourChanged.NewValue;
             }, true);
-            buttonBindable.BindValueChanged(buttonChanged => approachCircle.Rotation = PositionExtensions.ButtonToRotation(buttonChanged.NewValue), true);
+            buttonBindable.BindValueChanged(buttonChanged =>
+            {
+                bool doRotation = skin.GetConfig<SoyokazeSkinConfiguration, bool>(SoyokazeSkinConfiguration.RotateApproachCircle)?.Value ?? false;
+                approachCircle.Rotation = doRotation ? PositionExtensions.ButtonToRotation(buttonChanged.NewValue) : 0f;
+            }, true);
 
             if (drawableSoyokazeObject is DrawableHoldCircle)
             {

@@ -13,5 +13,9 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         KiaiVisualizerFlashOpacity,
         KiaiVisualizerDefaultSpin,
         KiaiVisualizerKiaiSpin,
+        RotateApproachCircle,
+        RotateHitCircle,
+        RotateHoldProgress,
+        RotateInputOverlayKey,
     }
 }

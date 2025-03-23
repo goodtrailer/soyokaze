@@ -67,7 +67,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         }
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(ISkinSource skin)
         {
             InternalChildren = new Drawable[]
             {
@@ -86,7 +86,8 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             indexInCurrentComboBindable.BindValueChanged(indexChanged => hitCircleText.Text = (indexChanged.NewValue + 1).ToString(), true);
             buttonBindable.BindValueChanged(buttonChanged =>
             {
-                float rotation = PositionExtensions.ButtonToRotation(buttonChanged.NewValue);
+                bool doRotation = skin.GetConfig<SoyokazeSkinConfiguration, bool>(SoyokazeSkinConfiguration.RotateHitCircle)?.Value ?? false;
+                float rotation = doRotation ? PositionExtensions.ButtonToRotation(buttonChanged.NewValue) : 0f;
                 hitCircle.Rotation = rotation;
                 hitCircleOverlay.Rotation = rotation;
             }, true);
