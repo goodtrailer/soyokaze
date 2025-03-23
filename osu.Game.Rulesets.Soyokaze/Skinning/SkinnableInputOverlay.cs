@@ -39,6 +39,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 {
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
+                    Rotation = PositionExtensions.ButtonToRotation((SoyokazeAction)i),
                 };
             }
 
