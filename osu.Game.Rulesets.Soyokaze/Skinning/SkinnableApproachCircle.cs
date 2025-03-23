@@ -36,11 +36,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
         {
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
-        }
 
-        [BackgroundDependencyLoader]
-        private void load(ISkinSource skin, SoyokazeConfigManager cm)
-        {
             approachCircle = new SkinnableDrawable(
                 new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.ApproachCircle),
                 _ => new DefaultApproachCircle()
@@ -49,6 +45,11 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
             };
+        }
+
+        [BackgroundDependencyLoader]
+        private void load(ISkinSource skin, SoyokazeConfigManager cm)
+        {
             AddInternal(approachCircle);
             
             DrawableSoyokazeHitObject drawableSoyokazeObject = (DrawableSoyokazeHitObject)drawableObject;

@@ -48,6 +48,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Legacy
                         case SoyokazeSkinComponents.HitCircle:
                         case SoyokazeSkinComponents.HitCircleOverlay:
                         case SoyokazeSkinComponents.HoldOverlay:
+                        case SoyokazeSkinComponents.HoldOverlayBackground:
                         case SoyokazeSkinComponents.InputOverlayKey:
                         case SoyokazeSkinComponents.InputOverlayBackground:
                         case SoyokazeSkinComponents.KiaiVisualizerSquare:

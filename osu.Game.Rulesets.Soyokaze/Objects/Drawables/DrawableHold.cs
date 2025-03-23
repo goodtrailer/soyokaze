@@ -60,7 +60,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
                 HoldProgress = new SkinnableHoldProgress
                 {
                     RelativeSizeAxes = Axes.Both,
-                    Progress = 0.0,
+                    Progress = 0f,
                 },
                 holdSamples = new PausableSkinnableSound { Looping = true },
             };
@@ -144,7 +144,7 @@ namespace osu.Game.Rulesets.Soyokaze.Objects.Drawables
             HoldProgress.FadeInFromZero(Math.Min(HitObject.FadeIn * 2, HitObject.Preempt / 2));
             using (BeginDelayedSequence(HitObject.Preempt))
             {
-                HoldProgress.ProgressTo(1.0, HitObject.Duration);
+                HoldProgress.ProgressTo(1f, HitObject.Duration);
             }
         }
 

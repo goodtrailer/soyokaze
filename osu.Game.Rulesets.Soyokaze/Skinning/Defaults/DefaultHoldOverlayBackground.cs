@@ -10,11 +10,10 @@ using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
 {
-    public partial class DefaultHoldOverlay : CompositeDrawable
+    public partial class DefaultHoldOverlayBackground : CompositeDrawable
     {
-        public DefaultHoldOverlay()
+        public DefaultHoldOverlayBackground()
         {
-            AutoSizeAxes = Axes.Both;
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
         }
@@ -22,7 +21,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
         [BackgroundDependencyLoader]
         private void load(TextureStore textures, ISkinSource skin)
         {
-            var lookup = new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HoldOverlay);
+            var lookup = new SoyokazeSkinComponentLookup(SoyokazeSkinComponents.HoldOverlayBackground);
             AddInternal(new Sprite
             {
                 Anchor = Anchor.Centre,
