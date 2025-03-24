@@ -72,7 +72,7 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
                 highlightColourEnumBindable.BindValueChanged(colourEnumChanged =>
                 {
                     if (colourEnumChanged.NewValue == ColourEnum.None)
-                        highlightColour = skin.GetConfig<SoyokazeSkinColour, Colour4>(SoyokazeSkinColour.HoldHighlight)?.Value ?? Colour4.Lime;
+                        highlightColour = skin.GetConfig<SoyokazeSkinColour, Color4>(SoyokazeSkinColour.HoldHighlight)?.Value ?? Colour4.Lime;
                     else
                         highlightColour = ColourExtensions.ToColour4(colourEnumChanged.NewValue);
 
