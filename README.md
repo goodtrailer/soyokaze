@@ -30,6 +30,10 @@ KiaiVisualizerKiaiSpin: -60
 KiaiVisualizerDefaultOpacity: 128
 KiaiVisualizerFirstFlashOpacity: 255
 KiaiVisualizerFlashOpacity: 152
+RotateApproachCircle: false
+RotateHitCircle: false
+RotateHoldProgress: true
+RotateInputOverlayKey: true
 
 [Colours]
 HoldHighlight: 0, 255, 0

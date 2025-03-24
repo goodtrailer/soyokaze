@@ -67,6 +67,13 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
 
             screenCenterGapBindable.BindValueChanged(_ => updatePositions(), true);
             showBindable.BindValueChanged(valueChanged => Alpha = valueChanged.NewValue ? 1f : 0f, true);
+
+            bool doRotation = skin.GetConfig<SoyokazeSkinConfiguration, bool>(SoyokazeSkinConfiguration.RotateInputOverlayKey)?.Value ?? true;
+            if (doRotation)
+            {
+                for (int i = 0; i <  inputOverlayKeys.Length; i++)
+                    inputOverlayKeys[i].Rotation = PositionExtensions.ButtonToRotation((SoyokazeAction)i);
+            }
         }
 
         private void updatePositions()

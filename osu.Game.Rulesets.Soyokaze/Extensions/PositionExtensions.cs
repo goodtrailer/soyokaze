@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
-using osu.Framework.Extensions.EnumExtensions;
 using osu.Framework.Graphics;
+using osu.Game.Rulesets.Soyokaze.UI;
 using osuTK;
 
 namespace osu.Game.Rulesets.Soyokaze.Extensions
@@ -62,6 +62,31 @@ namespace osu.Game.Rulesets.Soyokaze.Extensions
                     positions[6],
                     positions[7]
                 };
+        }
+
+        public static float ButtonToRotation(SoyokazeAction button)
+        {
+            switch (button)
+            {
+                case SoyokazeAction.Button0:
+                case SoyokazeAction.Button4:
+                    return 0f;
+
+                case SoyokazeAction.Button1:
+                case SoyokazeAction.Button5:
+                    return 270f;
+
+                case SoyokazeAction.Button2:
+                case SoyokazeAction.Button6:
+                    return 180f;
+
+                case SoyokazeAction.Button3:
+                case SoyokazeAction.Button7:
+                    return 90f;
+
+                default:
+                    return float.NaN;
+            }
         }
 
         public static int PositionToButton(int positionIndex)

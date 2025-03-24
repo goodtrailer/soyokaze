@@ -13,8 +13,8 @@ using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Rulesets.Scoring;
-using osuTK.Graphics;
 using osu.Game.Screens.Ranking.Statistics;
+using osuTK.Graphics;
 
 namespace osu.Game.Rulesets.Soyokaze.Statistics
 {

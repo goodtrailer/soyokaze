@@ -68,7 +68,7 @@ namespace osu.Game.Rulesets.Soyokaze.Statistics
         {
             int maxScore = 0;
             int score = 0;
-            
+
             SoyokazeScoreProcessor scorer = new SoyokazeScoreProcessor();
             foreach (HitEvent hitEvent in hitEvents)
             {

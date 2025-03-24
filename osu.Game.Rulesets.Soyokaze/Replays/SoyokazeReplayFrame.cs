@@ -2,7 +2,6 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using System.Collections.Generic;
-using osu.Framework.Extensions.EnumExtensions;
 using osu.Game.Beatmaps;
 using osu.Game.Replays.Legacy;
 using osu.Game.Rulesets.Replays;
