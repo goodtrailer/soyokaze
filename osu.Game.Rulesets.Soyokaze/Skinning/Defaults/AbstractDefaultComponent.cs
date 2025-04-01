@@ -24,12 +24,12 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning.Defaults
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
-            var lookup = new SoyokazeSkinComponentLookup(Component);
+            string storeName = $"Gameplay/{SoyokazeRuleset.SHORT_NAME}/{Component.ToString().ToLower()}";
             AddInternal(new Sprite
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Texture = Texture ?? textures.Get(lookup.StoreName),
+                Texture = Texture ?? textures.Get(storeName),
             });
         }
     }

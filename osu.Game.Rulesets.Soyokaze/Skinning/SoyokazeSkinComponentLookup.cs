@@ -11,7 +11,5 @@ namespace osu.Game.Rulesets.Soyokaze.Skinning
             : base(component)
         {
         }
-
-        public string StoreName => $"Gameplay/{SoyokazeRuleset.SHORT_NAME}/{Component.ToString().ToLower()}";
     }
 }
