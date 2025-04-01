@@ -19,7 +19,7 @@ An [osu!](https://github.com/ppy/osu) ruleset mimicking [Genshin Impact](https:/
 ## Skinning
 Default skin PNGs (they're all white): [/osu.Game.Rulesets.Soyokaze/Resources/Textures/Gameplay/soyokaze](/osu.Game.Rulesets.Soyokaze/Resources/Textures/Gameplay/soyokaze). Judgements and Hit Circle text are skinnable too following normal [osu!standard skinning guidelines](https://osu.ppy.sh/wiki/en/Skinning/osu%21).
 
-**Note:** By default, skin PNGs will be taken from the skin's root folder (i.e. where stable looks for skin PNGs). So certain elements (hit circles, approach circles, judgements) will share the same PNGs as osu!std. However, soyokaze! will also look for skin PNGs inside a separate `soyokaze/` folder (i.e. `soyokaze/hitcircle@2x.png` instead of `hitcircle@2x.png`), so it is possible to differentiate between soyokaze! and osu!std. For better organization, *all* soyokaze! PNGs can be placed inside this `soyokaze/` folder.
+***Note.*** By default, skin PNGs will be taken from the skin's root folder (i.e. where stable looks for skin PNGs). So certain elements (hit circles, approach circles, judgements) will share the same PNGs as osu!std. However, soyokaze! will also look for skin PNGs inside a separate `soyokaze/` folder (i.e. `soyokaze/hitcircle@2x.png` instead of `hitcircle@2x.png`), so it is possible to differentiate between soyokaze! and osu!std. For better organization, *all* soyokaze! PNGs can be placed inside this `soyokaze/` folder.
 
 `skin.ini` default values:
 ```
