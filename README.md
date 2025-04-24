@@ -1,4 +1,8 @@
-<img src="assets/logo.png" alt="soyokaze!" width="300" height="300">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/logo_white.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/logo.png">
+  <img src="assets/logo.png" alt="soyokaze!" width="300" height="300">
+</picture>
 
 # soyokaze!
 
