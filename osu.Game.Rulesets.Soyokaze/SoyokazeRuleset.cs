@@ -2,13 +2,16 @@
 // See the LICENSE file in the repository root for full licence text.
 
 using System.Collections.Generic;
+using System.Linq;
 using osu.Framework.Allocation;
+using osu.Framework.Extensions.EnumExtensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Rendering;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Bindings;
+using osu.Framework.Localisation;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
 using osu.Game.Overlays.Settings;
@@ -220,6 +223,12 @@ namespace osu.Game.Rulesets.Soyokaze
             {
                 sprite.Texture = new TextureStore(renderer, new TextureLoaderStore(ruleset.CreateResourceStore()), false).Get("Textures/icon");
             }
+        }
+
+        protected override IEnumerable<HitResult> GetValidHitResults()
+        {
+            var windows = new SoyokazeHitWindows();
+            return EnumExtensions.GetValuesInOrder<HitResult>().Where(hr => windows.IsHitResultAllowed(hr));
         }
     }
 }
