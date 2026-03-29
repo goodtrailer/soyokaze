@@ -225,7 +225,7 @@ namespace osu.Game.Rulesets.Soyokaze
             }
         }
 
-        protected override IEnumerable<HitResult> GetValidHitResults()
+        public override IEnumerable<HitResult> GetValidHitResults()
         {
             var windows = new SoyokazeHitWindows();
             return EnumExtensions.GetValuesInOrder<HitResult>().Where(hr => windows.IsHitResultAllowed(hr));
