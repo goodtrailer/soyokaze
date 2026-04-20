@@ -10,9 +10,8 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty.Skills
 {
     public class SkillRead : StrainDecaySkill
     {
-        // slow decay and medium multiplier = buff consistently fast and cluttered maps
-        protected override double SkillMultiplier => 7.0;
-        protected override double StrainDecayBase => 0.3;
+        protected override double SkillMultiplier => 1.59;
+        protected override double StrainDecayBase => 0.08;
 
         public SkillRead(Mod[] mods)
             : base(mods)
