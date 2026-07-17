@@ -14,7 +14,6 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         public override string Name => "Staccato";
         public override string Acronym => "ST";
         public override LocalisableString Description => "We hate hold notes!";
-        public override double ScoreMultiplier => 0.86;
         public override IconUsage? Icon => FontAwesome.Regular.DotCircle;
         public override ModType Type => ModType.DifficultyReduction;
 

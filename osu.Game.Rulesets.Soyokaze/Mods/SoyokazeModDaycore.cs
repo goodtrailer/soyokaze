@@ -7,6 +7,5 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
 {
     public class SoyokazeModDaycore : ModDaycore
     {
-        public override double ScoreMultiplier => 0.3;
     }
 }

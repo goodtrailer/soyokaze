@@ -12,6 +12,7 @@ using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Soyokaze.Difficulty.Preprocessing;
 using osu.Game.Rulesets.Soyokaze.Difficulty.Skills;
 using osu.Game.Rulesets.Soyokaze.Mods;
+using osu.Game.Utils;
 
 namespace osu.Game.Rulesets.Soyokaze.Difficulty
 {
@@ -24,7 +25,7 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
         {
         }
 
-        protected override DifficultyAttributes CreateDifficultyAttributes(IBeatmap beatmap, Mod[] mods, Skill[] skills, double clockRate)
+        protected override DifficultyAttributes CreateDifficultyAttributes(IBeatmap beatmap, Mod[] mods, Skill[] skills)
         {
             if (beatmap.HitObjects.Count == 0)
                 return new DifficultyAttributes
@@ -47,9 +48,11 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
             };
         }
 
-        protected override IEnumerable<DifficultyHitObject> CreateDifficultyHitObjects(IBeatmap beatmap, double clockRate)
+        protected override IEnumerable<DifficultyHitObject> CreateDifficultyHitObjects(IBeatmap beatmap, Mod[] mods)
         {
             var diffObjects = new List<DifficultyHitObject>();
+
+            double clockRate = ModUtils.CalculateRateWithMods(mods);
 
             for (int i = 0; i < beatmap.HitObjects.Count - SoyokazeDifficultyHitObject.COUNT; i++)
             {
@@ -61,7 +64,7 @@ namespace osu.Game.Rulesets.Soyokaze.Difficulty
             return diffObjects;
         }
 
-        protected override Skill[] CreateSkills(IBeatmap beatmap, Mod[] mods, double clockrate) => new Skill[]
+        protected override Skill[] CreateSkills(IBeatmap beatmap, Mod[] mods) => new Skill[]
         {
             new SkillSpeed(mods),
             new SkillRead(mods),

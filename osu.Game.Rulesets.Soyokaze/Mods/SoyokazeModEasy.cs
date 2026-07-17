@@ -8,8 +8,6 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
 {
     public class SoyokazeModEasy : ModEasyWithExtraLives
     {
-        public override double ScoreMultiplier => 0.85;
-
         public override LocalisableString Description => "Larger circles, more forgiving HP drain, less accuracy required, and multiple lives. As a bonus, it makes the map impossible to read!";
     }
 }
