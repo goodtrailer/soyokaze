@@ -12,7 +12,6 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
         public override string Name => "Holds [Obsolete]";
         public override string Acronym => "HO";
         public override LocalisableString Description => string.Empty;
-        public override double ScoreMultiplier => 1.0;
         public override IconUsage? Icon => FontAwesome.Solid.Fingerprint;
     }
 }

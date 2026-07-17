@@ -7,6 +7,5 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
 {
     public class SoyokazeModDoubleTime : ModDoubleTime
     {
-        public override double ScoreMultiplier => 1.12;
     }
 }

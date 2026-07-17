@@ -7,6 +7,5 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
 {
     public class SoyokazeModHardRock : ModHardRock
     {
-        public override double ScoreMultiplier => 1.06;
     }
 }

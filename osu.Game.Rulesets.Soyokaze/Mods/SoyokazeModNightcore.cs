@@ -8,6 +8,5 @@ namespace osu.Game.Rulesets.Soyokaze.Mods
 {
     public class SoyokazeModNightcore : ModNightcore<SoyokazeHitObject>
     {
-        public override double ScoreMultiplier => 1.12;
     }
 }
