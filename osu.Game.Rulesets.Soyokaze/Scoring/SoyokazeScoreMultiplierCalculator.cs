@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Alden Wu <aldenwu0@gmail.com>. Licensed under the MIT Licence.
 // See the LICENSE file in the repository root for full licence text.
 
-using System;
-using osu.Game.Beatmaps;
-using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Rulesets.Soyokaze.Mods;
 
@@ -48,7 +45,7 @@ namespace osu.Game.Rulesets.Soyokaze.Scoring
             value -= 1;
 
             if (speedChange >= 1)
-                return 1 + value / 5;
+                return 1 + (value / 5);
             else
                 return 0.6 + value;
         }
